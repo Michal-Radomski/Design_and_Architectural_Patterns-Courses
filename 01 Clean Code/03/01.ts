@@ -1,3 +1,5 @@
+//@ Control Structures & Errors
+
 interface Transaction {
   id: string;
   type: string;
@@ -201,7 +203,7 @@ interface Transaction {
 
 //* V3 - Final Code
 interface CustomError extends Error {
-  item(message: string, item: string): void;
+  item(message: string, item: {}): void;
   message: string;
   code: number;
 }
@@ -268,8 +270,8 @@ function isEmpty(transactions: Transaction[]) {
 }
 
 function showErrorMessage(message: string, item = {}) {
-  console.log(message);
-  console.log(item);
+  console.log({ message });
+  console.log({ item });
 }
 
 function processTransaction(transaction: Transaction) {
