@@ -11,7 +11,7 @@ interface Transaction {
 main();
 
 function main() {
-  const transactions = [
+  const transactions: Transaction[] = [
     {
       id: "t1",
       type: "PAYMENT",
