@@ -1,5 +1,13 @@
 //@ Guards
 
+interface Transaction {
+  id: string;
+  type: string;
+  status: string;
+  method: string;
+  amount: string;
+}
+
 main();
 
 function main() {
@@ -37,14 +45,14 @@ function main() {
   processTransactions(transactions);
 }
 
-function processTransactions(transactions) {
+function processTransactions(transactions: Transaction[]) {
   if (!transactions || transactions.length === 0) {
     console.log("No transactions provided!");
     return;
   }
 
   for (const transaction of transactions) {
-    if (transactions.status !== "OPEN") {
+    if (transaction.status !== "OPEN") {
       console.log("Invalid transaction type!");
       continue;
     }
@@ -70,26 +78,26 @@ function processTransactions(transactions) {
   }
 }
 
-function processCreditCardPayment(transaction) {
+function processCreditCardPayment(transaction: Transaction) {
   console.log("Processing credit card payment for amount: " + transaction.amount);
 }
 
-function processCreditCardRefund(transaction) {
+function processCreditCardRefund(transaction: Transaction) {
   console.log("Processing credit card refund for amount: " + transaction.amount);
 }
 
-function processPayPalPayment(transaction) {
+function processPayPalPayment(transaction: Transaction) {
   console.log("Processing PayPal payment for amount: " + transaction.amount);
 }
 
-function processPayPalRefund(transaction) {
+function processPayPalRefund(transaction: Transaction) {
   console.log("Processing PayPal refund for amount: " + transaction.amount);
 }
 
-function processPlanPayment(transaction) {
+function processPlanPayment(transaction: Transaction) {
   console.log("Processing plan payment for amount: " + transaction.amount);
 }
 
-function processPlanRefund(transaction) {
+function processPlanRefund(transaction: Transaction) {
   console.log("Processing plan refund for amount: " + transaction.amount);
 }
