@@ -59,40 +59,66 @@
 // delivery.deliverProduct();
 // console.log("delivery:", delivery);
 
-//* Clean Classes Should Be Small -> Single Responsibility Principle
-class Order {
-  public refund() {}
-}
+//* Clean Classes Should Be Small -> Single-Responsibility Principle
+// class Order {
+//   public refund() {}
+// }
 
+// class Customer {
+//   private orders: Order[];
+
+//   constructor(email: string, password: string, orders: Order[]) {
+//     this.orders = orders;
+//   }
+
+//   public login(email: string, password: string) {}
+
+//   public updateProfile(name: string) {}
+
+//   public makePurchase(productId: string) {}
+// }
+
+// class Product {
+//   constructor(title: string, price: number) {}
+
+//   public update(Id: string, title: string, price: number) {}
+
+//   public remove(Id: string) {}
+// }
+
+// class Inventory {
+//   private products: Product;
+//   constructor(products: Product) {
+//     this.products = products;
+//   }
+
+//   public getAvailableItems(productId: string) {}
+
+//   public restockProduct(productId: string) {}
+// }
+
+//* Cohesion
+// High cohesion means that the class is focused on what it should be doing, i.e. only methods relating to the intention of the class.
+
+//* The "Law Of Demeter"
 class Customer {
-  private orders: Order[];
+  lastPurchase: any;
 
-  constructor(email: string, password: string, orders: Order[]) {
-    this.orders = orders;
+  getLastPurchaseDate() {
+    return this.lastPurchase.date;
   }
-
-  public login(email: string, password: string) {}
-
-  public updateProfile(name: string) {}
-
-  public makePurchase(productId: string) {}
 }
 
-class Product {
-  constructor(title: string, price: number) {}
+class DeliveryJob {
+  customer: any;
+  warehouse: any;
 
-  public update(Id: string, title: string, price: number) {}
-
-  public remove(Id: string) {}
-}
-
-class Inventory {
-  private products: Product;
-  constructor(products: Product) {
-    this.products = products;
+  constructor(customer: any, warehouse: any) {
+    this.customer = customer;
+    this.warehouse = warehouse;
   }
 
-  public getAvailableItems(productId: string) {}
-
-  public restockProduct(productId: string) {}
+  deliverLastPurchase() {
+    this.warehouse.deliverPurchase(this.customer.lastPurchase);
+  }
 }
