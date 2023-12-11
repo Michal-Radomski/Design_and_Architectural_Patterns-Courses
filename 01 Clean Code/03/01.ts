@@ -258,6 +258,7 @@ function processTransactions(transactions: Transaction[]) {
 }
 
 function validateTransactions(transactions: Transaction[]) {
+  //* Prefer Positive Check (don't use if(isNotEmpty) {} !!!)
   if (isEmpty(transactions)) {
     const error = new Error("No transactions provided!");
     (error as CustomError).code = 1;

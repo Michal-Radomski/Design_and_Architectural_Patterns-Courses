@@ -1,7 +1,7 @@
 export {};
 //@ The SOLID Principles
-// The Single-responsibility principle: "There should never be more than one reason for a class to change.
-// The Open–closed principle: "Software entities ... should be open for extension, but closed for modification.
+//! The Single-responsibility principle: "There should never be more than one reason for a class to change.
+//! The Open–closed principle: "Software entities ... should be open for extension, but closed for modification.
 // The Liskov substitution principle: "Functions using pointers or references to base classes must be able to use objects of derived classes without knowing it.
 // The Interface segregation principle: "Clients should not be forced to depend upon interfaces that they do not use.
 // The Dependency inversion principle: "Depend upon abstractions, [not] concretes."
@@ -116,17 +116,46 @@ class InMemoryDatabase2 implements Database {
 }
 
 class App {
-  private database: Database;
+  private database2: Database2;
 
-  constructor(database: Database) {
-    this.database = database;
+  constructor(database2: Database2) {
+    this.database2 = database2;
   }
 
   saveSettings() {
-    this.database.storeData("Some data");
+    this.database2.storeData("Some data");
   }
 }
 
-const sqlDatabase = new SQLDatabase();
-sqlDatabase.connect("my-url");
-const app = new App(sqlDatabase);
+const sqlDatabase2 = new SQLDatabase2();
+sqlDatabase2.connect("my-url");
+const app2 = new App(sqlDatabase2);
+console.log("app2:", app2);
+
+//* KISS => Keep It Simple, Stupid/Smart
+// 1. Short-circuit Evaluation -> const firstName = person && person.firstNames
+// 2. Arrow Functions -> const sayHello = name => console.log("Hello", name)
+// 3. Avoid boring old for loop -> list.forEach(number => console.log(number))
+// 4. Implicit Return -> const doubleValue = value => value * 2
+// 5. Default Parameters -> const volume = ( l, w = 1, h = 1) => l * w * h
+// 6. Destructuring -> let { first = 'John' , last = 'Doe' } = person -> with default values
+// 7. Spread Operator -> const nums = [4, 5, 6, ...odd]
+// 8. Importing Modules -> import { observable, action, runInAction } from ‘mobx’ -> not the whole library
+// 9. Async/Await over Promises ->
+// const makeRequest = async () => {
+//   console.log(await getJSON())
+//   return "done"
+// }
+// makeRequest()
+// 10. Map, Filter, Reduce ->
+const distances = [
+  { from: "New York", to: "Dhaka", distance: 12654 },
+  { from: "Sydney", to: "chittagong", distance: 8858 },
+  { from: "Kolkata", to: "Sylhet", distance: 670 },
+];
+
+const totalDistanceLT1000 = distances
+  .filter((item) => item.distance < 10000)
+  .map((item) => item.distance * 0.621371)
+  .reduce((prev, distance) => prev + distance, 0);
+console.log({ totalDistanceLT1000 });
