@@ -26,14 +26,24 @@
 // const bar: boolean = true;
 
 //* Number are transpiled to decimal
-let baz: number;
-baz = 123; // decimal
-console.log("baz:", baz);
-baz = 123.456; // float
-console.log("baz:", baz);
-baz = 0xffff; // hex //* 65535
-console.log("baz:", baz);
-baz = 0b10101; // binary //* 21
-console.log("baz:", baz);
-baz = 0o671; // octal //* 441
-console.log("baz:", baz);
+// let baz: number;
+// baz = 123; // decimal
+// console.log("baz:", baz);
+// baz = 123.456; // float
+// console.log("baz:", baz);
+// baz = 0xffff; // hex //* 65535
+// console.log("baz:", baz);
+// baz = 0b10101; // binary //* 21
+// console.log("baz:", baz);
+// baz = 0o671; // octal //* 441
+// console.log("baz:", baz);
+
+// const a: string[] = ["a", "b", "d", "d"];
+// console.log("a[0]", a[0]);
+
+//* Dictionary
+// let a: { [key: number]: string };
+const a: { [key: number]: string } = { 123: "abc", 456: "def" };
+const b: { [key: string]: boolean } = { abc: true, def: false, ghi: true };
+console.log("a[123]:", a[123]);
+console.log('b["def"]:', b["def"]);
