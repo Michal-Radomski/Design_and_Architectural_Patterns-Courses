@@ -386,12 +386,32 @@
 // const cat = new Cat("Cosmo");
 // console.log(cat.name); //* Property 'name' is private and only accessible within class 'Cat'.ts(2341)
 
-class Cat {
-  #name: string;
-  constructor(name: string) {
-    this.#name = name;
+// class Cat {
+//   #name: string;
+//   constructor(name: string) {
+//     this.#name = name;
+//   }
+// }
+
+// const cat = new Cat("Cosmo");
+// console.log(cat.#name); //* Property '#name' is not accessible outside class 'Cat' because it has a private identifier.ts(18013)
+
+class Animal {
+  protected name: string;
+  protected age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
   }
 }
 
-const cat = new Cat("Cosmo");
-console.log(cat.#name); //* Property '#name' is not accessible outside class 'Cat' because it has a private identifier.ts(18013)
+class Cat extends Animal {
+  constructor(name: string, age: number) {
+    super(name, age);
+    console.log(this.name);
+  }
+}
+
+const cat = new Cat("Cosmo", 8);
+console.log(cat.name); //* Property 'name' is protected and only accessible within class 'Animal' and its subclasses.ts(2445)
