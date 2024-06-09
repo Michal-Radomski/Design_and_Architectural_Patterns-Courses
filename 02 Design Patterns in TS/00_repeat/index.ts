@@ -421,11 +421,49 @@
 // cat.getName(); // Cosmo
 
 //* Static Members
-class Person {
-  static species = "Homo Sapiens";
-  age = 1;
-  constructor(public name: string) {}
+// class Person {
+//   static species = "Homo Sapiens";
+//   age = 1;
+//   constructor(public name: string) {}
+// }
+
+// console.log(Person.species); // Output: "Homo Sapiens"
+// // console.log(Person.age); //* Property 'age' does not exist on type 'typeof Person'.ts(2339)
+
+// //* You are creating a new object in memory with its own copies of all the members of the Cat class.
+// //* Now it's possible to make objects that were instantiated from classes share the same methods and properties behind the scenes,
+// //* and that is using the static keyword.
+
+class ClassWithProperty {
+  abc = 123;
 }
 
-console.log(Person.species); // Output: "Homo Sapiens"
-// console.log(Person.age); //* Property 'age' does not exist on type 'typeof Person'.ts(2339)
+class ClassWithStaticProperty {
+  static abc = 123;
+}
+
+class ClassWithMethod {
+  method() {
+    return 123;
+  }
+}
+
+class ClassWithStaticMethod {
+  static method() {
+    return 123;
+  }
+}
+
+const CLASS_A = new ClassWithProperty();
+console.log(CLASS_A.abc); // 123
+
+const CLASS_B = new ClassWithStaticProperty();
+// console.log(CLASS_B.abc); // undefined. 'abc' does not exist on CLASS_B instance. You must reference it via the class name instead
+console.log(ClassWithStaticProperty.abc); // 123
+
+const CLASS_C = new ClassWithMethod();
+console.log(CLASS_C.method()); // 123
+
+const CLASS_D = new ClassWithStaticMethod();
+// console.log(CLASS_D.method()); //error. CLASS_D.method is not a function. You must reference it via the class name instead
+console.log(ClassWithStaticMethod.method()); // 123
