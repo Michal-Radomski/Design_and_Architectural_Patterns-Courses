@@ -48,27 +48,48 @@
 // console.log("a[123]:", a[123]);
 // console.log('b["def"]:', b["def"]);
 
-let a: { [key: string]: string };
-let b: { [id: number]: string };
-a = { a: "car", b: "train", c: "plane", d: "boat" };
-b = { 1: "car", 2: "train", 3: "plane", 4: "boat" };
-// and can be retrieved as such
-console.log(a["a"]);
-console.log(b[2]);
-// Since Dictionaries are really just objects. You can also retrieve
-// a dictionary's value using object notation if the keys are strings
-console.log(a.c);
-//* console.log(b.2) // this doesn't work when the key is a number
+// let a: { [key: string]: string };
+// let b: { [id: number]: string };
+// a = { a: "car", b: "train", c: "plane", d: "boat" };
+// b = { 1: "car", 2: "train", 3: "plane", 4: "boat" };
+// // and can be retrieved as such
+// console.log(a["a"]);
+// console.log(b[2]);
+// // Since Dictionaries are really just objects. You can also retrieve
+// // a dictionary's value using object notation if the keys are strings
+// console.log(a.c);
+// //* console.log(b.2) // this doesn't work when the key is a number
 
-// you can add items to a dictionary
-a["e"] = "go-cart";
-console.log(a);
+// // you can add items to a dictionary
+// a["e"] = "go-cart";
+// console.log(a);
 
-// you can delete
-delete b[2];
-console.log(b);
+// // you can delete
+// delete b[2];
+// console.log(b);
 
-// The values of a dictionary can be of any type, even an array.
-let c: { [id: number]: number[] };
-c = { 1: [1, 2, 3], 2: [4, 5, 6], 3: [7, 8, 9], 4: [10, 11, 12] };
-console.log("c:", c);
+// // The values of a dictionary can be of any type, even an array.
+// let c: { [id: number]: number[] };
+// c = { 1: [1, 2, 3], 2: [4, 5, 6], 3: [7, 8, 9], 4: [10, 11, 12] };
+// console.log("c:", c);
+
+//* Tuple (like an array only in TS)
+// let a: [number, string];
+// a = [1, "abc"];
+// let b: [string, boolean, number];
+// b = ["abc", false, 123];
+
+// console.log(a[1]);
+// console.log(b[2]);
+
+//* Set
+let a: Set<number>;
+a = new Set([1, 2, 3, 4]);
+let b: Set<string>;
+b = new Set(["a", "b", "c", "d", "a"]); // The second `a` is not added
+let c: Set<unknown>;
+c = new Set([1, "b", true]);
+
+console.log(a); // Set(4) { 1, 2, 3, 4 }
+console.log(b); // Set(4) { 'a', 'b', 'c', 'd' }
+console.log(c); // Set(3) { 1, 'b', true }
