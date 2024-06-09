@@ -243,12 +243,52 @@
 // dog.feed("Beef", 0.25); // Feeding Rusty the Dog, 0.25kg of Beef
 
 //* Extending Classes
-class Animal {
-  name: string;
+// class Animal {
+//   name: string;
+//   age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+
+//   feed(food: string, amount: number): void {
+//     console.log("Feeding " + this.name + " the " + this.constructor.name + " " + amount + " kg of " + food);
+//   }
+// }
+
+// class Cat extends Animal {
+//   isHungry: boolean;
+//   constructor(name: string, age: number, isHungry: boolean) {
+//     super(name, age);
+//     this.isHungry = isHungry;
+//   }
+
+//   feed(food: string, amount: number): void {
+//     if (this.isHungry) {
+//       super.feed(food, amount);
+//     } else {
+//       console.log(this.name + " the " + this.constructor.name + " is not hungry");
+//     }
+//   }
+// }
+
+// class Dog extends Animal {}
+
+// const cat = new Cat("Cosmo", 8, false);
+// const cat2 = new Cat("Cosmo", 8, true);
+// const dog = new Dog("Rusty", 12);
+// cat.feed("Fish", 0.1); // Feeding Cosmo the Cat, 0.1kg of Fish
+// dog.feed("Beef", 0.25); // Feeding Rusty the Dog, 0.25kg of Beef
+// cat2.feed("Fish", 0.1); // Feeding Cosmo the Cat 0.1 kg of Fish
+
+//* Abstract Classes (Abstract classes are like a mixture of implementing interfaces and extending a class in one step)
+abstract class Animal {
+  abstract name: string;
   age: number;
 
-  constructor(name: string, age: number) {
-    this.name = name;
+  constructor(age: number) {
+    // this.name = name // this must now be assigned in the derived class instead
     this.age = age;
   }
 
@@ -258,26 +298,22 @@ class Animal {
 }
 
 class Cat extends Animal {
-  isHungry: boolean;
-  constructor(name: string, age: number, isHungry: boolean) {
-    super(name, age);
-    this.isHungry = isHungry;
-  }
-
-  feed(food: string, amount: number): void {
-    if (this.isHungry) {
-      super.feed(food, amount);
-    } else {
-      console.log(this.name + " the " + this.constructor.name + " is not hungry");
-    }
+  name: string;
+  constructor(name: string, age: number) {
+    super(age);
+    this.name = name;
   }
 }
 
-class Dog extends Animal {}
+class Dog extends Animal {
+  name: string;
+  constructor(name: string, age: number) {
+    super(age);
+    this.name = name;
+  }
+}
 
-const cat = new Cat("Cosmo", 8, false);
-const cat2 = new Cat("Cosmo", 8, true);
+const cat = new Cat("Cosmo", 8);
 const dog = new Dog("Rusty", 12);
-cat.feed("Fish", 0.1); // Feeding Cosmo the Cat, 0.1kg of Fish
-dog.feed("Beef", 0.25); // Feeding Rusty the Dog, 0.25kg of Beef
-cat2.feed("Fish", 0.1); // Feeding Cosmo the Cat 0.1 kg of Fish
+cat.feed("Fish", 0.1); // Feeding Cosmo the Cat 0.1 kg of Fish
+dog.feed("Beef", 0.25); // Feeding Rusty the Dog 0.25 kg of Beef
