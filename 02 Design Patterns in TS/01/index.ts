@@ -147,26 +147,57 @@
 // const cat = new Cat("Cosmo");
 // cat.walk(20); // Cosmo the cat, has walked 20 steps.
 
-class Cat {
+// class Cat {
+//   name: string;
+//   stepsWalked: number = 0;
+
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+
+//   walk(steps: number): void {
+//     console.log(this.name + " the cat has walked " + steps + " steps.");
+//     this.stepsWalked += steps;
+//   }
+
+//   totalStepCount(): number {
+//     return this.stepsWalked;
+//   }
+// }
+
+// const cat = new Cat("Cosmo");
+// cat.walk(20);
+// cat.walk(20);
+// cat.walk(10);
+// console.log(cat.name + " the cat, has walked a total of " + cat.totalStepCount() + " steps.");
+
+//* Interfaces
+// interface IAnimal {
+//     name: string
+//     age?: number
+// }
+
+// class Cat implements IAnimal {
+//     name: string
+
+//     constructor(name: string) {
+//         this.name = name
+//     }
+// }
+
+interface IAnimal {
   name: string;
-  stepsWalked: number = 0;
+  age: number;
 
-  constructor(name: string) {
-    this.name = name;
-  }
-
-  walk(steps: number): void {
-    console.log(this.name + " the cat has walked " + steps + " steps.");
-    this.stepsWalked += steps;
-  }
-
-  totalStepCount(): number {
-    return this.stepsWalked;
-  }
+  feed?(food: string, amount: number): void;
 }
 
-const cat = new Cat("Cosmo");
-cat.walk(20);
-cat.walk(20);
-cat.walk(10);
-console.log(cat.name + " the cat, has walked a total of " + cat.totalStepCount() + " steps.");
+class Cat implements IAnimal {
+  name: string;
+  age: number;
+
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
+  }
+}
