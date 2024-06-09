@@ -257,11 +257,27 @@ class Animal {
   }
 }
 
-class Cat extends Animal {}
+class Cat extends Animal {
+  isHungry: boolean;
+  constructor(name: string, age: number, isHungry: boolean) {
+    super(name, age);
+    this.isHungry = isHungry;
+  }
+
+  feed(food: string, amount: number): void {
+    if (this.isHungry) {
+      super.feed(food, amount);
+    } else {
+      console.log(this.name + " the " + this.constructor.name + " is not hungry");
+    }
+  }
+}
 
 class Dog extends Animal {}
 
-const cat = new Cat("Cosmo", 8);
+const cat = new Cat("Cosmo", 8, false);
+const cat2 = new Cat("Cosmo", 8, true);
 const dog = new Dog("Rusty", 12);
 cat.feed("Fish", 0.1); // Feeding Cosmo the Cat, 0.1kg of Fish
 dog.feed("Beef", 0.25); // Feeding Rusty the Dog, 0.25kg of Beef
+cat2.feed("Fish", 0.1); // Feeding Cosmo the Cat 0.1 kg of Fish
