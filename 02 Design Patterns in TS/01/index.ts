@@ -202,14 +202,48 @@
 //   }
 // }
 
-interface IAnimal {
-  name: string;
-  age: number;
+// interface IAnimal {
+//   name: string;
+//   age: number;
 
-  feed(food: string, amount: number): void;
-}
+//   feed(food: string, amount: number): void;
+// }
 
-class Cat implements IAnimal {
+// class Cat implements IAnimal {
+//   name: string;
+//   age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+
+//   feed(food: string, amount: number): void {
+//     console.log("Feeding " + this.name + " the Cat " + amount + " kg of " + food);
+//   }
+// }
+
+// class Dog implements IAnimal {
+//   name: string;
+//   age: number;
+
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+
+//   feed(food: string, amount: number): void {
+//     console.log("Feeding " + this.name + " the Dog " + amount + " kg of " + food);
+//   }
+// }
+
+// const cat = new Cat("Cosmo", 8);
+// const dog = new Dog("Rusty", 12);
+// cat.feed("Fish", 0.1); // Feeding Cosmo the Cat, 0.1kg of Fish
+// dog.feed("Beef", 0.25); // Feeding Rusty the Dog, 0.25kg of Beef
+
+//* Extending Classes
+class Animal {
   name: string;
   age: number;
 
@@ -219,23 +253,13 @@ class Cat implements IAnimal {
   }
 
   feed(food: string, amount: number): void {
-    console.log("Feeding " + this.name + " the Cat " + amount + " kg of " + food);
+    console.log("Feeding " + this.name + " the " + this.constructor.name + " " + amount + " kg of " + food);
   }
 }
 
-class Dog implements IAnimal {
-  name: string;
-  age: number;
+class Cat extends Animal {}
 
-  constructor(name: string, age: number) {
-    this.name = name;
-    this.age = age;
-  }
-
-  feed(food: string, amount: number): void {
-    console.log("Feeding " + this.name + " the Dog " + amount + " kg of " + food);
-  }
-}
+class Dog extends Animal {}
 
 const cat = new Cat("Cosmo", 8);
 const dog = new Dog("Rusty", 12);
