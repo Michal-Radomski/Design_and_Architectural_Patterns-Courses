@@ -411,7 +411,11 @@ class Cat extends Animal {
     super(name, age);
     console.log(this.name);
   }
+  getName() {
+    console.log(this.name);
+  }
 }
 
 const cat = new Cat("Cosmo", 8);
-console.log(cat.name); //* Property 'name' is protected and only accessible within class 'Animal' and its subclasses.ts(2445)
+// console.log(cat.name); //* Property 'name' is protected and only accessible within class 'Animal' and its subclasses.ts(2445)
+cat.getName(); // Cosmo
