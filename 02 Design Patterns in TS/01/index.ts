@@ -83,13 +83,39 @@
 // console.log(b[2]);
 
 //* Set
-let a: Set<number>;
-a = new Set([1, 2, 3, 4]);
-let b: Set<string>;
-b = new Set(["a", "b", "c", "d", "a"]); // The second `a` is not added
-let c: Set<unknown>;
-c = new Set([1, "b", true]);
+// let a: Set<number>;
+// a = new Set([1, 2, 3, 4]);
+// let b: Set<string>;
+// b = new Set(["a", "b", "c", "d", "a"]); // The second `a` is not added
+// let c: Set<unknown>;
+// c = new Set([1, "b", true]);
 
-console.log(a); // Set(4) { 1, 2, 3, 4 }
-console.log(b); // Set(4) { 'a', 'b', 'c', 'd' }
-console.log(c); // Set(3) { 1, 'b', true }
+// console.log(a); // Set(4) { 1, 2, 3, 4 }
+// console.log(b); // Set(4) { 'a', 'b', 'c', 'd' }
+// console.log(c); // Set(3) { 1, 'b', true }
+
+const a: Set<string> = new Set();
+// adding items
+a.add("cat");
+a.add("dog");
+a.add("bird");
+console.log(a); // Set(3) { 'cat', 'dog', 'bird' }
+
+// remove an item
+a.delete("dog");
+console.log(a); // Set(2) { 'cat', 'bird' }
+
+// Retrieve an individual item.
+console.log("Array.from(a)[1]:", Array.from(a)[1]); // bird
+
+// The great thin about a set compared to an array, is that all
+// items are guaranteed to be unique. No duplicates allowed.
+a.add("bird");
+a.add("bird");
+console.log(a); // Set(2) { 'cat', 'bird' }
+
+// Get the length of the Set
+console.log(a.size); // 2
+
+// Check if a Set has a value
+console.log(a.has("cat")); // true
