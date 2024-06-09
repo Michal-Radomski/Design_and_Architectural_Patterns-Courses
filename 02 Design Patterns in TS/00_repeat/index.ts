@@ -288,7 +288,7 @@ abstract class Animal {
   age: number;
 
   constructor(age: number) {
-    // this.name = name // this must now be assigned in the derived class instead
+    // this.name = name //* this must now be assigned in the derived class instead
     this.age = age;
   }
 
@@ -296,6 +296,8 @@ abstract class Animal {
     console.log("Feeding " + this.name + " the " + this.constructor.name + " " + amount + " kg of " + food);
   }
 }
+
+// const animal = new Animal(); //* Cannot create an instance of an abstract class.ts(2511)
 
 class Cat extends Animal {
   name: string;
