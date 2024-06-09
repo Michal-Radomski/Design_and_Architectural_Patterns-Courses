@@ -468,20 +468,29 @@
 // // console.log(class_D.method()); //error. class_D.method is not a function. You must reference it via the class name instead
 // console.log(ClassWithStaticMethod.method()); // 123
 
-class Circle {
-  radius: number;
-  static PI = Math.PI;
+// class Circle {
+//   radius: number;
+//   static PI = Math.PI;
 
-  constructor(radius: number) {
-    this.radius = radius;
-  }
-}
+//   constructor(radius: number) {
+//     this.radius = radius;
+//   }
+// }
 
-console.log("Circle.PI = " + Circle.PI); // Circle.PI = 3.141592653589793
+// console.log("Circle.PI = " + Circle.PI); // Circle.PI = 3.141592653589793
 
-const circle1 = new Circle(1);
-const circle2 = new Circle(2);
-const circle3 = new Circle(3);
-console.log("circle1 Area = " + Circle.PI * circle1.radius ** 2); // circle1 Area = 3.141592653589793
-console.log("circle2 Area = " + Circle.PI * circle2.radius ** 2); // circle2 Area = 12.566370614359172
-console.log("circle3 Area = " + Circle.PI * circle3.radius ** 2); // circle3 Area = 28.274333882308138
+// const circle1 = new Circle(1);
+// const circle2 = new Circle(2);
+// const circle3 = new Circle(3);
+// console.log("circle1 Area = " + Circle.PI * circle1.radius ** 2); // circle1 Area = 3.141592653589793
+// console.log("circle2 Area = " + Circle.PI * circle2.radius ** 2); // circle2 Area = 12.566370614359172
+// console.log("circle3 Area = " + Circle.PI * circle3.radius ** 2); // circle3 Area = 28.274333882308138
+
+//* Import/Export
+
+import { Dog, Cat } from "./animals";
+
+const cat = new Cat("Cosmo", 8);
+console.log(cat.name); // Cosmo
+const dob = new Dog("Rusty", 12);
+console.log(dob.name); // Rusty
