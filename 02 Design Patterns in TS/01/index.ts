@@ -132,8 +132,24 @@
 // const cat = new Cat();
 // cat.walk(); // Cat is walking
 
+// class Cat {
+//   name: string;
+
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+
+//   walk(steps: number): void {
+//     console.log(this.name + " the cat has walked " + steps + " steps.");
+//   }
+// }
+
+// const cat = new Cat("Cosmo");
+// cat.walk(20); // Cosmo the cat, has walked 20 steps.
+
 class Cat {
   name: string;
+  stepsWalked: number = 0;
 
   constructor(name: string) {
     this.name = name;
@@ -141,8 +157,16 @@ class Cat {
 
   walk(steps: number): void {
     console.log(this.name + " the cat has walked " + steps + " steps.");
+    this.stepsWalked += steps;
+  }
+
+  totalStepCount(): number {
+    return this.stepsWalked;
   }
 }
 
 const cat = new Cat("Cosmo");
-cat.walk(20); // Cosmo the cat, has walked 20 steps.
+cat.walk(20);
+cat.walk(20);
+cat.walk(10);
+console.log(cat.name + " the cat, has walked a total of " + cat.totalStepCount() + " steps.");
