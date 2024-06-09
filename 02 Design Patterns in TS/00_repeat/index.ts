@@ -320,45 +320,78 @@
 // cat.feed("Fish", 0.1); // Feeding Cosmo the Cat 0.1 kg of Fish
 // dog.feed("Beef", 0.25); // Feeding Rusty the Dog 0.25 kg of Beef
 
-abstract class Animal {
-  abstract name: string;
-  age = -1;
+// abstract class Animal {
+//   abstract name: string;
+//   age = -1; //* Setting a default value is optional.
 
-  constructor() {}
+//   constructor() {}
 
-  // abstract feed(food: string, amount: number): void {
-  //   console.log("Feeding " + this.name + " the Cat " + amount + " kg of " + food);
-  // } //* Method 'feed' cannot have an implementation because it is marked abstract.ts(1245)
-  // abstract feed(food: string, amount: number): void;
+//   // abstract feed(food: string, amount: number): void {
+//   //   console.log("Feeding " + this.name + " the Cat " + amount + " kg of " + food);
+//   // } //* Method 'feed' cannot have an implementation because it is marked abstract.ts(1245)
+//   // abstract feed(food: string, amount: number): void;
+// }
+
+// class Cat extends Animal {
+//   name: string;
+//   constructor(name: string, age: number) {
+//     super();
+//     this.name = name;
+//     this.age = age;
+//   }
+
+//   feed(food: string, amount: number): void {
+//     console.log("Feeding " + this.name + " the Cat " + amount + " kg of " + food);
+//   }
+// }
+
+// class Dog extends Animal {
+//   name: string;
+//   constructor(name: string, age: number) {
+//     super();
+//     this.name = name;
+//     this.age = age;
+//   }
+
+//   feed(food: string, amount: number): void {
+//     console.log("Feeding " + this.name + " the Dog " + amount + " kg of " + food);
+//   }
+// }
+
+// const cat = new Cat("Cosmo", 8);
+// const dog = new Dog("Rusty", 12);
+// cat.feed("Fish", 0.1); // Feeding Cosmo the Cat 0.1 kg of Fish
+// dog.feed("Beef", 0.25); // Feeding Rusty the Dog 0.25 kg of Beef
+
+//* Access Modifiers
+// class Cat {
+//   public name: string; //* public is default!
+
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+// }
+
+// const cat = new Cat("Cosmo");
+// console.log(cat.name); // Cosmo
+
+// class Cat {
+//   private name: string;
+
+//   constructor(name: string) {
+//     this.name = name;
+//   }
+// }
+
+// const cat = new Cat("Cosmo");
+// console.log(cat.name); //* Property 'name' is private and only accessible within class 'Cat'.ts(2341)
+
+class Cat {
+  #name: string;
+  constructor(name: string) {
+    this.#name = name;
+  }
 }
 
-class Cat extends Animal {
-  name: string;
-  constructor(name: string, age: number) {
-    super();
-    this.name = name;
-    this.age = age;
-  }
-
-  feed(food: string, amount: number): void {
-    console.log("Feeding " + this.name + " the Cat " + amount + " kg of " + food);
-  }
-}
-
-class Dog extends Animal {
-  name: string;
-  constructor(name: string, age: number) {
-    super();
-    this.name = name;
-    this.age = age;
-  }
-
-  feed(food: string, amount: number): void {
-    console.log("Feeding " + this.name + " the Dog " + amount + " kg of " + food);
-  }
-}
-
-const cat = new Cat("Cosmo", 8);
-const dog = new Dog("Rusty", 12);
-cat.feed("Fish", 0.1); // Feeding Cosmo the Cat 0.1 kg of Fish
-dog.feed("Beef", 0.25); // Feeding Rusty the Dog 0.25 kg of Beef
+const cat = new Cat("Cosmo");
+console.log(cat.#name); //* Property '#name' is not accessible outside class 'Cat' because it has a private identifier.ts(18013)
