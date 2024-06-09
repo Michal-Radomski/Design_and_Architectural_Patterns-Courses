@@ -1,1 +1,1 @@
-console.log("test");
+//* Factory Pattern
