@@ -283,35 +283,78 @@
 // cat2.feed("Fish", 0.1); // Feeding Cosmo the Cat 0.1 kg of Fish
 
 //* Abstract Classes (Abstract classes are like a mixture of implementing interfaces and extending a class in one step)
+// abstract class Animal {
+//   abstract name: string;
+//   age: number;
+
+//   constructor(age: number) {
+//     // this.name = name //* this must now be assigned in the derived class instead
+//     this.age = age;
+//   }
+
+//   feed(food: string, amount: number): void {
+//     console.log("Feeding " + this.name + " the " + this.constructor.name + " " + amount + " kg of " + food);
+//   }
+// }
+
+// // const animal = new Animal(); //* Cannot create an instance of an abstract class.ts(2511)
+
+// class Cat extends Animal {
+//   name: string;
+//   constructor(name: string, age: number) {
+//     super(age);
+//     this.name = name;
+//   }
+// }
+
+// class Dog extends Animal {
+//   name: string;
+//   constructor(name: string, age: number) {
+//     super(age);
+//     this.name = name;
+//   }
+// }
+
+// const cat = new Cat("Cosmo", 8);
+// const dog = new Dog("Rusty", 12);
+// cat.feed("Fish", 0.1); // Feeding Cosmo the Cat 0.1 kg of Fish
+// dog.feed("Beef", 0.25); // Feeding Rusty the Dog 0.25 kg of Beef
+
 abstract class Animal {
   abstract name: string;
-  age: number;
+  age = -1;
 
-  constructor(age: number) {
-    // this.name = name //* this must now be assigned in the derived class instead
-    this.age = age;
-  }
+  constructor() {}
 
-  feed(food: string, amount: number): void {
-    console.log("Feeding " + this.name + " the " + this.constructor.name + " " + amount + " kg of " + food);
-  }
+  // abstract feed(food: string, amount: number): void {
+  //   console.log("Feeding " + this.name + " the Cat " + amount + " kg of " + food);
+  // } //* Method 'feed' cannot have an implementation because it is marked abstract.ts(1245)
+  // abstract feed(food: string, amount: number): void;
 }
-
-// const animal = new Animal(); //* Cannot create an instance of an abstract class.ts(2511)
 
 class Cat extends Animal {
   name: string;
   constructor(name: string, age: number) {
-    super(age);
+    super();
     this.name = name;
+    this.age = age;
+  }
+
+  feed(food: string, amount: number): void {
+    console.log("Feeding " + this.name + " the Cat " + amount + " kg of " + food);
   }
 }
 
 class Dog extends Animal {
   name: string;
   constructor(name: string, age: number) {
-    super(age);
+    super();
     this.name = name;
+    this.age = age;
+  }
+
+  feed(food: string, amount: number): void {
+    console.log("Feeding " + this.name + " the Dog " + amount + " kg of " + food);
   }
 }
 
