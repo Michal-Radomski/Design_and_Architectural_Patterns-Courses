@@ -396,26 +396,36 @@
 // const cat = new Cat("Cosmo");
 // console.log(cat.#name); //* Property '#name' is not accessible outside class 'Cat' because it has a private identifier.ts(18013)
 
-class Animal {
-  protected name: string;
-  protected age: number;
+// class Animal {
+//   protected name: string;
+//   protected age: number;
 
-  constructor(name: string, age: number) {
-    this.name = name;
-    this.age = age;
-  }
+//   constructor(name: string, age: number) {
+//     this.name = name;
+//     this.age = age;
+//   }
+// }
+
+// class Cat extends Animal {
+//   constructor(name: string, age: number) {
+//     super(name, age);
+//     console.log(this.name);
+//   }
+//   getName() {
+//     console.log(this.name);
+//   }
+// }
+
+// const cat = new Cat("Cosmo", 8);
+// // console.log(cat.name); //* Property 'name' is protected and only accessible within class 'Animal' and its subclasses.ts(2445)
+// cat.getName(); // Cosmo
+
+//* Static Members
+class Person {
+  static species = "Homo Sapiens";
+  age = 1;
+  constructor(public name: string) {}
 }
 
-class Cat extends Animal {
-  constructor(name: string, age: number) {
-    super(name, age);
-    console.log(this.name);
-  }
-  getName() {
-    console.log(this.name);
-  }
-}
-
-const cat = new Cat("Cosmo", 8);
-// console.log(cat.name); //* Property 'name' is protected and only accessible within class 'Animal' and its subclasses.ts(2445)
-cat.getName(); // Cosmo
+console.log(Person.species); // Output: "Homo Sapiens"
+// console.log(Person.age); //* Property 'age' does not exist on type 'typeof Person'.ts(2339)
