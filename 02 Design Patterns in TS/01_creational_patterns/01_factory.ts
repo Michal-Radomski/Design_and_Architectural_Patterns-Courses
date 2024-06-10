@@ -1,3 +1,4 @@
+export {};
 //* Factory Pattern
 // The Factory pattern is really about adding that extra abstraction between the object creation and where it is used. This gives you extra options that you can more easily extend in the future.
 
