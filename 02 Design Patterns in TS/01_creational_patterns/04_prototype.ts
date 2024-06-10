@@ -1,0 +1,2 @@
+export {};
+//* Prototype Design Pattern
