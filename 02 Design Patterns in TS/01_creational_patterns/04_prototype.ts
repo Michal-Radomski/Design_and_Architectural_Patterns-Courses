@@ -56,6 +56,10 @@ class Document implements IProtoType {
     this.array = array;
   }
 
+  customMethod() {
+    console.log("Custom method");
+  }
+
   clone(mode: number): Document {
     // This clone method uses different copy techniques
     let array;
@@ -100,3 +104,5 @@ DOCUMENT_COPY_3.name = "Copy 3";
 DOCUMENT_COPY_3.array[1][0] = 1234;
 console.log("DOCUMENT_COPY_3:", DOCUMENT_COPY_3);
 console.log("ORIGINAL_DOCUMENT:", ORIGINAL_DOCUMENT);
+
+DOCUMENT_COPY_3.customMethod();
