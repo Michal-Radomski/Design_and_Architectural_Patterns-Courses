@@ -24,6 +24,7 @@ const OBJECT2 = new Singleton(2); // setting its id property to 2
 
 console.log("OBJECT1:", OBJECT1);
 console.log("OBJECT2:", OBJECT2);
+console.log("OBJECT1===OBJECT2", OBJECT1 === OBJECT2); // true
 
 //* Singleton Use Case Example Code
 
