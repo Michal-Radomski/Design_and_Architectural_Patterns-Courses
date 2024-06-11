@@ -31,5 +31,8 @@ console.log(`object2: ${JSON.stringify(object2)}`);
 object2.field[1] = 101;
 
 // Comparing object1 and object2
-console.log("object1:", object1);
-console.log("object2:", object2);
+console.log(`object1: ${JSON.stringify(object1)}`);
+console.log(`object2: ${JSON.stringify(object2)}`);
+
+// const object3 = object2.clone(); //* Error
+// console.log(`object3: ${JSON.stringify(object3)}`);
