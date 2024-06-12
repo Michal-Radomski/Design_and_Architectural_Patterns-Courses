@@ -272,7 +272,7 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function facadeExample() {
+(async function facadeExample() {
   const gameAPI = new GameAPI();
 
   const user = { user_name: "sean" };
@@ -312,5 +312,4 @@ async function facadeExample() {
   console.log("");
   console.log("---- GameState Snapshot ----");
   console.log(JSON.stringify(gameAPI.gameState()));
-}
-facadeExample();
+})();
