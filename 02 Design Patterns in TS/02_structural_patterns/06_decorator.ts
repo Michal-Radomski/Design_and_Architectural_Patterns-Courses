@@ -3,7 +3,6 @@ export {};
 // The decorator pattern is a structural pattern, that allows you to attach additional responsibilities to an object at runtime.
 
 // Decorator Concept Sample Code
-
 interface IComponent {
   method(): string;
 }
