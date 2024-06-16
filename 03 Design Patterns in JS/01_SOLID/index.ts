@@ -88,12 +88,14 @@ p.saveToFile(j, filename);
 
 //^ 2. Open-Closed Principle
 console.log("-----------------");
+//* In TS can be used: enums!
 const Color = Object.freeze({
   red: "red",
   green: "green",
   blue: "blue",
 });
 
+//* In TS can be used: enums!
 const Size = Object.freeze({
   small: "small",
   medium: "medium",
@@ -112,6 +114,13 @@ class Product {
   }
 }
 
+const apple = new Product("Apple", Color.green, Size.small);
+const tree = new Product("Tree", Color.green, Size.large);
+const house = new Product("House", Color.blue, Size.large);
+
+const products: Product[] = [apple, tree, house];
+
+// Old way
 // class ProductFilter {
 //   filterByColor(products: Product[], color: any) {
 //     return products.filter((p) => p.color === color);
@@ -131,19 +140,15 @@ class Product {
 //   // OCP = open for extension, closed for modification
 // }
 
-const apple = new Product("Apple", Color.green, Size.small);
-const tree = new Product("Tree", Color.green, Size.large);
-const house = new Product("House", Color.blue, Size.large);
-
-const products = [apple, tree, house];
-
 // const pf = new ProductFilter();
 // console.log(`Green products (old):`);
-// for (let p of pf.filterByColor(products, Color.green))
+// for (let p of pf.filterByColor(products, Color.green)) {
 //   console.log(` * ${p.name} is green`);
+// }
 //* ↑↑↑ BEFORE
 
 //* ↓↓↓ AFTER
+// New Way
 // general interface for a specification
 class ColorSpecification {
   color: string;
@@ -180,7 +185,7 @@ class AndSpecification {
     this.specs = specs;
   }
 
-  isSatisfied(item: Product) {
+  isSatisfied(item: Product): boolean {
     return this.specs.every((x) => x.isSatisfied(item));
   }
 }
@@ -197,5 +202,7 @@ for (let p of bf.filter(products, new SizeSpecification(Size.large))) {
 }
 
 console.log(`Large and green products:`);
-let spec = new AndSpecification(new ColorSpecification(Color.green), new SizeSpecification(Size.large));
-for (let p of bf.filter(products, spec)) console.log(` * ${p.name} is large and green`);
+const spec = new AndSpecification(new ColorSpecification(Color.green), new SizeSpecification(Size.large));
+for (let p of bf.filter(products, spec)) {
+  console.log(` * ${p.name} is large and green`);
+}
