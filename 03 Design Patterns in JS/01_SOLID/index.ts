@@ -366,7 +366,7 @@ class Person {
 }
 
 // LOW-LEVEL (STORAGE)
-class RelationshipBrowser {
+abstract class RelationshipBrowser {
   constructor() {
     if (this.constructor.name === "RelationshipBrowser") throw new Error("RelationshipBrowser is abstract!");
   }
@@ -399,7 +399,6 @@ class Relationships extends RelationshipBrowser {
 }
 
 // HIGH-LEVEL (RESEARCH)
-
 class Research {
   // constructor(relationships)
   // {
@@ -479,7 +478,7 @@ const userService = new UserService(mongoDBService);
 userService.createUser({ name: "John Doe", email: "john@example.com" });
 
 // Get a user by ID
-(async function () {
+(async function (): Promise<void> {
   const user = await userService.getUserById("1234");
   console.log(user); // { id: '1234' }
 })();
