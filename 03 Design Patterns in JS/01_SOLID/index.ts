@@ -21,6 +21,9 @@
 //  5)  The principle is closely related to other design principles like consistency, discoverability, and providing appropriate affordances in user interfaces.
 //  6)  Adhering to the principle of least astonishment can improve usability, learnability, and overall user satisfaction with software products.
 
+//^ YAGNI (You Aren't Gonna Need It)
+// The YAGNI principle is a concept in software development that suggests you should only implement functionality when it is actually needed, rather than anticipating future requirements and implementing them preemptively. It is part of the Extreme Programming (XP) methodology and is closely related to the KISS (Keep It Simple, Stupid) principle.
+
 //@ SOLID Principles
 //^ SOLID is an acronym for five fundamental principles of object-oriented programming and design. These principles aim to make software designs more understandable, flexible, and maintainable. The SOLID principles are:
 //* Single Responsibility Principle (SRP)
