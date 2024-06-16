@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon index.ts"
+    "start": "nodemon index.ts",
+    "start2": "nodemon exercises.ts"
   },
   "keywords": [],
   "author": "Michal Radomski <michalra@op.pl>",
