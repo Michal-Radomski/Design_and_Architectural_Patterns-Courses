@@ -13,6 +13,18 @@
 // 3)  Modify related items in just one place when changes are required
 
 //@ SOLID Principles
+//^ SOLID is an acronym for five fundamental principles of object-oriented programming and design. These principles aim to make software designs more understandable, flexible, and maintainable. The SOLID principles are:
+//* Single Responsibility Principle (SRP)
+// A class should have only one reason to change, meaning it should have a single responsibility or job. This helps in achieving loose coupling and high cohesion in software components.
+//* Open/Closed Principle (OCP)
+// Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification. This means that the behavior of existing code should be extended without modifying its source code.
+//* Liskov Substitution Principle (LSP)
+// Subtypes must be substitutable for their base types. In other words, if S is a subtype of T, then objects of type T may be replaced with objects of type S without altering any of the desirable properties of the program.
+//* Interface Segregation Principle (ISP)
+// Clients should not be forced to depend on interfaces they do not use. Instead of one fat interface, we should have many small interfaces, each addressing a specific subset of behavior.
+//* Dependency Inversion Principle (DIP)
+// High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
+
 import fs from "fs";
 
 interface ObjectI {
