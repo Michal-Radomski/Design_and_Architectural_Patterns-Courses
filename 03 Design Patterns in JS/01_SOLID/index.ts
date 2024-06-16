@@ -1,13 +1,19 @@
 //* Single Responsibility Principle
 
-const fs = require("fs");
+import fs from "fs";
+
+interface ObjectI {
+  [key: string]: string | number | ObjectI;
+}
 
 class Journal {
+  entries: ObjectI;
+  static count: number;
   constructor() {
-    this.entries = {};
+    this.entries = {} as ObjectI;
   }
 
-  addEntry(text) {
+  addEntry(text: string) {
     let c = ++Journal.count;
     let entry = `${c}: ${text}`;
     this.entries[c] = entry;
@@ -15,7 +21,7 @@ class Journal {
     return c;
   }
 
-  removeEntry(index) {
+  removeEntry(index: number) {
     delete this.entries[index];
   }
 
@@ -23,6 +29,7 @@ class Journal {
     return Object.values(this.entries).join("\n");
   }
 
+  //* Moved to other class!
   // save(filename)
   // {
   //   fs.writeFileSync(filename, this.toString());
@@ -32,9 +39,13 @@ class Journal {
 Journal.count = 0;
 
 class PersistenceManager {
-  load(filename) {}
-  loadFromUrl(url) {}
-  saveToFile(journal, filename) {
+  load(filename: string) {
+    console.log({ filename });
+  }
+  loadFromUrl(url: string) {
+    console.log({ url });
+  }
+  saveToFile(journal: Journal, filename: fs.PathOrFileDescriptor) {
     fs.writeFileSync(filename, journal.toString());
   }
 }
