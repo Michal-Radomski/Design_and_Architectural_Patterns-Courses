@@ -1,3 +1,18 @@
+//@ KISS, DRY Principles
+//^ KISS Principle (Keep It Simple, Stupid)
+//* KISS is a principle that emphasizes simplicity in software design and implementation. It suggests that most systems work best when they are kept simple rather than made overly complex. The key aspects of KISS are:
+// 1)  Avoid unnecessary complexity and over-engineering
+// 2)  Favor simple, straightforward solutions over convoluted ones
+// 3)  Write code that is easy to understand and maintain
+// 4)  Break down complex problems into simpler, manageable parts
+
+//^ DRY Principle (Don't Repeat Yourself)
+//* DRY is a principle that aims to reduce repetition of code and data. It states that "every piece of knowledge must have a single, unambiguous, authoritative representation within a system." The key aspects of DRY are:
+// 1)  Eliminate redundant or duplicated code
+// 2)  Extract shared code into reusable abstractions (functions, classes, modules)
+// 3)  Modify related items in just one place when changes are required
+
+//@ SOLID Principles
 import fs from "fs";
 
 interface ObjectI {
