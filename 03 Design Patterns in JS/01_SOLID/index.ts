@@ -32,7 +32,7 @@ interface ObjectI {
 }
 
 //^ 1. Single Responsibility Principle
-console.log("-----------------");
+console.log("1. -----------------");
 class Journal {
   entries: ObjectI;
   static count: number;
@@ -87,7 +87,7 @@ const filename = "./journal.txt";
 p.saveToFile(j, filename);
 
 //^ 2. Open-Closed Principle
-console.log("-----------------");
+console.log("2. -----------------");
 //* In TS can be used: enums!
 const Color = Object.freeze({
   red: "red",
@@ -206,3 +206,62 @@ const spec = new AndSpecification(new ColorSpecification(Color.green), new SizeS
 for (let p of bf.filter(products, spec)) {
   console.log(` * ${p.name} is large and green`);
 }
+
+//^ 3. Liskov Substitution Principle
+console.log("3. -----------------");
+class Rectangle {
+  _width: number;
+  _height: number;
+  constructor(width: number, height: number) {
+    this._width = width;
+    this._height = height;
+  }
+
+  get width() {
+    return this._width;
+  }
+  get height() {
+    return this._height;
+  }
+
+  set width(value) {
+    this._width = value;
+  }
+  set height(value) {
+    this._height = value;
+  }
+
+  get area() {
+    return this._width * this._height;
+  }
+
+  toString() {
+    return `${this._width}x${this._height}`;
+  }
+}
+
+class Square extends Rectangle {
+  constructor(size: number) {
+    super(size, size);
+  }
+
+  set width(value: number) {
+    this._width = this._height = value;
+  }
+
+  set height(value: number) {
+    this._width = this._height = value;
+  }
+}
+
+const useIt = function (rc: Rectangle) {
+  const width = rc._width;
+  rc.height = 10;
+  console.log(`Expected area of ${10 * width}, ` + `got ${rc.area}`);
+};
+
+const rc = new Rectangle(2, 3);
+useIt(rc);
+
+const sq = new Square(5);
+useIt(sq);
