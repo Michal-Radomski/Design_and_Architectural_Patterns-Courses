@@ -301,3 +301,41 @@ makeBirdFly(sparrow); // Output: Sparrow is flying...
 // Penguin instance violates LSP when substituted for Bird
 // const penguin = new Penguin();
 // makeBirdFly(penguin); // Throws an error: Penguins can't fly!
+
+//^ 4. Interface Segregation Principle
+console.log("4. -----------------");
+
+interface WorkerInterface {
+  work(): void;
+}
+
+interface HumanWorkerInterface extends WorkerInterface {
+  eat(): void;
+  sleep(): void;
+}
+
+class HumanWorker implements HumanWorkerInterface {
+  work() {
+    console.log("Working...");
+  }
+
+  eat() {
+    console.log("Eating...");
+  }
+
+  sleep() {
+    console.log("Sleeping...");
+  }
+}
+
+class RobotWorker implements WorkerInterface {
+  work() {
+    console.log("Working...");
+  }
+}
+
+const humanWorker = new HumanWorker();
+humanWorker.eat();
+
+const robotWorker = new RobotWorker();
+robotWorker.work();
