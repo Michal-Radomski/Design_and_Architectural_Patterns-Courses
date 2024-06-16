@@ -209,59 +209,95 @@ for (let p of bf.filter(products, spec)) {
 
 //^ 3. Liskov Substitution Principle
 console.log("3. -----------------");
-class Rectangle {
-  _width: number;
-  _height: number;
-  constructor(width: number, height: number) {
-    this._width = width;
-    this._height = height;
-  }
+//* This needs to be fixed!
+// class Rectangle {
+//   _width: number;
+//   _height: number;
+//   constructor(width: number, height: number) {
+//     this._width = width;
+//     this._height = height;
+//   }
 
-  get width() {
-    return this._width;
-  }
-  get height() {
-    return this._height;
-  }
+//   get width() {
+//     return this._width;
+//   }
+//   get height() {
+//     return this._height;
+//   }
 
-  set width(value) {
-    this._width = value;
-  }
-  set height(value) {
-    this._height = value;
-  }
+//   set width(value) {
+//     this._width = value;
+//   }
+//   set height(value) {
+//     this._height = value;
+//   }
 
-  get area() {
-    return this._width * this._height;
-  }
+//   get area() {
+//     return this._width * this._height;
+//   }
 
-  toString() {
-    return `${this._width}x${this._height}`;
+//   toString() {
+//     return `${this._width}x${this._height}`;
+//   }
+// }
+
+// class Square extends Rectangle {
+//   constructor(size: number) {
+//     super(size, size);
+//   }
+
+//   set width(value: number) {
+//     this._width = this._height = value;
+//   }
+
+//   set height(value: number) {
+//     this._width = this._height = value;
+//   }
+// }
+
+// const useIt = function (rc: Rectangle): void {
+//   const width = rc._width;
+//   rc.height = 10;
+//   console.log(`Expected area of ${10 * width}, ` + `got ${rc.area}`);
+// };
+
+// const rc = new Rectangle(2, 3);
+// useIt(rc);
+
+// const sq = new Square(5);
+// useIt(sq);
+
+//* Example 2
+// Base class
+class Bird {
+  fly(): void {
+    console.log("Flying...");
   }
 }
 
-class Square extends Rectangle {
-  constructor(size: number) {
-    super(size, size);
-  }
-
-  set width(value: number) {
-    this._width = this._height = value;
-  }
-
-  set height(value: number) {
-    this._width = this._height = value;
+// Derived class that follows LSP
+class Sparrow extends Bird {
+  fly(): void {
+    console.log("Sparrow is flying...");
   }
 }
 
-const useIt = function (rc: Rectangle) {
-  const width = rc._width;
-  rc.height = 10;
-  console.log(`Expected area of ${10 * width}, ` + `got ${rc.area}`);
-};
+// Derived class that violates LSP //* the Penguin class violates the Liskov Substitution Principle!
+// class Penguin extends Bird {
+//   fly(): void {
+//     throw new Error("Penguins can't fly!");
+//   }
+// }
 
-const rc = new Rectangle(2, 3);
-useIt(rc);
+// Usage
+function makeBirdFly(bird: Bird): void {
+  bird.fly();
+}
 
-const sq = new Square(5);
-useIt(sq);
+// Sparrow instance can be substituted for Bird
+const sparrow = new Sparrow();
+makeBirdFly(sparrow); // Output: Sparrow is flying...
+
+// Penguin instance violates LSP when substituted for Bird
+// const penguin = new Penguin();
+// makeBirdFly(penguin); // Throws an error: Penguins can't fly!
