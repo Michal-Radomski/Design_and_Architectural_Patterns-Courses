@@ -1,4 +1,4 @@
-//@ KISS, DRY Principles
+//@ KISS, DRY  and other Principles
 //^ KISS Principle (Keep It Simple, Stupid)
 //* KISS is a principle that emphasizes simplicity in software design and implementation. It suggests that most systems work best when they are kept simple rather than made overly complex. The key aspects of KISS are:
 // 1)  Avoid unnecessary complexity and over-engineering
@@ -11,6 +11,15 @@
 // 1)  Eliminate redundant or duplicated code
 // 2)  Extract shared code into reusable abstractions (functions, classes, modules)
 // 3)  Modify related items in just one place when changes are required
+
+//^ The principle of least astonishment (or principle of least surprise)
+//* The principle of least astonishment (or principle of least surprise) is a key concept in software design and user experience. It states that a system should behave in a way that is consistent with users' reasonable expectations and should avoid surprising or astonishing them with unexpected behavior.
+//  1)  It aims to minimize surprising or unintuitive behavior from software systems and user interfaces. The system should operate in a predictable manner aligned with users' mental models and prior experiences.
+//  2)  It promotes designing interfaces and APIs that follow common conventions and patterns that users are already familiar with. This reduces the learning curve and cognitive load on users.
+//  3)  Method names, variable names, and other code constructs should clearly communicate their purpose and behavior to avoid surprising developers working with the code.
+//  4)  When a system must deviate from established conventions or expectations, it should provide clear feedback and justification to users to minimize confusion.
+//  5)  The principle is closely related to other design principles like consistency, discoverability, and providing appropriate affordances in user interfaces.
+//  6)  Adhering to the principle of least astonishment can improve usability, learnability, and overall user satisfaction with software products.
 
 //@ SOLID Principles
 //^ SOLID is an acronym for five fundamental principles of object-oriented programming and design. These principles aim to make software designs more understandable, flexible, and maintainable. The SOLID principles are:
