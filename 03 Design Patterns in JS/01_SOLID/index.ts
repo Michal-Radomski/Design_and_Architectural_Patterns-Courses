@@ -32,7 +32,7 @@
 //* Interface Segregation Principle (ISP)
 // Clients should not be forced to depend on interfaces they do not use. Instead of one fat interface, we should have many small interfaces, each addressing a specific subset of behavior.
 //* Dependency Inversion Principle (DIP)
-// High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions.
+// High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions. High-level modules are eg: business logic, and low-level are eg: data access, I/O operations, external services.
 
 import fs from "fs";
 
@@ -431,3 +431,55 @@ rels.addParentAndChild(parent, child1);
 rels.addParentAndChild(parent, child2);
 
 new Research(rels);
+
+//* Example 2
+// Abstraction (Interface)
+interface DatabaseService {
+  save(data: any): Promise<void>;
+  get(id: string): Promise<any>;
+}
+
+// High-level module (UserService)
+class UserService {
+  constructor(private databaseService: DatabaseService) {}
+
+  async createUser(userData: any): Promise<void> {
+    // Validate user data
+    // ...
+
+    // Save user data using the injected DatabaseService
+    await this.databaseService.save(userData);
+  }
+
+  async getUserById(userId: string): Promise<any> {
+    // Get user data using the injected DatabaseService
+    return await this.databaseService.get(userId);
+  }
+}
+
+// Low-level module (concrete implementation)
+class MongoDBService implements DatabaseService {
+  async save(_data: any): Promise<void> {
+    // Save data to MongoDB
+    console.log("Saving data to MongoDB...");
+  }
+
+  async get(id: string): Promise<any> {
+    // Get data from MongoDB
+    console.log("Getting data from MongoDB...");
+    return { id };
+  }
+}
+
+// Usage
+const mongoDBService = new MongoDBService();
+const userService = new UserService(mongoDBService);
+
+// Create a new user
+userService.createUser({ name: "John Doe", email: "john@example.com" });
+
+// Get a user by ID
+(async function () {
+  const user = await userService.getUserById("1234");
+  console.log(user); // { id: '1234' }
+})();
