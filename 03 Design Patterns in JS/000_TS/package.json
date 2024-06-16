@@ -1,0 +1,12 @@
+{
+  "name": "000_ts",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon index.ts"
+  },
+  "keywords": [],
+  "author": "Michal Radomski <michalra@op.pl>",
+  "license": "MIT",
+  "description": ""
+}
