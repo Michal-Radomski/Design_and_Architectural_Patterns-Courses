@@ -32,12 +32,13 @@ class Person {
   }
 }
 
-let john = new Person("John", new Address("123 London Road", "London", "UK"));
+const john = new Person("John", new Address("123 London Road", "London", "UK"));
 
-let jane = john.deepCopy();
+// const jane = john //* Bad copying!
+const jane = john.deepCopy();
 
 jane.name = "Jane";
 jane.address.streetAddress = "321 Angel St"; // oops
 
-console.log(john.toString()); // oops, john is called 'jane'
-console.log(jane.toString());
+console.log(john.toString()); // John lives at Address: 123 London Road, London, UK
+console.log(jane.toString()); // Jane lives at Address: 321 Angel St, London, UK
