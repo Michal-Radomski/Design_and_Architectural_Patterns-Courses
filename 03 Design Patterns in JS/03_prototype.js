@@ -18,7 +18,7 @@
 // class Person {
 //   constructor(name, address) {
 //     this.name = name;
-//     this.address = address; //!
+//     this.address = address;
 //   }
 
 //   deepCopy() {
@@ -60,7 +60,7 @@
 // class Person {
 //   constructor(name, address) {
 //     this.name = name;
-//     this.address = address; //!
+//     this.address = address;
 //   }
 
 //   toString() {
@@ -179,7 +179,7 @@ class Serializer {
       object["typeIndex"] = idx;
 
       for (let key in object) {
-        if (object.hasOwnProperty(key) && object[key] != null) this.markRecursive(object[key]); // ^^^^^^^^^^ important
+        if (object.hasOwnProperty(key) && object[key] != null) this.markRecursive(object[key]); //^ important
       }
     }
   }
@@ -227,8 +227,29 @@ EmployeeFactory.serializer = new Serializer([Employee, Address]);
 EmployeeFactory.main = new Employee(null, new Address(null, "123 East Dr", "London"));
 EmployeeFactory.aux = new Employee(null, new Address(null, "200 London Road", "Oxford"));
 
-let john = EmployeeFactory.newMainOfficeEmployee("John", 4321);
-let jane = EmployeeFactory.newAuxOfficeEmployee("Jane", 222);
+const john = EmployeeFactory.newMainOfficeEmployee("John", 4321);
+const jane = EmployeeFactory.newAuxOfficeEmployee("Jane", 222);
 
 console.log(john.toString());
 console.log(jane.toString());
+
+//* Exercise
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
+class Line {
+  constructor(start, end) {
+    this.start = start;
+    this.end = end;
+  }
+
+  deepCopy() {
+    let newStart = new Point(this.start.x, this.start.y);
+    let newEnd = new Point(this.end.x, this.end.y);
+    return new Line(newStart, newEnd);
+  }
+}
