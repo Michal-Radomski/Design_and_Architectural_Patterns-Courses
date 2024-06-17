@@ -45,30 +45,123 @@
 // console.log(jane.toString()); // Jane lives at Address: 321 Angel St, London, UK
 
 //* Copy Through Serialization
+// class Address {
+//   constructor(streetAddress, city, country) {
+//     this.streetAddress = streetAddress;
+//     this.city = city;
+//     this.country = country;
+//   }
+
+//   toString() {
+//     return `Address: ${this.streetAddress}, ` + `${this.city}, ${this.country}`;
+//   }
+// }
+
+// class Person {
+//   constructor(name, address) {
+//     this.name = name;
+//     this.address = address; //!
+//   }
+
+//   toString() {
+//     return `${this.name} lives at ${this.address}`;
+//   }
+
+//   greet() {
+//     console.log(`Hi, my name is ${this.name}, ` + `I live at ${this.address.toString()}`);
+//   }
+// }
+
+// class Serializer {
+//   constructor(types) {
+//     this.types = types;
+//   }
+
+//   markRecursive(object) {
+//     // anoint each object with a type index
+//     let idx = this.types.findIndex((t) => {
+//       return t.name === object.constructor.name;
+//     });
+//     if (idx !== -1) {
+//       object["typeIndex"] = idx;
+
+//       for (let key in object) {
+//         if (object.hasOwnProperty(key) && object[key] != null) this.markRecursive(object[key]);
+//       }
+//     }
+//   }
+
+//   reconstructRecursive(object) {
+//     if (object.hasOwnProperty("typeIndex")) {
+//       let type = this.types[object.typeIndex];
+//       let obj = new type();
+//       for (let key in object) {
+//         if (object.hasOwnProperty(key) && object[key] != null) {
+//           obj[key] = this.reconstructRecursive(object[key]);
+//         }
+//       }
+//       delete obj.typeIndex;
+//       return obj;
+//     }
+//     return object;
+//   }
+
+//   clone(object) {
+//     this.markRecursive(object);
+//     let copy = JSON.parse(JSON.stringify(object));
+//     return this.reconstructRecursive(copy);
+//   }
+// }
+
+// const john = new Person("John", new Address("123 London Road", "London", "UK"));
+
+// let jane = JSON.parse(JSON.stringify(john));
+
+// jane.name = "Jane";
+// jane.address.streetAddress = "321 Angel St";
+
+// john.greet();
+// // jane.greet(); //* this won't work
+
+// // try a dedicated serializer
+// const s = new Serializer([Person, Address]); // pain point
+// jane = s.clone(john);
+
+// jane.name = "Jane";
+// jane.address.streetAddress = "321 Angel St";
+// jane.greet(); //* this works!
+
+// console.log(john.toString()); // John lives at Address: 123 London Road, London, UK
+// console.log(jane.toString()); // Jane lives at Address: 321 Angel St, London, UK
+
+//* Prototype Factory
 class Address {
-  constructor(streetAddress, city, country) {
+  constructor(suite, streetAddress, city) {
+    this.suite = suite;
     this.streetAddress = streetAddress;
     this.city = city;
-    this.country = country;
   }
 
   toString() {
-    return `Address: ${this.streetAddress}, ` + `${this.city}, ${this.country}`;
+    return `Suite ${this.suite}, ` + `${this.streetAddress}, ${this.city}`;
   }
 }
 
-class Person {
+class Employee {
+  // renamed
   constructor(name, address) {
     this.name = name;
     this.address = address; //!
   }
 
   toString() {
-    return `${this.name} lives at ${this.address}`;
+    return `${this.name} works at ${this.address}`;
   }
 
   greet() {
-    console.log(`Hi, my name is ${this.name}, ` + `I live at ${this.address.toString()}`);
+    console.log(
+      `Hi, my name is ${this.name}, ` + `I work at ${this.address.toString()}` //!
+    );
   }
 }
 
@@ -86,7 +179,7 @@ class Serializer {
       object["typeIndex"] = idx;
 
       for (let key in object) {
-        if (object.hasOwnProperty(key) && object[key] != null) this.markRecursive(object[key]);
+        if (object.hasOwnProperty(key) && object[key] != null) this.markRecursive(object[key]); // ^^^^^^^^^^ important
       }
     }
   }
@@ -113,22 +206,29 @@ class Serializer {
   }
 }
 
-const john = new Person("John", new Address("123 London Road", "London", "UK"));
+class EmployeeFactory {
+  static _newEmployee(proto, name, suite) {
+    let copy = EmployeeFactory.serializer.clone(proto);
+    copy.name = name;
+    copy.address.suite = suite;
+    return copy;
+  }
 
-let jane = JSON.parse(JSON.stringify(john));
+  static newMainOfficeEmployee(name, suite) {
+    return this._newEmployee(EmployeeFactory.main, name, suite);
+  }
 
-jane.name = "Jane";
-jane.address.streetAddress = "321 Angel St";
+  static newAuxOfficeEmployee(name, suite) {
+    return this._newEmployee(EmployeeFactory.aux, name, suite);
+  }
+}
 
-john.greet();
-// jane.greet(); //* this won't work
+EmployeeFactory.serializer = new Serializer([Employee, Address]);
+EmployeeFactory.main = new Employee(null, new Address(null, "123 East Dr", "London"));
+EmployeeFactory.aux = new Employee(null, new Address(null, "200 London Road", "Oxford"));
 
-// try a dedicated serializer
-const s = new Serializer([Person, Address]); // pain point
-jane = s.clone(john);
+let john = EmployeeFactory.newMainOfficeEmployee("John", 4321);
+let jane = EmployeeFactory.newAuxOfficeEmployee("Jane", 222);
 
-jane.name = "Jane";
-jane.address.streetAddress = "321 Angel St";
-
-console.log(john.toString()); // John lives at Address: 123 London Road, London, UK
-console.log(jane.toString()); // Jane lives at Address: 321 Angel St, London, UK
+console.log(john.toString());
+console.log(jane.toString());
