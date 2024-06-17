@@ -131,3 +131,44 @@ console.log("");
 
 console.log("App: Launched with ConcreteCreatorB.");
 clientCode(new ConcreteCreatorB());
+
+//^ 03. Prototype Design Pattern
+interface Prototype<T> {
+  clone(): T;
+}
+
+class Address implements Prototype<Address> {
+  constructor(public street: string, public city: string) {}
+
+  clone(): Address {
+    return new Address(this.street, this.city);
+  }
+
+  toString(): string {
+    return `${this.street}, ${this.city}`;
+  }
+}
+
+class Person implements Prototype<Person> {
+  constructor(public name: string, public age: number, public address: Address) {}
+
+  clone(): Person {
+    return new Person(this.name, this.age, this.address.clone());
+  }
+
+  toString(): string {
+    return `${this.name}, ${this.age}, ${this.address}`;
+  }
+}
+
+const originalAddress = new Address("123 Main St", "New York");
+const originalPerson = new Person("John Doe", 30, originalAddress);
+
+const clonedPerson = originalPerson.clone();
+
+// Modify the cloned person and address
+clonedPerson.name = "Jane Doe";
+clonedPerson.address.street = "456 Elm St";
+
+console.log(originalPerson.toString()); // John Doe, 30, 123 Main St, New York
+console.log(clonedPerson.toString()); // Jane Doe, 30, 456 Elm St, New York
