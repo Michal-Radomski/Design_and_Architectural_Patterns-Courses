@@ -172,3 +172,32 @@ clonedPerson.address.street = "456 Elm St";
 
 console.log(originalPerson.toString()); // John Doe, 30, 123 Main St, New York
 console.log(clonedPerson.toString()); // Jane Doe, 30, 456 Elm St, New York
+
+//^ 04. Singleton Design Pattern
+class Singleton {
+  private static instance: Singleton;
+
+  private constructor() {
+    // Private constructor to prevent instantiation from outside the class
+  }
+
+  public static getInstance(): Singleton {
+    if (!Singleton.instance) {
+      Singleton.instance = new Singleton();
+    }
+    return Singleton.instance;
+  }
+
+  // Add any methods or properties you need for your Singleton class
+  public someMethod(): void {
+    console.log("Singleton method called");
+  }
+}
+
+// Usage
+const instance1 = Singleton.getInstance();
+const instance2 = Singleton.getInstance();
+
+console.log(instance1 === instance2); // true
+
+instance1.someMethod(); // Outputs: "Singleton method called"
