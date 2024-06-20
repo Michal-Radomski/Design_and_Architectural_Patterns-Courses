@@ -234,3 +234,114 @@ function clientCode_2(newApi: NewApi): void {
 const oldApi = new OldApi();
 const adapter = new Adapter(oldApi);
 clientCode_2(adapter); // Outputs: Called oldRequest method
+
+//^ 06. Bridge Design Pattern
+// Device interface
+interface Device {
+  isEnabled(): boolean;
+  enable(): void;
+  disable(): void;
+  getVolume(): number;
+  setVolume(volume: number): void;
+}
+
+// Concrete implementation for TV
+class TV implements Device {
+  private power: boolean = false;
+  private volume: number = 10;
+
+  isEnabled(): boolean {
+    return this.power;
+  }
+
+  enable(): void {
+    this.power = true;
+  }
+
+  disable(): void {
+    this.power = false;
+  }
+
+  getVolume(): number {
+    return this.volume;
+  }
+
+  setVolume(volume: number): void {
+    this.volume = volume;
+  }
+}
+
+// Concrete implementation for Radio
+class Radio implements Device {
+  private power: boolean = false;
+  private volume: number = 20;
+
+  isEnabled(): boolean {
+    return this.power;
+  }
+
+  enable(): void {
+    this.power = true;
+  }
+
+  disable(): void {
+    this.power = false;
+  }
+
+  getVolume(): number {
+    return this.volume;
+  }
+
+  setVolume(volume: number): void {
+    this.volume = volume;
+  }
+}
+
+// RemoteControl abstraction
+class RemoteControl {
+  protected device: Device;
+
+  constructor(device: Device) {
+    this.device = device;
+  }
+
+  togglePower(): void {
+    if (this.device.isEnabled()) {
+      this.device.disable();
+    } else {
+      this.device.enable();
+    }
+  }
+
+  volumeUp(): void {
+    this.device.setVolume(this.device.getVolume() + 10);
+  }
+
+  volumeDown(): void {
+    this.device.setVolume(this.device.getVolume() - 10);
+  }
+}
+
+// AdvancedRemoteControl extending RemoteControl
+class AdvancedRemoteControl extends RemoteControl {
+  mute(): void {
+    this.device.setVolume(0);
+  }
+}
+
+// Usage example
+const tv = new TV();
+const radio = new Radio();
+
+const remote = new RemoteControl(tv);
+const advancedRemote = new AdvancedRemoteControl(radio);
+
+console.log(`TV is ${tv.isEnabled() ? "enabled" : "disabled"}`);
+remote.togglePower();
+console.log(`TV is ${tv.isEnabled() ? "enabled" : "disabled"}`);
+
+console.log(`Radio volume: ${radio.getVolume()}`);
+advancedRemote.volumeUp();
+console.log(`Radio volume: ${radio.getVolume()}`);
+advancedRemote.mute();
+console.log(`Radio volume: ${radio.getVolume()}`);
