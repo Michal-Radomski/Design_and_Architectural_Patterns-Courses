@@ -35,9 +35,9 @@ class Circle extends Shape {
 // different ways of rendering: vector, raster
 // we don't want a cartesian product of these
 
-let raster = new RasterRenderer();
-let vector = new VectorRenderer();
-let circle = new Circle(vector, 5);
+const raster = new RasterRenderer();
+const vector = new VectorRenderer();
+const circle = new Circle(vector, 5);
 circle.draw();
 circle.resize(2);
 circle.draw();
