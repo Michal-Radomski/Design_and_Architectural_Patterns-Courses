@@ -201,3 +201,36 @@ const instance2 = Singleton.getInstance();
 console.log(instance1 === instance2); // true
 
 instance1.someMethod(); // Outputs: "Singleton method called"
+
+//^ 05. Adapter Design Pattern
+interface NewApi {
+  newRequest(): void;
+}
+
+class OldApi {
+  oldRequest(): void {
+    console.log("Called oldRequest method");
+  }
+}
+
+class Adapter implements NewApi {
+  private oldApi: OldApi;
+
+  constructor(oldApi: OldApi) {
+    this.oldApi = oldApi;
+  }
+
+  newRequest(): void {
+    this.oldApi.oldRequest();
+  }
+}
+
+// Client code
+function clientCode_2(newApi: NewApi): void {
+  newApi.newRequest();
+}
+
+// Example usage
+const oldApi = new OldApi();
+const adapter = new Adapter(oldApi);
+clientCode_2(adapter); // Outputs: Called oldRequest method
