@@ -495,3 +495,58 @@ console.log(milkSugarCoffee.getDescription() + " $" + milkSugarCoffee.getCost())
 
 const fancyCoffee = new WhipDecorator(milkSugarCoffee);
 console.log(fancyCoffee.getDescription() + " $" + fancyCoffee.getCost()); // Simple coffee, milk, sugar, whip $11
+
+//^ 09. Facade Design Pattern
+console.log("09. Facade Design Pattern ----------------");
+class CPU {
+  freeze(): void {
+    console.log("Freezing CPU...");
+  }
+
+  jump(position: number): void {
+    console.log(`Jumping to position ${position}...`);
+  }
+
+  execute(): void {
+    console.log("Executing instructions...");
+  }
+}
+
+class Memory {
+  load(position: number, data: string): void {
+    console.log(`Loading data '${data}' into position ${position}...`);
+  }
+}
+
+class HardDrive {
+  read(lba: number, size: number): string {
+    return `Reading ${size} bytes from LBA ${lba}...`;
+  }
+}
+
+class ComputerFacade {
+  private cpu: CPU;
+  private memory: Memory;
+  private hardDrive: HardDrive;
+
+  constructor() {
+    this.cpu = new CPU();
+    this.memory = new Memory();
+    this.hardDrive = new HardDrive();
+  }
+
+  start(): void {
+    this.cpu.freeze();
+    this.memory.load(0, this.hardDrive.read(0, 1024));
+    this.cpu.jump(0);
+    this.cpu.execute();
+  }
+}
+
+const computer = new ComputerFacade();
+computer.start();
+//* Output:
+// Freezing CPU...
+// Loading data 'Reading 1024 bytes from LBA 0...' into position 0...
+// Jumping to position 0...
+// Executing instructions...
