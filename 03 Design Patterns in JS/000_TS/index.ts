@@ -496,8 +496,8 @@ console.log(milkSugarCoffee.getDescription() + " $" + milkSugarCoffee.getCost())
 const fancyCoffee = new WhipDecorator(milkSugarCoffee);
 console.log(fancyCoffee.getDescription() + " $" + fancyCoffee.getCost()); // Simple coffee, milk, sugar, whip $11
 
-//^ 09. Facade Design Pattern
-console.log("09. Facade Design Pattern ----------------");
+//^ 09. Façade Design Pattern
+console.log("09. Façade ----------------");
 class CPU {
   freeze(): void {
     console.log("Freezing CPU...");
