@@ -133,6 +133,7 @@ console.log("App: Launched with ConcreteCreatorB.");
 clientCode(new ConcreteCreatorB());
 
 //^ 03. Prototype Design Pattern
+console.log("03. Prototype Design Pattern ----------------");
 interface Prototype<T> {
   clone(): T;
 }
@@ -174,6 +175,7 @@ console.log(originalPerson.toString()); // John Doe, 30, 123 Main St, New York
 console.log(clonedPerson.toString()); // Jane Doe, 30, 456 Elm St, New York
 
 //^ 04. Singleton Design Pattern
+console.log("04. Singleton Design Pattern ----------------");
 class Singleton {
   private static instance: Singleton;
 
@@ -203,6 +205,7 @@ console.log(instance1 === instance2); // true
 instance1.someMethod(); // Outputs: "Singleton method called"
 
 //^ 05. Adapter Design Pattern
+console.log("05. Adapter Design Pattern ----------------");
 interface NewApi {
   newRequest(): void;
 }
@@ -236,6 +239,7 @@ const adapter = new Adapter(oldApi);
 clientCode_2(adapter); // Outputs: Called oldRequest method
 
 //^ 06. Bridge Design Pattern
+console.log("06. Bridge Design Pattern ----------------");
 // Device interface
 interface Device {
   isEnabled(): boolean;
@@ -345,3 +349,62 @@ advancedRemote.volumeUp();
 console.log(`Radio volume: ${radio.getVolume()}`);
 advancedRemote.mute();
 console.log(`Radio volume: ${radio.getVolume()}`);
+
+//^ 07. Composite Design Pattern
+console.log("07. Composite Design Pattern ----------------");
+interface Graphic {
+  move(x: number, y: number): void;
+  draw(): void;
+}
+
+class Dot implements Graphic {
+  constructor(private x: number, private y: number) {}
+
+  move(x: number, y: number): void {
+    this.x += x;
+    this.y += y;
+  }
+
+  draw(): void {
+    console.log(`Drawing a dot at (${this.x}, ${this.y})`);
+  }
+}
+
+class CompoundGraphic implements Graphic {
+  private children: Graphic[] = [];
+
+  add(child: Graphic): void {
+    this.children.push(child);
+  }
+
+  remove(child: Graphic): void {
+    const index = this.children.indexOf(child);
+    if (index !== -1) {
+      this.children.splice(index, 1);
+    }
+  }
+
+  move(x: number, y: number): void {
+    this.children.forEach((child) => child.move(x, y));
+  }
+
+  draw(): void {
+    console.log("Drawing a compound graphic:");
+    this.children.forEach((child) => child.draw());
+  }
+}
+
+const dot1 = new Dot(1, 2);
+const dot2 = new Dot(3, 4);
+const compoundGraphic = new CompoundGraphic();
+
+compoundGraphic.add(dot1);
+compoundGraphic.add(dot2);
+
+const dot3 = new Dot(5, 6);
+const anotherCompoundGraphic = new CompoundGraphic();
+anotherCompoundGraphic.add(dot3);
+anotherCompoundGraphic.add(compoundGraphic);
+
+anotherCompoundGraphic.move(1, 1);
+anotherCompoundGraphic.draw();
