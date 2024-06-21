@@ -408,3 +408,90 @@ anotherCompoundGraphic.add(compoundGraphic);
 
 anotherCompoundGraphic.move(1, 1);
 anotherCompoundGraphic.draw();
+
+//^ 08. Decorator Design Pattern
+console.log("08. Decorator Design Pattern ----------------");
+interface Coffee {
+  getCost(): number;
+  getDescription(): string;
+}
+
+class SimpleCoffee implements Coffee {
+  getCost(): number {
+    return 5;
+  }
+
+  getDescription(): string {
+    return "Simple coffee";
+  }
+}
+
+class CoffeeDecorator implements Coffee {
+  protected decoratedCoffee: Coffee;
+
+  constructor(coffee: Coffee) {
+    this.decoratedCoffee = coffee;
+  }
+
+  getCost(): number {
+    return this.decoratedCoffee.getCost();
+  }
+
+  getDescription(): string {
+    return this.decoratedCoffee.getDescription();
+  }
+}
+
+class MilkDecorator extends CoffeeDecorator {
+  constructor(coffee: Coffee) {
+    super(coffee);
+  }
+
+  getCost(): number {
+    return super.getCost() + 2;
+  }
+
+  getDescription(): string {
+    return super.getDescription() + ", milk";
+  }
+}
+
+class SugarDecorator extends CoffeeDecorator {
+  constructor(coffee: Coffee) {
+    super(coffee);
+  }
+
+  getCost(): number {
+    return super.getCost() + 1;
+  }
+
+  getDescription(): string {
+    return super.getDescription() + ", sugar";
+  }
+}
+
+class WhipDecorator extends CoffeeDecorator {
+  constructor(coffee: Coffee) {
+    super(coffee);
+  }
+
+  getCost(): number {
+    return super.getCost() + 3;
+  }
+
+  getDescription(): string {
+    return super.getDescription() + ", whip";
+  }
+}
+
+const myCoffee = new SimpleCoffee();
+console.log(myCoffee.getDescription() + " $" + myCoffee.getCost()); // Simple coffee $5
+
+const milkCoffee = new MilkDecorator(myCoffee);
+console.log(milkCoffee.getDescription() + " $" + milkCoffee.getCost()); // Simple coffee, milk $7
+
+const milkSugarCoffee = new SugarDecorator(milkCoffee);
+console.log(milkSugarCoffee.getDescription() + " $" + milkSugarCoffee.getCost()); // Simple coffee, milk, sugar $8
+
+const fancyCoffee = new WhipDecorator(milkSugarCoffee);
+console.log(fancyCoffee.getDescription() + " $" + fancyCoffee.getCost()); // Simple coffee, milk, sugar, whip $11
