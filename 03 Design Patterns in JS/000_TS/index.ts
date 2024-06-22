@@ -603,3 +603,49 @@ class ShapeFactory {
 // Creating a circle of color: blue
 // Drawing a blue circle at (50, 60)
 // Drawing a blue circle at (70, 80)
+
+//^ 11. Proxy Design Pattern
+console.log("11. Proxy Design Pattern ----------------");
+
+// Subject interface
+interface DataFetcher {
+  fetchData(id: number): string;
+}
+
+// RealSubject class that performs the actual operation
+class RealDataFetcher implements DataFetcher {
+  fetchData(id: number): string {
+    console.log(`Fetching data for ID: ${id}`);
+    return `Data for ID: ${id}`;
+  }
+}
+
+// Proxy class that controls access to the RealSubject and adds caching
+class DataFetcherProxy implements DataFetcher {
+  private realDataFetcher: RealDataFetcher;
+  private cache: Map<number, string>;
+
+  constructor() {
+    this.realDataFetcher = new RealDataFetcher();
+    this.cache = new Map<number, string>();
+  }
+
+  fetchData(id: number): string {
+    if (this.cache.has(id)) {
+      console.log(`Returning cached data for ID: ${id}`);
+      return this.cache.get(id)!;
+    }
+
+    const data = this.realDataFetcher.fetchData(id);
+    this.cache.set(id, data);
+    return data;
+  }
+}
+
+// Usage
+const dataFetcher: DataFetcher = new DataFetcherProxy();
+
+console.log(dataFetcher.fetchData(1)); // Fetching data for ID: 1, Data for ID: 1
+console.log(dataFetcher.fetchData(1)); // Returning cached data for ID: 1, Data for ID: 1
+console.log(dataFetcher.fetchData(2)); // Fetching data for ID: 2, Data for ID: 2
+console.log(dataFetcher.fetchData(2)); // Returning cached data for ID: 2, Data for ID: 2
