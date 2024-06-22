@@ -48,3 +48,66 @@ class Creature {
 const c = new Creature();
 c.agility = 12;
 c.agility = 13;
+
+//* Example 3
+class Car {
+  drive() {
+    console.log("Car being driven");
+  }
+}
+
+class CarProxy {
+  constructor(driver) {
+    this.driver = driver;
+    this._car = new Car();
+  }
+
+  drive() {
+    if (this.driver.age >= 16) this._car.drive();
+    else console.log("Driver too young");
+  }
+}
+
+class Driver {
+  constructor(age) {
+    this.age = age;
+  }
+}
+
+const car = new Car();
+car.drive();
+
+const car2 = new CarProxy(new Driver(12)); // try 22
+car2.drive();
+
+//* Example 4
+class Image {
+  constructor(url) {
+    this.url = url;
+    console.log(`Loading image from ${this.url}`);
+  }
+
+  draw() {
+    console.log(`Drawing image ${this.url}`);
+  }
+}
+
+class LazyImage {
+  constructor(url) {
+    this.url = url;
+  }
+
+  draw() {
+    if (!this.image) this.image = new Image(this.url);
+    this.image.draw();
+  }
+}
+
+function drawImage(img) {
+  console.log("About to draw the image");
+  img.draw();
+  console.log("Done drawing the image");
+}
+
+let img = new LazyImage("http://pokemon.com/pikachu.png");
+drawImage(img);
