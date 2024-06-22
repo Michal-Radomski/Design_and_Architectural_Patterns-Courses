@@ -550,3 +550,56 @@ computer.start();
 // Loading data 'Reading 1024 bytes from LBA 0...' into position 0...
 // Jumping to position 0...
 // Executing instructions...
+
+//^ 10. Flyweight Design Pattern
+console.log("10. Flyweight Design Pattern ----------------");
+interface Shape {
+  draw(x: number, y: number): void;
+}
+
+class Circle implements Shape {
+  private color: string;
+
+  constructor(color: string) {
+    this.color = color;
+  }
+
+  public draw(x: number, y: number): void {
+    console.log(`Drawing a ${this.color} circle at (${x}, ${y})`);
+  }
+}
+
+class ShapeFactory {
+  private shapes: { [key: string]: Shape } = {};
+
+  public getCircle(color: string): Shape {
+    if (!this.shapes[color]) {
+      this.shapes[color] = new Circle(color);
+      console.log(`Creating a circle of color: ${color}`);
+    }
+    return this.shapes[color];
+  }
+}
+
+(function main() {
+  const shapeFactory = new ShapeFactory();
+
+  const redCircle1 = shapeFactory.getCircle("red");
+  redCircle1.draw(10, 20);
+
+  const redCircle2 = shapeFactory.getCircle("red");
+  redCircle2.draw(30, 40);
+
+  const blueCircle1 = shapeFactory.getCircle("blue");
+  blueCircle1.draw(50, 60);
+
+  const blueCircle2 = shapeFactory.getCircle("blue");
+  blueCircle2.draw(70, 80);
+})();
+// Output
+// Creating a circle of color: red
+// Drawing a red circle at (10, 20)
+// Drawing a red circle at (30, 40)
+// Creating a circle of color: blue
+// Drawing a blue circle at (50, 60)
+// Drawing a blue circle at (70, 80)
