@@ -24,6 +24,37 @@
 //^ YAGNI (You Aren't Gonna Need It)
 // The YAGNI principle is a concept in software development that suggests you should only implement functionality when it is actually needed, rather than anticipating future requirements and implementing them preemptively. It is part of the Extreme Programming (XP) methodology and is closely related to the KISS (Keep It Simple, Stupid) principle.
 
+//^ Command–Query Separation (CQS)
+//* Without CQS
+class Counter {
+  private count = 0;
+
+  incrementAndGet(): number {
+    this.count += 1;
+    return this.count;
+  }
+}
+
+const counter = new Counter();
+console.log(counter.incrementAndGet()); // Output: 1
+
+//* With CQS
+class Counter2 {
+  private count = 0;
+
+  increment(): void {
+    this.count += 1;
+  }
+
+  getCount(): number {
+    return this.count;
+  }
+}
+
+const counter2 = new Counter2();
+counter2.increment();
+console.log(counter2.getCount()); // Output: 1
+
 //@ SOLID Principles
 //^ SOLID is an acronym for five fundamental principles of object-oriented programming and design. These principles aim to make software designs more understandable, flexible, and maintainable. The SOLID principles are:
 //* Single Responsibility Principle (SRP)
