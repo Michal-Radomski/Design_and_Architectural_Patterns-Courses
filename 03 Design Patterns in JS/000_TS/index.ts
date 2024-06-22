@@ -649,3 +649,81 @@ console.log(dataFetcher.fetchData(1)); // Fetching data for ID: 1, Data for ID: 
 console.log(dataFetcher.fetchData(1)); // Returning cached data for ID: 1, Data for ID: 1
 console.log(dataFetcher.fetchData(2)); // Fetching data for ID: 2, Data for ID: 2
 console.log(dataFetcher.fetchData(2)); // Returning cached data for ID: 2, Data for ID: 2
+
+//^ 12. Chain of Responsibility Design Pattern
+console.log("12. Chain of Responsibility Design Pattern ----------------");
+
+// Handler interface
+interface Handler {
+  setNext(handler: Handler): Handler;
+  handle(request: string): void;
+}
+
+// Abstract handler class
+abstract class AbstractHandler implements Handler {
+  private nextHandler: Handler | null = null;
+
+  public setNext(handler: Handler): Handler {
+    this.nextHandler = handler;
+    return handler;
+  }
+
+  public handle(request: string): void {
+    if (this.nextHandler) {
+      this.nextHandler.handle(request);
+    }
+  }
+}
+
+// Concrete handlers
+class SupportHandler extends AbstractHandler {
+  public handle(request: string): void {
+    if (request === "low") {
+      console.log("SupportHandler: Handling low level request");
+    } else {
+      console.log("SupportHandler: Passing request to the next handler");
+      super.handle(request);
+    }
+  }
+}
+
+class ManagerHandler extends AbstractHandler {
+  public handle(request: string): void {
+    if (request === "medium") {
+      console.log("ManagerHandler: Handling medium level request");
+    } else {
+      console.log("ManagerHandler: Passing request to the next handler");
+      super.handle(request);
+    }
+  }
+}
+
+class DirectorHandler extends AbstractHandler {
+  public handle(request: string): void {
+    if (request === "high") {
+      console.log("DirectorHandler: Handling high level request");
+    } else {
+      console.log("DirectorHandler: Passing request to the next handler");
+      super.handle(request);
+    }
+  }
+}
+
+// Client code
+const support = new SupportHandler();
+const manager = new ManagerHandler();
+const director = new DirectorHandler();
+
+support.setNext(manager).setNext(director);
+
+console.log("Sending low level request:");
+support.handle("low");
+
+console.log("\nSending medium level request:");
+support.handle("medium");
+
+console.log("\nSending high level request:");
+support.handle("high");
+
+console.log("\nSending unknown level request:");
+support.handle("unknown");
