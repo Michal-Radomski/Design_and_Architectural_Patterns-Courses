@@ -1,82 +1,82 @@
-class Creature {
-  constructor(name, attack, defense) {
-    this.name = name;
-    this.attack = attack;
-    this.defense = defense;
-  }
+// class Creature {
+//   constructor(name, attack, defense) {
+//     this.name = name;
+//     this.attack = attack;
+//     this.defense = defense;
+//   }
 
-  toString() {
-    return `${this.name} (${this.attack}/${this.defense})`;
-  }
-}
+//   toString() {
+//     return `${this.name} (${this.attack}/${this.defense})`;
+//   }
+// }
 
-class CreatureModifier {
-  constructor(creature) {
-    this.creature = creature;
-    this.next = null; // linked list
-  }
+// class CreatureModifier {
+//   constructor(creature) {
+//     this.creature = creature;
+//     this.next = null; // linked list
+//   }
 
-  add(modifier) {
-    if (this.next) this.next.add(modifier);
-    else this.next = modifier;
-  }
+//   add(modifier) {
+//     if (this.next) this.next.add(modifier);
+//     else this.next = modifier;
+//   }
 
-  handle() {
-    if (this.next) this.next.handle();
-  }
-}
+//   handle() {
+//     if (this.next) this.next.handle();
+//   }
+// }
 
-class NoBonusesModifier extends CreatureModifier {
-  constructor(creature) {
-    super(creature);
-  }
+// class NoBonusesModifier extends CreatureModifier {
+//   constructor(creature) {
+//     super(creature);
+//   }
 
-  handle() {
-    console.log("No bonuses for you!");
-  }
-}
+//   handle() {
+//     console.log("No bonuses for you!");
+//   }
+// }
 
-class DoubleAttackModifier extends CreatureModifier {
-  constructor(creature) {
-    super(creature);
-  }
+// class DoubleAttackModifier extends CreatureModifier {
+//   constructor(creature) {
+//     super(creature);
+//   }
 
-  handle() {
-    console.log(`Doubling ${this.creature.name}'s attack`);
-    this.creature.attack *= 2;
-    super.handle();
-  }
-}
+//   handle() {
+//     console.log(`Doubling ${this.creature.name}'s attack`);
+//     this.creature.attack *= 2;
+//     super.handle();
+//   }
+// }
 
-class IncreaseDefenseModifier extends CreatureModifier {
-  constructor(creature) {
-    super(creature);
-  }
+// class IncreaseDefenseModifier extends CreatureModifier {
+//   constructor(creature) {
+//     super(creature);
+//   }
 
-  handle() {
-    if (this.creature.attack <= 2) {
-      console.log(`Increasing ${this.creature.name}'s defense`);
-      this.creature.defense++;
-    }
-    super.handle();
-  }
-}
+//   handle() {
+//     if (this.creature.attack <= 2) {
+//       console.log(`Increasing ${this.creature.name}'s defense`);
+//       this.creature.defense++;
+//     }
+//     super.handle();
+//   }
+// }
 
-const goblin = new Creature("Goblin", 1, 1);
-console.log(goblin.toString());
+// const goblin = new Creature("Goblin", 1, 1);
+// console.log(goblin.toString());
 
-const root = new CreatureModifier(goblin);
+// const root = new CreatureModifier(goblin);
 
-//root.add(new NoBonusesModifier(goblin));
+// //root.add(new NoBonusesModifier(goblin));
 
-root.add(new DoubleAttackModifier(goblin));
-//root.add(new DoubleAttackModifier(goblin));
+// root.add(new DoubleAttackModifier(goblin));
+// //root.add(new DoubleAttackModifier(goblin));
 
-root.add(new IncreaseDefenseModifier(goblin));
+// root.add(new IncreaseDefenseModifier(goblin));
 
-// eventually...
-root.handle();
-console.log(goblin.toString());
+// // eventually...
+// root.handle();
+// console.log(goblin.toString());
 
 //* Example 2
 class Event {
@@ -133,13 +133,13 @@ class Creature {
   }
 
   get attack() {
-    let q = new Query(this.name, WhatToQuery.attack, this.initial_attack);
+    const q = new Query(this.name, WhatToQuery.attack, this.initial_attack);
     this.game.performQuery(this, q);
     return q.value;
   }
 
   get defense() {
-    let q = new Query(this.name, WhatToQuery.defense, this.initial_defense);
+    const q = new Query(this.name, WhatToQuery.defense, this.initial_defense);
     this.game.performQuery(this, q);
     return q.value;
   }

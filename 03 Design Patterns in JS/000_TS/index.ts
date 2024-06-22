@@ -727,3 +727,69 @@ support.handle("high");
 
 console.log("\nSending unknown level request:");
 support.handle("unknown");
+
+//^ 13. Command Design Pattern
+console.log("13. Command Design Pattern ----------------");
+
+interface Command {
+  execute(): void;
+}
+
+class Light {
+  turnOn() {
+    console.log("The light is on");
+  }
+
+  turnOff() {
+    console.log("The light is off");
+  }
+}
+
+class TurnOnLightCommand implements Command {
+  private light: Light;
+
+  constructor(light: Light) {
+    this.light = light;
+  }
+
+  execute() {
+    this.light.turnOn();
+  }
+}
+
+class TurnOffLightCommand implements Command {
+  private light: Light;
+
+  constructor(light: Light) {
+    this.light = light;
+  }
+
+  execute() {
+    this.light.turnOff();
+  }
+}
+
+class RemoteControl2 {
+  private command!: Command;
+
+  setCommand(command: Command) {
+    this.command = command;
+  }
+
+  pressButton() {
+    this.command.execute();
+  }
+}
+
+// Client code
+const light = new Light();
+const turnOnCommand = new TurnOnLightCommand(light);
+const turnOffCommand = new TurnOffLightCommand(light);
+
+const remoteControl = new RemoteControl2();
+
+remoteControl.setCommand(turnOnCommand);
+remoteControl.pressButton(); // Output: The light is on
+
+remoteControl.setCommand(turnOffCommand);
+remoteControl.pressButton(); // Output: The light is off
