@@ -32,3 +32,60 @@ i = 0;
 if (i++ === 1) {
   console.log("This will not be logged"); // Post-increment: i is incremented to 1 after the comparison
 }
+
+//* Symbol.iterator
+class Range2 {
+  constructor(public start: number, public end: number) {}
+
+  [Symbol.iterator](): Iterator<number> {
+    let current = this.start;
+    const end = this.end;
+
+    return {
+      next(): IteratorResult<number> {
+        if (current <= end) {
+          return { value: current++, done: false };
+        } else {
+          return { value: null, done: true };
+        }
+      },
+    };
+  }
+}
+
+// Usage
+const range2 = new Range2(1, 5);
+
+for (const num of range2) {
+  console.log(num); // Outputs: 1, 2, 3, 4, 5
+}
+
+class ItemCollection {
+  private items: string[];
+
+  constructor(items: string[]) {
+    this.items = items;
+  }
+
+  [Symbol.iterator](): Iterator<string> {
+    let index = 0;
+    const items = this.items;
+
+    return {
+      next(): IteratorResult<string> {
+        if (index < items.length) {
+          return { value: items[index++], done: false };
+        } else {
+          return { value: null, done: true };
+        }
+      },
+    };
+  }
+}
+
+// Usage
+const collection = new ItemCollection(["apple", "banana", "cherry"]);
+
+for (const item of collection) {
+  console.log(item); // Outputs: 'apple', 'banana', 'cherry'
+}
