@@ -68,3 +68,56 @@ console.log(
     `max stat = ${creature.maxStat}, ` +
     `sum of stats = ${creature.sumOfStats}.`
 );
+
+//^ Iterator
+const values = [100, 200, 300];
+for (let i in values) {
+  console.log(`Element at pos ${i} is ${values[i]}`); //* Similar ways of iterating!
+}
+
+for (let v of values) {
+  console.log(`Value is ${v}`); //* Similar ways of iterating!
+}
+
+class Stuff {
+  constructor() {
+    this.a = 11;
+    this.b = 22;
+  }
+
+  // default iterator
+  [Symbol.iterator]() {
+    let i = 0;
+    let self = this;
+    return {
+      next: function () {
+        return {
+          done: i > 1,
+          value: self[i++ === 0 ? "a" : "b"],
+        };
+      },
+    };
+  }
+
+  get backwards() {
+    let i = 0;
+    let self = this;
+    return {
+      next: function () {
+        return {
+          done: i > 1,
+          value: self[i++ === 0 ? "b" : "a"],
+        };
+      },
+      // make iterator iterable
+      [Symbol.iterator]: function () {
+        return this;
+      },
+    };
+  }
+}
+
+const stuff = new Stuff();
+for (let item of stuff) console.log(`${item}`);
+
+for (let item of stuff.backwards) console.log(`${item}`);
