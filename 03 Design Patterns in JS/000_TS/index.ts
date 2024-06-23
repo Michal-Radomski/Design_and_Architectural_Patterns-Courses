@@ -1220,8 +1220,8 @@ context.request(); // Output: "State B is handling the request."
 context.request(); // Output: "State A is handling the request."
 context.request(); // Output: "State B is handling the request."
 
-// //^ 20. Strategy Design Pattern
-// console.log("20. Strategy Design Pattern ----------------");
+//^ 20. Strategy Design Pattern
+console.log("20. Strategy Design Pattern ----------------");
 
 // //^ 21. Template Method Design Pattern
 // console.log("21. Template Method Design Pattern ----------------");
