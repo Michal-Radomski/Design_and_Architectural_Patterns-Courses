@@ -1101,14 +1101,84 @@ console.log(`Second saved State: ${originator.getState()}`);
 //^ 18. Observer Design Pattern
 console.log("18. Observer Design Pattern ----------------");
 
-//^ 19. State Design Pattern
-console.log("19. State Design Pattern ----------------");
+// Subject interface
+interface Subject {
+  registerObserver(observer: Observer): void;
+  removeObserver(observer: Observer): void;
+  notifyObservers(): void;
+}
 
-//^ 20. Strategy Design Pattern
-console.log("20. Strategy Design Pattern ----------------");
+// Observer interface
+interface Observer {
+  update(state: any): void;
+}
 
-//^ 21. Template Method Design Pattern
-console.log("21. Template Method Design Pattern ----------------");
+// Concrete Subject class
+class ConcreteSubject implements Subject {
+  private observers: Observer[] = [];
+  private state: any;
 
-//^ 22. Visitor Design Pattern
-console.log("22. Visitor Design Pattern ----------------");
+  public getState(): any {
+    return this.state;
+  }
+
+  public setState(state: any): void {
+    this.state = state;
+    this.notifyObservers();
+  }
+
+  public registerObserver(observer: Observer): void {
+    this.observers.push(observer);
+  }
+
+  public removeObserver(observer: Observer): void {
+    this.observers = this.observers.filter((obs) => obs !== observer);
+  }
+
+  public notifyObservers(): void {
+    for (const observer of this.observers) {
+      observer.update(this.state);
+    }
+  }
+}
+
+// Concrete Observer class
+class ConcreteObserver implements Observer {
+  private name: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
+
+  public update(state: any): void {
+    console.log(`${this.name} received state update: ${state}`);
+  }
+}
+
+// Example usage
+const subject = new ConcreteSubject();
+
+const observer1 = new ConcreteObserver("Observer 1");
+const observer2 = new ConcreteObserver("Observer 2");
+
+subject.registerObserver(observer1);
+subject.registerObserver(observer2);
+
+subject.setState("State 1");
+subject.setState("State 2");
+
+subject.removeObserver(observer1);
+
+subject.setState("State 3");
+
+// //^ 19. State Design Pattern
+// console.log("19. State Design Pattern ----------------");
+
+// //^ 20. Strategy Design Pattern
+// console.log("20. Strategy Design Pattern ----------------");
+
+// //^ 21. Template Method Design Pattern
+// console.log("21. Template Method Design Pattern ----------------");
+
+// //^ 22. Visitor Design Pattern
+// console.log("22. Visitor Design Pattern ----------------");
