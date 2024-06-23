@@ -1026,3 +1026,74 @@ colleagueB.doD();
 // ColleagueB does D.
 // Mediator reacts on D and triggers following operations:
 // ColleagueA does B.
+
+//^ 17. Momento Design Pattern
+console.log("17. Momento Design Pattern ----------------");
+
+// Memento class to store the state
+class Memento {
+  private state: string;
+
+  constructor(state: string) {
+    this.state = state;
+  }
+
+  public getState(): string {
+    return this.state;
+  }
+}
+
+// Originator class that creates a memento containing a snapshot of its current internal state
+class Originator {
+  private state!: string;
+
+  public setState(state: string): void {
+    this.state = state;
+    console.log(`State set to ${this.state}`);
+  }
+
+  public getState(): string {
+    return this.state;
+  }
+
+  public saveStateToMemento(): Memento {
+    return new Memento(this.state);
+  }
+
+  public getStateFromMemento(memento: Memento): void {
+    this.state = memento.getState();
+    console.log(`State restored to ${this.state}`);
+  }
+}
+
+// Caretaker class that keeps track of multiple mementos
+class Caretaker {
+  private mementoList: Memento[] = [];
+
+  public add(memento: Memento): void {
+    this.mementoList.push(memento);
+  }
+
+  public get(index: number): Memento {
+    return this.mementoList[index];
+  }
+}
+
+// Example usage:
+const originator = new Originator();
+const caretaker = new Caretaker();
+
+originator.setState("State1");
+originator.setState("State2");
+caretaker.add(originator.saveStateToMemento());
+
+originator.setState("State3");
+caretaker.add(originator.saveStateToMemento());
+
+originator.setState("State4");
+console.log(`Current State: ${originator.getState()}`);
+
+originator.getStateFromMemento(caretaker.get(0));
+console.log(`First saved State: ${originator.getState()}`);
+originator.getStateFromMemento(caretaker.get(1));
+console.log(`Second saved State: ${originator.getState()}`);
