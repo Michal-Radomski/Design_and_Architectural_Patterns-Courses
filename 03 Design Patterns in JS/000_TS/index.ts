@@ -1,4 +1,5 @@
-export {};
+export {}; //* By adding export {}; at the top of a file, you tell TypeScript to treat this file as a module not a script!
+
 //^ 01. Builder Design Pattern
 // console.log("01. Builder Design Pattern ----------------");
 // class Product {
