@@ -1,85 +1,85 @@
 export {}; //* By adding export {}; at the top of a file, you tell TypeScript to treat this file as a module not a script!
 
 //^ 01. Builder Design Pattern
-// console.log("01. Builder Design Pattern ----------------");
-// class Product {
-//   public partA!: string;
-//   public partB!: string;
-//   public partC!: string;
+console.log("01. Builder Design Pattern ----------------");
+class Product {
+  public partA!: string;
+  public partB!: string;
+  public partC!: string;
 
-//   public listParts(): void {
-//     console.log(`Product parts: ${this.partA}, ${this.partB}, ${this.partC}`);
-//   }
-// }
+  public listParts(): void {
+    console.log(`Product parts: ${this.partA}, ${this.partB}, ${this.partC}`);
+  }
+}
 
-// interface IBuilder {
-//   buildPartA(): this;
-//   buildPartB(): this;
-//   buildPartC(): this;
-//   getResult(): Product;
-// }
+interface IBuilder {
+  buildPartA(): this;
+  buildPartB(): this;
+  buildPartC(): this;
+  getResult(): Product;
+}
 
-// class ConcreteBuilder implements IBuilder {
-//   private product: Product;
+class ConcreteBuilder implements IBuilder {
+  private product: Product;
 
-//   constructor() {
-//     this.product = new Product();
-//   }
+  constructor() {
+    this.product = new Product();
+  }
 
-//   public buildPartA(): this {
-//     this.product.partA = "PartA";
-//     return this;
-//   }
+  public buildPartA(): this {
+    this.product.partA = "PartA";
+    return this;
+  }
 
-//   public buildPartB(): this {
-//     this.product.partB = "PartB";
-//     return this;
-//   }
+  public buildPartB(): this {
+    this.product.partB = "PartB";
+    return this;
+  }
 
-//   public buildPartC(): this {
-//     this.product.partC = "PartC";
-//     return this;
-//   }
+  public buildPartC(): this {
+    this.product.partC = "PartC";
+    return this;
+  }
 
-//   public getResult(): Product {
-//     return this.product;
-//   }
-// }
+  public getResult(): Product {
+    return this.product;
+  }
+}
 
-// class Director {
-//   private builder!: IBuilder;
+class Director {
+  private builder!: IBuilder;
 
-//   public setBuilder(builder: IBuilder): void {
-//     this.builder = builder;
-//   }
+  public setBuilder(builder: IBuilder): void {
+    this.builder = builder;
+  }
 
-//   public buildMinimalViableProduct(): void {
-//     this.builder.buildPartA();
-//   }
+  public buildMinimalViableProduct(): void {
+    this.builder.buildPartA();
+  }
 
-//   public buildFullFeaturedProduct(): void {
-//     this.builder.buildPartA().buildPartB().buildPartC();
-//   }
-// }
+  public buildFullFeaturedProduct(): void {
+    this.builder.buildPartA().buildPartB().buildPartC();
+  }
+}
 
-// (function main() {
-//   const director = new Director();
-//   const builder = new ConcreteBuilder();
+(function main() {
+  const director = new Director();
+  const builder = new ConcreteBuilder();
 
-//   director.setBuilder(builder);
+  director.setBuilder(builder);
 
-//   console.log("Building minimal viable product:");
-//   director.buildMinimalViableProduct();
-//   builder.getResult().listParts();
+  console.log("Building minimal viable product:");
+  director.buildMinimalViableProduct();
+  builder.getResult().listParts();
 
-//   console.log("Building full-featured product:");
-//   director.buildFullFeaturedProduct();
-//   builder.getResult().listParts();
+  console.log("Building full-featured product:");
+  director.buildFullFeaturedProduct();
+  builder.getResult().listParts();
 
-//   console.log("Building custom product:");
-//   builder.buildPartA().buildPartC();
-//   builder.getResult().listParts();
-// })();
+  console.log("Building custom product:");
+  builder.buildPartA().buildPartC();
+  builder.getResult().listParts();
+})();
 
 //^ 02. Factory Design Pattern
 console.log("02. Factory Design Pattern ----------------");
@@ -1097,3 +1097,18 @@ originator.getStateFromMemento(caretaker.get(0));
 console.log(`First saved State: ${originator.getState()}`);
 originator.getStateFromMemento(caretaker.get(1));
 console.log(`Second saved State: ${originator.getState()}`);
+
+//^ 18. Observer Design Pattern
+console.log("18. Observer Design Pattern ----------------");
+
+//^ 19. State Design Pattern
+console.log("19. State Design Pattern ----------------");
+
+//^ 20. Strategy Design Pattern
+console.log("20. Strategy Design Pattern ----------------");
+
+//^ 21. Template Method Design Pattern
+console.log("21. Template Method Design Pattern ----------------");
+
+//^ 22. Visitor Design Pattern
+console.log("22. Visitor Design Pattern ----------------");
