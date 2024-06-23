@@ -514,5 +514,5 @@ userService.createUser({ name: "John Doe", email: "john@example.com" });
 // Get a user by ID
 (async function (): Promise<void> {
   const user = await userService.getUserById("1234");
-  console.log(user); // { id: '1234' }
+  console.log("user:", user); // { id: '1234' }
 })();

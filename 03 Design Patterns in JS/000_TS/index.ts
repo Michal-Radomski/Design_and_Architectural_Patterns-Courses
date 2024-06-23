@@ -793,3 +793,80 @@ remoteControl.pressButton(); // Output: The light is on
 
 remoteControl.setCommand(turnOffCommand);
 remoteControl.pressButton(); // Output: The light is off
+
+//^ 14. Interpreter Design Pattern
+console.log("14. Interpreter Design Pattern ----------------");
+
+// 1. Abstract Expression
+interface Expression {
+  interpret(context: string): boolean;
+}
+
+// 2. Concrete Expressions
+class TerminalExpression implements Expression {
+  private data: string;
+
+  constructor(data: string) {
+    this.data = data;
+  }
+
+  interpret(context: string): boolean {
+    return context.includes(this.data);
+  }
+}
+
+class OrExpression implements Expression {
+  private expr1: Expression;
+  private expr2: Expression;
+
+  constructor(expr1: Expression, expr2: Expression) {
+    this.expr1 = expr1;
+    this.expr2 = expr2;
+  }
+
+  interpret(context: string): boolean {
+    return this.expr1.interpret(context) || this.expr2.interpret(context);
+  }
+}
+
+class AndExpression implements Expression {
+  private expr1: Expression;
+  private expr2: Expression;
+
+  constructor(expr1: Expression, expr2: Expression) {
+    this.expr1 = expr1;
+    this.expr2 = expr2;
+  }
+
+  interpret(context: string): boolean {
+    return this.expr1.interpret(context) && this.expr2.interpret(context);
+  }
+}
+
+// 3. Interpreter
+const createInterpreterTree = (): Expression => {
+  // Rule: "John" and "Doe" are in the context
+  const john = new TerminalExpression("John");
+  const doe = new TerminalExpression("Doe");
+
+  // Rule: "Jane" or "Doe" is in the context
+  const jane = new TerminalExpression("Jane");
+
+  const isJohnAndDoe = new AndExpression(john, doe);
+  const isJaneOrDoe = new OrExpression(jane, doe);
+
+  return new OrExpression(isJohnAndDoe, isJaneOrDoe);
+};
+
+// Client code
+const interpreter = createInterpreterTree();
+
+const context1 = "John Doe";
+const context2 = "Jane Smith";
+const context3 = "Jane Doe";
+const context4 = "John Smith";
+
+console.log(`Context: "${context1}" - Result: ${interpreter.interpret(context1)}`); // true
+console.log(`Context: "${context2}" - Result: ${interpreter.interpret(context2)}`); // true
+console.log(`Context: "${context3}" - Result: ${interpreter.interpret(context3)}`); // true
+console.log(`Context: "${context4}" - Result: ${interpreter.interpret(context4)}`); // false
