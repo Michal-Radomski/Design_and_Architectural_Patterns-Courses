@@ -1171,8 +1171,54 @@ subject.removeObserver(observer1);
 
 subject.setState("State 3");
 
-// //^ 19. State Design Pattern
-// console.log("19. State Design Pattern ----------------");
+//^ 19. State Design Pattern
+console.log("19. State Design Pattern ----------------");
+
+// State interface
+interface State {
+  handle(context: Context): void;
+}
+
+// Concrete State A
+class ConcreteStateA implements State {
+  handle(context: Context): void {
+    console.log("State A is handling the request.");
+    context.setState(new ConcreteStateB());
+  }
+}
+
+// Concrete State B
+class ConcreteStateB implements State {
+  handle(context: Context): void {
+    console.log("State B is handling the request.");
+    context.setState(new ConcreteStateA());
+  }
+}
+
+// Context class
+class Context {
+  private state: State;
+
+  constructor(state: State) {
+    this.state = state;
+  }
+
+  setState(state: State): void {
+    this.state = state;
+  }
+
+  request(): void {
+    this.state.handle(this);
+  }
+}
+
+// Example usage
+const context = new Context(new ConcreteStateA());
+
+context.request(); // Output: "State A is handling the request."
+context.request(); // Output: "State B is handling the request."
+context.request(); // Output: "State A is handling the request."
+context.request(); // Output: "State B is handling the request."
 
 // //^ 20. Strategy Design Pattern
 // console.log("20. Strategy Design Pattern ----------------");
