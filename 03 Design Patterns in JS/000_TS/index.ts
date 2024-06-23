@@ -931,3 +931,98 @@ const iterator = collection2.createIterator();
 while (iterator.hasNext()) {
   console.log(iterator.next());
 }
+
+//^ 16. Mediator Design Pattern
+console.log("16. Mediator Design Pattern ----------------");
+
+// Mediator interface
+interface Mediator {
+  notify(sender: Colleague, event: string): void;
+}
+
+// Colleague abstract class
+abstract class Colleague {
+  protected mediator!: Mediator;
+
+  constructor(mediator?: Mediator) {
+    if (mediator) {
+      this.mediator = mediator;
+    }
+  }
+
+  setMediator(mediator: Mediator): void {
+    this.mediator = mediator;
+  }
+}
+
+// Concrete Colleague A
+class ColleagueA extends Colleague {
+  public doA(): void {
+    console.log("ColleagueA does A.");
+    this.mediator.notify(this, "A");
+  }
+
+  public doB(): void {
+    console.log("ColleagueA does B.");
+    this.mediator.notify(this, "B");
+  }
+}
+
+// Concrete Colleague B
+class ColleagueB extends Colleague {
+  public doC(): void {
+    console.log("ColleagueB does C.");
+    this.mediator.notify(this, "C");
+  }
+
+  public doD(): void {
+    console.log("ColleagueB does D.");
+    this.mediator.notify(this, "D");
+  }
+}
+
+// Concrete Mediator
+class ConcreteMediator implements Mediator {
+  private colleagueA: ColleagueA;
+  private colleagueB: ColleagueB;
+
+  constructor(colleagueA: ColleagueA, colleagueB: ColleagueB) {
+    this.colleagueA = colleagueA;
+    this.colleagueA.setMediator(this);
+    this.colleagueB = colleagueB;
+    this.colleagueB.setMediator(this);
+  }
+
+  public notify(_sender: Colleague, event: string): void {
+    // console.log("_ender:", _sender);
+    if (event === "A") {
+      console.log("Mediator reacts on A and triggers following operations:");
+      this.colleagueB.doC();
+    } else if (event === "D") {
+      console.log("Mediator reacts on D and triggers following operations:");
+      this.colleagueA.doB();
+    }
+  }
+}
+
+// Usage
+const colleagueA = new ColleagueA();
+const colleagueB = new ColleagueB();
+const mediator = new ConcreteMediator(colleagueA, colleagueB);
+// console.log("mediator:", mediator);
+
+console.log("Client triggers operation A.");
+colleagueA.doA();
+
+console.log("Client triggers operation D.");
+colleagueB.doD();
+// Output:
+// Client triggers operation A.
+// ColleagueA does A.
+// Mediator reacts on A and triggers following operations:
+// ColleagueB does C.
+
+// Client triggers operation D.
+// ColleagueB does D.
+// Mediator reacts on D and triggers following operations:
+// ColleagueA does B.
