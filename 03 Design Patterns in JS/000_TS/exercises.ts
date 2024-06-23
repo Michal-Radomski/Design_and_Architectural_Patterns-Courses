@@ -1,3 +1,4 @@
+export {};
 //* Reflect
 const duck = {
   name: "Maurice",

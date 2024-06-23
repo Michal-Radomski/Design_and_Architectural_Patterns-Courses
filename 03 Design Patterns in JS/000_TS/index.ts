@@ -1,3 +1,4 @@
+export {};
 //^ 01. Builder Design Pattern
 // console.log("01. Builder Design Pattern ----------------");
 // class Product {
@@ -870,3 +871,62 @@ console.log(`Context: "${context1}" - Result: ${interpreter.interpret(context1)}
 console.log(`Context: "${context2}" - Result: ${interpreter.interpret(context2)}`); // true
 console.log(`Context: "${context3}" - Result: ${interpreter.interpret(context3)}`); // true
 console.log(`Context: "${context4}" - Result: ${interpreter.interpret(context4)}`); // false
+
+//^ 15. Iterator Design Pattern
+console.log("15. Iterator Design Pattern ----------------");
+// 1. Iterator Interface
+interface Iterator<T> {
+  next(): T | null;
+  hasNext(): boolean;
+}
+
+// 2. Concrete Iterator
+class ArrayIterator<T> implements Iterator<T> {
+  private collection: T[];
+  private position: number = 0;
+
+  constructor(collection: T[]) {
+    this.collection = collection;
+  }
+
+  public next(): T | null {
+    if (this.hasNext()) {
+      return this.collection[this.position++];
+    }
+    return null;
+  }
+
+  public hasNext(): boolean {
+    return this.position < this.collection.length;
+  }
+}
+
+// 3. Aggregate Interface
+interface IterableCollection<T> {
+  createIterator(): Iterator<T>;
+}
+
+// 4. Concrete Aggregate
+class NumberCollection implements IterableCollection<number> {
+  private items: number[] = [];
+
+  public addItem(item: number): void {
+    this.items.push(item);
+  }
+
+  public createIterator(): Iterator<number> {
+    return new ArrayIterator<number>(this.items);
+  }
+}
+
+// Client code
+const collection2 = new NumberCollection();
+collection2.addItem(1);
+collection2.addItem(2);
+collection2.addItem(3);
+
+const iterator = collection2.createIterator();
+
+while (iterator.hasNext()) {
+  console.log(iterator.next());
+}
