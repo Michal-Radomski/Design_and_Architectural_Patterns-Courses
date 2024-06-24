@@ -1222,6 +1222,75 @@ context.request(); // Output: "State B is handling the request."
 
 //^ 20. Strategy Design Pattern
 console.log("20. Strategy Design Pattern ----------------");
+// Strategy Interface
+interface PaymentStrategy {
+  pay(amount: number): void;
+}
+
+// Concrete Strategy for Credit Card Payment
+class CreditCardPayment implements PaymentStrategy {
+  private name: string;
+  private cardNumber: string;
+  private cvv: string;
+  private dateOfExpiry: string;
+
+  constructor(name: string, cardNumber: string, cvv: string, dateOfExpiry: string) {
+    this.name = name;
+    this.cardNumber = cardNumber;
+    this.cvv = cvv;
+    this.dateOfExpiry = dateOfExpiry;
+  }
+
+  pay(amount: number): void {
+    console.log(`Paid ${amount} using Credit Card.`);
+  }
+}
+
+// Concrete Strategy for PayPal Payment
+class PayPalPayment implements PaymentStrategy {
+  private email: string;
+  private password: string;
+
+  constructor(email: string, password: string) {
+    this.email = email;
+    this.password = password;
+  }
+
+  pay(amount: number): void {
+    console.log(`Paid ${amount} using PayPal.`);
+  }
+}
+
+// Context Class
+class ShoppingCart {
+  private items: { name: string; price: number }[] = [];
+
+  addItem(item: { name: string; price: number }) {
+    this.items.push(item);
+  }
+
+  calculateTotal(): number {
+    return this.items.reduce((total, item) => total + item.price, 0);
+  }
+
+  pay(paymentMethod: PaymentStrategy) {
+    const amount = this.calculateTotal();
+    paymentMethod.pay(amount);
+  }
+}
+
+// Example usage
+const cart = new ShoppingCart();
+cart.addItem({ name: "Book", price: 30 });
+cart.addItem({ name: "Pen", price: 5 });
+
+// Pay using Credit Card
+const creditCardPayment = new CreditCardPayment("John Doe", "1234-5678-9876-5432", "123", "12/25");
+cart.pay(creditCardPayment);
+
+// Pay using PayPal
+const paypalPayment = new PayPalPayment("johndoe@example.com", "password");
+cart.pay(paypalPayment);
 
 //^ 21. Template Method Design Pattern
 console.log("21. Template Method Design Pattern ----------------");
