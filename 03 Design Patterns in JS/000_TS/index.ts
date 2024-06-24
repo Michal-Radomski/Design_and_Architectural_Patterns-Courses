@@ -1387,3 +1387,147 @@ const visitor = new ConcreteVisitor();
 for (const element of elements) {
   element.accept(visitor);
 }
+
+//^ 23. Appendix: Abstract Factory and Factory Method Design Pattern
+console.log("23. Appendix: Abstract Factory and Factory Method Design Pattern ----------------");
+
+console.log("1. Factory Method");
+{
+  // Product Interface
+  interface Product1 {
+    operation(): string;
+  }
+
+  // Concrete Products
+  class ConcreteProductA1 implements Product1 {
+    operation(): string {
+      return "Result of ConcreteProductA";
+    }
+  }
+
+  class ConcreteProductB1 implements Product1 {
+    operation(): string {
+      return "Result of ConcreteProductB";
+    }
+  }
+
+  // Creator
+  abstract class Creator1 {
+    abstract factoryMethod(): Product1;
+
+    someOperation(): string {
+      const product1 = this.factoryMethod();
+      return `Creator: The same creator's code has just worked with ${product1.operation()}`;
+    }
+  }
+
+  // Concrete Creators
+  class ConcreteCreatorA1 extends Creator1 {
+    factoryMethod(): Product1 {
+      return new ConcreteProductA1();
+    }
+  }
+
+  class ConcreteCreatorB1 extends Creator1 {
+    factoryMethod(): Product1 {
+      return new ConcreteProductB1();
+    }
+  }
+
+  // Client code
+  const creatorA1: Creator1 = new ConcreteCreatorA1();
+  console.log(creatorA1.someOperation());
+
+  const creatorB1: Creator1 = new ConcreteCreatorB1();
+  console.log(creatorB1.someOperation());
+}
+
+console.log("");
+
+{
+  console.log("2. Abstract Factory");
+  // Abstract Products
+  interface AbstractProductA {
+    operationA(): string;
+  }
+
+  interface AbstractProductB {
+    operationB(): string;
+    anotherOperationB(collaborator: AbstractProductA): string;
+  }
+
+  // Concrete Products
+  class ConcreteProductA1 implements AbstractProductA {
+    operationA(): string {
+      return "Result of ConcreteProductA1";
+    }
+  }
+
+  class ConcreteProductA2 implements AbstractProductA {
+    operationA(): string {
+      return "Result of ConcreteProductA2";
+    }
+  }
+
+  class ConcreteProductB1 implements AbstractProductB {
+    operationB(): string {
+      return "Result of ConcreteProductB1";
+    }
+
+    anotherOperationB(collaborator: AbstractProductA): string {
+      return `Result of ConcreteProductB1 collaborating with ${collaborator.operationA()}`;
+    }
+  }
+
+  class ConcreteProductB2 implements AbstractProductB {
+    operationB(): string {
+      return "Result of ConcreteProductB2";
+    }
+
+    anotherOperationB(collaborator: AbstractProductA): string {
+      return `Result of ConcreteProductB2 collaborating with ${collaborator.operationA()}`;
+    }
+  }
+
+  // Abstract Factory
+  interface AbstractFactory {
+    createProductA(): AbstractProductA;
+    createProductB(): AbstractProductB;
+  }
+
+  // Concrete Factories
+  class ConcreteFactory1 implements AbstractFactory {
+    createProductA(): AbstractProductA {
+      return new ConcreteProductA1();
+    }
+
+    createProductB(): AbstractProductB {
+      return new ConcreteProductB1();
+    }
+  }
+
+  class ConcreteFactory2 implements AbstractFactory {
+    createProductA(): AbstractProductA {
+      return new ConcreteProductA2();
+    }
+
+    createProductB(): AbstractProductB {
+      return new ConcreteProductB2();
+    }
+  }
+
+  // Client code
+  function clientCode(factory: AbstractFactory) {
+    const productA = factory.createProductA();
+    const productB = factory.createProductB();
+
+    console.log(productB.operationB());
+    console.log(productB.anotherOperationB(productA));
+  }
+
+  console.log("Client: Testing client code with the first factory type:");
+  clientCode(new ConcreteFactory1());
+
+  console.log("Client: Testing client code with the second factory type:");
+  clientCode(new ConcreteFactory2());
+}
