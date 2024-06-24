@@ -1223,8 +1223,47 @@ context.request(); // Output: "State B is handling the request."
 //^ 20. Strategy Design Pattern
 console.log("20. Strategy Design Pattern ----------------");
 
-// //^ 21. Template Method Design Pattern
-// console.log("21. Template Method Design Pattern ----------------");
+//^ 21. Template Method Design Pattern
+console.log("21. Template Method Design Pattern ----------------");
+abstract class DataProcessor {
+  // The template method defines the skeleton of an algorithm.
+  public process(): void {
+    this.readData();
+    this.processData();
+    this.saveData();
+  }
+
+  // These operations already have implementations.
+  protected readData(): void {
+    console.log("Reading data...");
+  }
+
+  protected saveData(): void {
+    console.log("Saving data...");
+  }
+
+  // These operations have to be implemented in subclasses.
+  protected abstract processData(): void;
+}
+
+class CSVDataProcessor extends DataProcessor {
+  protected processData(): void {
+    console.log("Processing CSV data...");
+  }
+}
+
+class XMLDataProcessor extends DataProcessor {
+  protected processData(): void {
+    console.log("Processing XML data...");
+  }
+}
+
+// Example usage
+const csvProcessor = new CSVDataProcessor();
+csvProcessor.process();
+
+const xmlProcessor = new XMLDataProcessor();
+xmlProcessor.process();
 
 // //^ 22. Visitor Design Pattern
 // console.log("22. Visitor Design Pattern ----------------");
