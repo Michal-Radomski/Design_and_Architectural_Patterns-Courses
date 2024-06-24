@@ -1390,6 +1390,7 @@ for (const element of elements) {
 
 //^ 23. Appendix: Abstract Factory and Factory Method Design Pattern
 console.log("23. Appendix: Abstract Factory and Factory Method Design Pattern ----------------");
+//* In JS there no abstract keyword (only in TS)!
 
 console.log("1. Factory Method");
 {
