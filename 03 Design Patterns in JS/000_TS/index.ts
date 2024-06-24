@@ -1334,5 +1334,56 @@ csvProcessor.process();
 const xmlProcessor = new XMLDataProcessor();
 xmlProcessor.process();
 
-// //^ 22. Visitor Design Pattern
-// console.log("22. Visitor Design Pattern ----------------");
+//^ 22. Visitor Design Pattern
+console.log("22. Visitor Design Pattern ----------------");
+// Visitor Interface
+interface Visitor {
+  visitElementA(element: ElementA): void;
+  visitElementB(element: ElementB): void;
+}
+
+// Element Interface
+interface Element {
+  accept(visitor: Visitor): void;
+}
+
+// Concrete ElementA
+class ElementA implements Element {
+  accept(visitor: Visitor): void {
+    visitor.visitElementA(this);
+  }
+
+  operationA(): string {
+    return "ElementA";
+  }
+}
+
+// Concrete ElementB
+class ElementB implements Element {
+  accept(visitor: Visitor): void {
+    visitor.visitElementB(this);
+  }
+
+  operationB(): string {
+    return "ElementB";
+  }
+}
+
+// Concrete Visitor
+class ConcreteVisitor implements Visitor {
+  visitElementA(element: ElementA): void {
+    console.log(`Visiting ${element.operationA()}`);
+  }
+
+  visitElementB(element: ElementB): void {
+    console.log(`Visiting ${element.operationB()}`);
+  }
+}
+
+// Client Code
+const elements: Element[] = [new ElementA(), new ElementB()];
+const visitor = new ConcreteVisitor();
+
+for (const element of elements) {
+  element.accept(visitor);
+}
