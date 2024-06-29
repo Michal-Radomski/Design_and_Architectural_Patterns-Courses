@@ -163,3 +163,94 @@ boss.render();
 // };
 
 // export default Contact;
+
+//* 03. State Management Architecture
+// Action Types
+// const ADD_TODO = 'ADD_TODO';
+// const TOGGLE_TODO = 'TOGGLE_TODO';
+// const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+
+// // Action Creators
+// const addTodo = (text: string) => ({
+//   type: ADD_TODO,
+//   payload: { text }
+// });
+
+// const toggleTodo = (id: number) => ({
+//   type: TOGGLE_TODO,
+//   payload: { id }
+// });
+
+// const setVisibilityFilter = (filter: string) => ({
+//   type: SET_VISIBILITY_FILTER,
+//   payload: { filter }
+// });
+
+// // Reducers
+// interface Todo {
+//   id: number;
+//   text: string;
+//   completed: boolean;
+// }
+
+// interface State {
+//   todos: Todo[];
+//   visibilityFilter: string;
+// }
+
+// const initialState: State = {
+//   todos: [],
+//   visibilityFilter: 'SHOW_ALL'
+// };
+
+// const todoReducer = (state = initialState, action: any): State => {
+//   switch (action.type) {
+//     case ADD_TODO:
+//       return {
+//         ...state,
+//         todos: [
+//           ...state.todos,
+//           {
+//             id: state.todos.length,
+//             text: action.payload.text,
+//             completed: false
+//           }
+//         ]
+//       };
+//     case TOGGLE_TODO:
+//       return {
+//         ...state,
+//         todos: state.todos.map(todo =>
+//           todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo
+//         )
+//       };
+//     case SET_VISIBILITY_FILTER:
+//       return {
+//         ...state,
+//         visibilityFilter: action.payload.filter
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+// // Store
+// import { createStore } from 'redux';
+// const store = createStore(todoReducer);
+
+// // Usage in components
+// const dispatch = store.dispatch;
+
+// // Add a todo
+// dispatch(addTodo('Learn Redux'));
+
+// // Toggle a todo
+// dispatch(toggleTodo(0));
+
+// // Set visibility filter
+// dispatch(setVisibilityFilter('SHOW_COMPLETED'));
+
+// // Subscribe to state changes
+// store.subscribe(() => {
+//   console.log(store.getState());
+// });
