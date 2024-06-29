@@ -84,3 +84,82 @@ boss.addComponent({
 // In the game loop
 boss.update();
 boss.render();
+
+//* 02. Single Page Application
+// App.tsx (Root component)
+// import React from "react";
+// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import Header from "./components/Header";
+// import Home from "./pages/Home";
+// import About from "./pages/About";
+// import Contact from "./pages/Contact";
+
+// const App: React.FC = () => {
+//   return (
+//     <Router>
+//       <div className="app">
+//         <Header />
+//         <Switch>
+//           <Route exact path="/" component={Home} />
+//           <Route path="/about" component={About} />
+//           <Route path="/contact" component={Contact} />
+//         </Switch>
+//       </div>
+//     </Router>
+//   );
+// };
+
+// export default App;
+
+// // Header.tsx
+// import React from "react";
+// import { Link } from "react-router-dom";
+
+// const Header: React.FC = () => {
+//   return (
+//     <header>
+//       <nav>
+//         <ul>
+//           <li>
+//             <Link to="/">Home</Link>
+//           </li>
+//           <li>
+//             <Link to="/about">About</Link>
+//           </li>
+//           <li>
+//             <Link to="/contact">Contact</Link>
+//           </li>
+//         </ul>
+//       </nav>
+//     </header>
+//   );
+// };
+
+// export default Header;
+
+// // Home.tsx
+// import React from "react";
+
+// const Home: React.FC = () => {
+//   return <h1>Welcome to the Home Page</h1>;
+// };
+
+// export default Home;
+
+// // About.tsx
+// import React from "react";
+
+// const About: React.FC = () => {
+//   return <h1>About Us</h1>;
+// };
+
+// export default About;
+
+// // Contact.tsx
+// import React from "react";
+
+// const Contact: React.FC = () => {
+//   return <h1>Contact Us</h1>;
+// };
+
+// export default Contact;
