@@ -421,3 +421,9 @@ exports.handler = async (event: { queryStringParameters: { name: string } }) => 
   };
   return response;
 };
+
+//* 06. PWA
+// A Progressive Web Application (PWA) architecture is designed to create web applications that deliver a native app-like experience using modern web capabilities. PWAs combine the best of web and mobile apps, providing users with a reliable, fast, and engaging experience.
+
+//* 07. SSR
+// Server-Side Rendering (SSR) is an architecture where the server generates the complete HTML for a web page on each request and sends it to the client. This contrasts with Client-Side Rendering (CSR), where the client (browser) downloads a minimal HTML page and then dynamically generates the rest of the content using JavaScript. SSR can improve performance, SEO, and user experience, especially for content-rich applications.
