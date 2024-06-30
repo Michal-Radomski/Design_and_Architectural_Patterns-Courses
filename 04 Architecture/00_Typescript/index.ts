@@ -328,3 +328,35 @@ boss.render();
 // store.subscribe(() => {
 //   console.log(store.getState());
 // });
+
+//* Memoization
+// Regular recursive Fibonacci function (inefficient for large inputs)
+function fibonacci(n: number): number {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+// Memoized Fibonacci function
+function memoizedFibonacci() {
+  const cache = {} as { [key: string]: number };
+
+  return function fib(n: number): number {
+    // console.log("cache:", cache);
+    if (n in cache) {
+      return cache[n];
+    } else {
+      if (n <= 1) {
+        return n;
+      } else {
+        const result = (fib(n - 1) + fib(n - 2)) as number;
+        cache[n] = result;
+        return result;
+      }
+    }
+  };
+}
+
+const fib: (n: number) => number = memoizedFibonacci();
+
+console.log("fib(10):", fib(10)); // Output: 55
+console.log("fib(50):", fib(50)); // Output: 12586269025
