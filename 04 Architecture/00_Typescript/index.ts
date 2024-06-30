@@ -410,3 +410,14 @@ console.log("fib(50):", fib(50)); // Output: 12586269025
 // );
 
 // export default Footer;
+
+//* 05. Serverless Architecture
+// Example of an AWS Lambda Function (Node.js)
+exports.handler = async (event: { queryStringParameters: { name: string } }) => {
+  const name = event.queryStringParameters.name || "World";
+  const response = {
+    statusCode: 200,
+    body: `Hello, ${name}!`,
+  };
+  return response;
+};
