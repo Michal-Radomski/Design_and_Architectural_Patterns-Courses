@@ -360,3 +360,53 @@ const fib: (n: number) => number = memoizedFibonacci();
 
 console.log("fib(10):", fib(10)); // Output: 55
 console.log("fib(50):", fib(50)); // Output: 12586269025
+
+//* 04. MicroFrontends Architecture
+// ParentApp.js
+// import React from "react";
+// import { Header } from "header-app/Header";
+// import { Content } from "content-app/Content";
+// import { Footer } from "footer-app/Footer";
+
+// const ParentApp = () => (
+//   <div>
+//     <Header />
+//     <Content />
+//     <Footer />
+//   </div>
+// );
+
+// export default ParentApp;
+
+// // Header.js
+// import React from "react";
+
+// const Header = () => (
+//   <header>
+//     <h1>Micro Frontend Header</h1>
+//   </header>
+// );
+
+// export default Header;
+
+// // Content.js
+// import React from "react";
+
+// const Content = () => (
+//   <main>
+//     <p>This is the content area of the micro frontend.</p>
+//   </main>
+// );
+
+// export default Content;
+
+// // Footer.js
+// import React from "react";
+
+// const Footer = () => (
+//   <footer>
+//     <p>Micro Frontend Footer</p>
+//   </footer>
+// );
+
+// export default Footer;
