@@ -1,0 +1,14 @@
+{
+  "name": "demo-vanillajs-pwa",
+  "version": "1.0.0",
+  "description": "Demo to show how PWA architecture works",
+  "main": "index.html",
+  "scripts": {
+    "dev": "node ./src/app.js"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2"
+  }
+}

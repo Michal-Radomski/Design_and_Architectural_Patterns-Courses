@@ -1,0 +1,10 @@
+{
+  "name": "PWA Demo",
+  "short_name": "PWA Demo",
+  "description": "Description of your app",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": []
+}

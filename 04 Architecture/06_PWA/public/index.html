@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vanilla PWA</title>
+    <link rel="manifest" href="./manifest.json" />
+
+    <script type="module">
+      let registrations = [];
+
+      window.registerServiceWorker = () => {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("/service-worker.js").then((registration) => {
+            registrations.push(registration);
+
+            document.getElementById("registrations").innerHTML = registration.scope;
+            document.getElementById("registerBtn").style.display = "none";
+            document.getElementById("unregisterBtn").style.display = "block";
+          });
+        }
+      };
+
+      window.unregisterServiceWorker = () => {
+        if ("serviceWorker" in navigator) {
+          registrations.forEach((registration) => {
+            registration.unregister();
+          });
+
+          document.getElementById("registrations").innerHTML = "";
+          document.getElementById("registerBtn").style.display = "block";
+          document.getElementById("unregisterBtn").style.display = "none";
+        }
+      };
+
+      window.registerServiceWorker();
+    </script>
+  </head>
+  <body>
+    <h1>This is a demo to show VanillaPWA</h1>
+
+    <h2>Registrations</h2>
+    <div id="registrations"></div>
+    <br />
+    <button id="unregisterBtn" onclick="unregisterServiceWorker()">Unsubscribe</button>
+    <button id="registerBtn" onclick="registerServiceWorker()" style="display: none">Subscribe again</button>
+    <img src="./img.jpg" />
+  </body>
+</html>
