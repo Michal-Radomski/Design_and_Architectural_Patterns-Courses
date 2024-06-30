@@ -238,7 +238,7 @@ boss.render();
 
 // export default Contact;
 
-//* 03. State Management Architecture
+//* 03. State Management Architecture (e.g. React + useContext or React + Redux)
 // Action Types
 // const ADD_TODO = 'ADD_TODO';
 // const TOGGLE_TODO = 'TOGGLE_TODO';
