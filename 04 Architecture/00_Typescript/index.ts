@@ -85,7 +85,81 @@ boss.addComponent({
 boss.update();
 boss.render();
 
-//* 02. Single Page Application
+{
+  //* Example 2
+  // Base Component class
+  // abstract class Component {
+  //   // The root element of the component
+  //   protected element: HTMLElement;
+  //   constructor(tagName: string = "div") {
+  //     this.element = document.createElement(tagName);
+  //   }
+  //   // Method to render the component
+  //   abstract render(): void;
+  //   // Method to get the component's root element
+  //   getElement(): HTMLElement {
+  //     return this.element;
+  //   }
+  // }
+  // // Button component
+  // class Button extends Component {
+  //   private label: string;
+  //   constructor(label: string) {
+  //     super("button");
+  //     this.label = label;
+  //   }
+  //   render(): void {
+  //     this.element.textContent = this.label;
+  //   }
+  // }
+  // // Card component
+  // class Card extends Component {
+  //   private title: string;
+  //   private content: string;
+  //   constructor(title: string, content: string) {
+  //     super("div");
+  //     this.title = title;
+  //     this.content = content;
+  //   }
+  //   render(): void {
+  //     this.element.innerHTML = `
+  //     <div class="card">
+  //       <h2>${this.title}</h2>
+  //       <p>${this.content}</p>
+  //     </div>
+  //   `;
+  //   }
+  // }
+  // // App class to manage the application
+  // class App {
+  //   private root: HTMLElement;
+  //   constructor(rootId: string) {
+  //     const rootElement = document.getElementById(rootId);
+  //     if (!rootElement) {
+  //       throw new Error("Root element not found");
+  //     }
+  //     this.root = rootElement;
+  //   }
+  //   // Method to render components in the root element
+  //   render(components: Component[]): void {
+  //     this.root.innerHTML = ""; // Clear the root element
+  //     components.forEach((component) => {
+  //       component.render();
+  //       this.root.appendChild(component.getElement());
+  //     });
+  //   }
+  // }
+  // // Usage example
+  // const button1 = new Button("Click Me!");
+  // const card1 = new Card("Card Title", "This is the card content.");
+  // const app = new App("app");
+  // app.render([button1, card1]);
+  // console.log("button1:", button1);
+  // console.log("card1:", card1);
+  // console.log("app:", app);
+}
+
+//* 02. Single Page Application (e.g. React CRA)
 // App.tsx (Root component)
 // import React from "react";
 // import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
