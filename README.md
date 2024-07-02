@@ -9,3 +9,5 @@ Files created during design patterns and clean code courses:
 3. [Design Patterns in JS](https://www.udemy.com/course/design-patterns-javascript)
 
 4. [Frontend Architecture and Patterns](https://www.udemy.com/course/frontend-architecture-and-patterns)
+
+5. [Web Performance Bootcamp](https://www.udemy.com/course/mastering-web-performance-optimization)
