@@ -1,0 +1,61 @@
+HTTP (Hypertext Transfer Protocol) is a fundamental protocol for data communication on the World Wide Web. Here's how HTTP works:
+
+1. Client-Server Model:
+HTTP operates on a client-server model. The client (typically a web browser) sends requests to the server, which then responds with the requested resources[1][5].
+
+2. Request-Response Cycle:
+The core of HTTP is the request-response cycle:
+- The client initiates a request to the server.
+- The server processes the request and generates a response.
+- The server sends the response back to the client.
+- The client receives and processes the response[3].
+
+3. HTTP Request:
+An HTTP request consists of:
+- Method (e.g., GET, POST, PUT, DELETE)
+- URL of the requested resource
+- HTTP version
+- Headers (additional information about the request)
+- Optional body (for methods like POST)[3][4]
+
+4. HTTP Response:
+The server's response includes:
+- Status code (e.g., 200 OK, 404 Not Found)
+- HTTP version
+- Headers
+- Optional body (containing the requested resource)[4]
+
+5. Stateless Protocol:
+HTTP is stateless, meaning each request-response cycle is independent of previous or future requests[5].
+
+6. TCP/IP:
+HTTP typically runs on top of TCP/IP, which handles the actual data transmission[4][5].
+
+7. Ports:
+HTTP usually uses port 80 for unencrypted connections and port 443 for encrypted (HTTPS) connections[5].
+
+8. Resources:
+HTTP is used to request and transfer various types of resources, including HTML documents, images, videos, and other files[2].
+
+9. Methods:
+HTTP defines several methods (also called verbs) for different types of requests:
+- GET: Retrieve a resource
+- POST: Submit data to be processed
+- PUT: Update an existing resource
+- DELETE: Remove a resource
+And others like HEAD, OPTIONS, TRACE, etc.[1]
+
+10. Headers:
+HTTP headers provide additional information about the request or response, such as content type, caching directives, and authentication tokens[1].
+
+11. Versions:
+HTTP has evolved over time, with HTTP/1.1 being widely used, and newer versions like HTTP/2 and HTTP/3 offering improved performance and features[5].
+
+In summary, HTTP facilitates the exchange of information between clients and servers on the web, using a structured request-response model. Its simplicity and flexibility have made it the backbone of data communication on the internet.
+
+Citations:
+[1] https://hop.extrahop.com/resources/protocols/http/
+[2] https://http.dev/explained
+[3] https://www.freecodecamp.org/news/what-is-http/
+[4] https://www.khanacademy.org/computing/computers-and-internet/xcae6f4a7ff015e7d:the-internet/xcae6f4a7ff015e7d:web-protocols/a/hypertext-transfer-protocol-http
+[5] https://en.wikipedia.org/wiki/HTTP
