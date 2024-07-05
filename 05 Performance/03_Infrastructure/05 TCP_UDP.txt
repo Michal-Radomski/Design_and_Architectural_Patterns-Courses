@@ -1,0 +1,42 @@
+The main differences between TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are:
+
+1. Connection:
+   - TCP is connection-oriented, establishing a reliable connection before data transfer[1][2].
+   - UDP is connectionless, sending data without establishing a connection first[1][2].
+
+2. Reliability:
+   - TCP guarantees delivery of data packets in the correct order[1][5].
+   - UDP does not guarantee delivery or order of packets[1][2].
+
+3. Speed:
+   - TCP is generally slower due to its error-checking and reliability mechanisms[1][2].
+   - UDP is faster as it lacks these overhead processes[1][2].
+
+4. Error checking:
+   - TCP has extensive error checking and acknowledgment of data[1][2].
+   - UDP has only basic error checking using checksums[1][2].
+
+5. Use cases:
+   - TCP is used for applications requiring reliable data transfer, such as web browsing, email, and file transfers[1][4].
+   - UDP is preferred for real-time applications like online gaming, video streaming, and VoIP where speed is crucial[1][4].
+
+6. Data sequencing:
+   - TCP can sequence data packets[1].
+   - UDP cannot sequence data packets[1].
+
+7. Flow control:
+   - TCP implements flow control to manage data transmission rates[1].
+   - UDP does not have flow control mechanisms[1].
+
+8. Broadcasting:
+   - TCP does not support broadcasting[1].
+   - UDP supports broadcasting, making it suitable for multicast network transmissions[1][3].
+
+The choice between TCP and UDP depends on the specific requirements of the application. TCP is better for applications that need guaranteed, ordered delivery of data, while UDP is preferred for applications that prioritize speed and can tolerate some data loss.
+
+Citations:
+[1] https://www.lifesize.com/blog/tcp-vs-udp/
+[2] https://www.geeksforgeeks.org/differences-between-tcp-and-udp/
+[3] https://support.holmsecurity.com/knowledge/what-is-the-difference-between-tcp-and-udp
+[4] https://www.javatpoint.com/tcp-vs-udp
+[5] https://stackoverflow.com/questions/5970383/difference-between-tcp-and-udp

@@ -1,0 +1,45 @@
+A network handshake is a process used to establish a connection between two devices or systems before they begin communicating. The most common and well-known example is the TCP three-way handshake, which is used to establish a reliable connection for data transmission over networks like the internet. Here's how it typically looks:
+
+1. Initial Connection Request (SYN):
+   - The client sends a TCP segment with the SYN (synchronize) flag set to the server[4].
+   - This segment includes a randomly generated initial sequence number[3].
+
+2. Server Response (SYN-ACK):
+   - Upon receiving the SYN, the server responds with a TCP segment that has both SYN and ACK (acknowledge) flags set[4].
+   - The server acknowledges the client's sequence number and sends its own initial sequence number[3].
+
+3. Client Acknowledgment (ACK):
+   - The client sends an ACK segment to confirm receipt of the server's response[4].
+   - This completes the handshake, and the connection is now established[3].
+
+The process can be visualized as follows:
+
+```
+Client                Server
+  |                     |
+  |        SYN          |
+  |-------------------->|
+  |                     |
+  |     SYN-ACK         |
+  |<--------------------|
+  |                     |
+  |        ACK          |
+  |-------------------->|
+  |                     |
+```
+
+This three-way handshake ensures that both parties are ready to communicate and have synchronized their sequence numbers[1]. It's a crucial part of establishing a reliable TCP connection, allowing for ordered and error-checked data transmission[2].
+
+Other protocols may use different handshake processes. For example:
+
+- TLS (Transport Layer Security) uses a more complex handshake to negotiate security parameters and establish encrypted communications[1].
+- SMTP (Simple Mail Transfer Protocol) includes a handshake to negotiate authentication, encryption, and maximum message size for email transmission[1].
+
+The handshake process helps devices agree on communication parameters, authenticate each other when necessary, and ensure both sides are ready for data exchange[1]. This initial negotiation is essential for establishing reliable and secure network connections across various protocols and applications.
+
+Citations:
+[1] https://en.wikipedia.org/wiki/Handshake_%28computing%29
+[2] https://www.baeldung.com/cs/handshakes
+[3] https://www.geeksforgeeks.org/tcp-3-way-handshake-process/
+[4] https://www.linkedin.com/pulse/understanding-tcp-3-way-handshake-computer-networking-haque
+[5] https://www.sciencedirect.com/topics/computer-science/three-way-handshake
