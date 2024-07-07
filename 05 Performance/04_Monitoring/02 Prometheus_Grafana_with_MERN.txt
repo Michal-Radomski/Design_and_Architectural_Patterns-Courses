@@ -1,0 +1,107 @@
+To use Prometheus and Grafana with a MERN stack application, follow these steps:
+
+1. Dockerize your MERN stack application if you haven't already done so[1].
+
+2. Update your docker-compose.yml file to include configurations for Prometheus and Grafana[1]:
+
+```yaml
+services:
+  prometheus:
+    image: prom/prometheus:v2.20.1
+    container_name: prometheus
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    ports:
+      - 9090:9090
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:7.1.5
+    container_name: grafana
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring
+
+  # Add your existing MERN stack services here
+```
+
+3. Configure Prometheus by creating a `prometheus.yml` file in the ./prometheus directory[1][2]:
+
+```yaml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'your_mern_app'
+    static_configs:
+      - targets: ['your_backend_service:8080']
+```
+
+4. Set up Node.js metrics collection using a library like `prom-client`[3]. Add the following code to your Express.js backend:
+
+```javascript
+const express = require('express');
+const client = require('prom-client');
+
+const app = express();
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics({ timeout: 5000 });
+
+// Create a counter for HTTP requests
+const httpRequestsTotal = new client.Counter({
+  name: 'http_requests_total',
+  help: 'Total number of HTTP requests',
+  labelNames: ['method', 'route', 'status']
+});
+
+// Middleware to increment the counter
+app.use((req, res, next) => {
+  res.on('finish', () => {
+    httpRequestsTotal.inc({
+      method: req.method,
+      route: req.route?.path || req.path,
+      status: res.statusCode
+    });
+  });
+  next();
+});
+
+// Expose metrics endpoint
+app.get('/metrics', async (req, res) => {
+  res.set('Content-Type', client.register.contentType);
+  res.end(await client.register.metrics());
+});
+```
+
+5. Configure Grafana data source[1][2]:
+
+- Access Grafana at `http://localhost:3000`
+- Log in with default credentials (admin/admin)
+- Go to "Configuration" > "Data Sources" > "Add data source"
+- Choose Prometheus and set the URL to `http://prometheus:9090`
+- Click "Save & Test"
+
+6. Create dashboards in Grafana[1]:
+
+- Go to "Create" > "Dashboard"
+- Add panels using PromQL queries to visualize your metrics
+- For example, to show total HTTP requests: `sum(http_requests_total)`
+
+7. Set up alerting in Grafana if desired[5].
+
+8. For production environments, consider using Grafana Cloud for easier setup and management[2][5].
+
+By following these steps, you'll have Prometheus collecting metrics from your MERN stack application and Grafana visualizing them in customizable dashboards. This setup allows you to monitor your application's performance, track key metrics, and set up alerts for potential issues[1][3].
+
+Citations:
+[1] https://sentinelfox.com/blog/unlocking-performance-insights-prometheus-grafanafor-mern-stack-applications-part2/
+[2] https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus/
+[3] https://stackabuse.com/nodejs-application-monitoring-with-prometheus-and-grafana/
+[4] https://www.linkedin.com/posts/sentinelfox_unlocking-performance-insights-prometheus-activity-7145789358694936576-d7mc
+[5] https://grafana.com/docs/grafana-cloud/send-data/metrics/metrics-prometheus/prometheus-config-examples/the-stacks-network-stacks-blockchain/
