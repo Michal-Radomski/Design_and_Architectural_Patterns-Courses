@@ -1,0 +1,133 @@
+Onion Architecture is a software design pattern that emphasizes the separation of concerns within an application, making the core business logic independent of external factors like databases and user interfaces. This architectural style is particularly useful in backend applications and can be effectively implemented using TypeScript, especially in Node.js environments. Here’s a detailed overview of Onion Architecture in TypeScript.
+
+## Overview of Onion Architecture
+
+The Onion Architecture consists of four main layers, arranged in concentric circles:
+
+### 1. Domain Layer
+This is the innermost layer and contains the core business logic of the application. It includes:
+
+- **Entities**: Objects that represent the business model.
+- **Value Objects**: Objects that describe aspects of the domain but do not have an identity.
+- **Domain Services**: Services that encapsulate domain logic.
+
+### 2. Application Layer
+Surrounding the Domain Layer, this layer manages application-specific logic. It includes:
+
+- **Application Services**: These orchestrate the domain objects to fulfill specific use cases, managing the flow of data between the domain and the outer layers.
+
+### 3. Infrastructure Layer
+This layer provides technical capabilities and external integrations. It includes:
+
+- **Adapters**: Interfaces to external systems such as databases, APIs, or messaging systems.
+- **Persistence**: Mechanisms for data storage and retrieval.
+
+### 4. Presentation Layer
+The outermost layer is responsible for user interaction. It includes:
+
+- **User Interfaces**: Web and mobile interfaces that allow users to interact with the application.
+- **Controllers**: Components that handle incoming requests and return responses.
+
+## Implementation in TypeScript
+
+To implement Onion Architecture in TypeScript, you can use frameworks like Node.js and Express. Here’s a basic setup:
+
+### Project Structure
+
+A typical project structure may look like this:
+
+```
+/src
+  /domain
+    /entities
+    /valueObjects
+    /services
+  /application
+    /services
+  /infrastructure
+    /repositories
+    /adapters
+  /presentation
+    /controllers
+    /routes
+```
+
+### Example Code
+
+Here’s a simple example of how to define a user entity in the Domain Layer:
+
+```typescript
+// src/domain/entities/User.ts
+export class User {
+    constructor(public id: number, public name: string, public email: string) {}
+}
+```
+
+An application service might look like this:
+
+```typescript
+// src/application/services/UserService.ts
+import { User } from '../domain/entities/User';
+
+export class UserService {
+    private users: User[] = [];
+
+    createUser(name: string, email: string): User {
+        const user = new User(this.users.length + 1, name, email);
+        this.users.push(user);
+        return user;
+    }
+
+    getUsers(): User[] {
+        return this.users;
+    }
+}
+```
+
+### Setting Up the Server
+
+You can set up an Express server to handle requests and connect the layers:
+
+```typescript
+// src/presentation/controllers/UserController.ts
+import { Request, Response } from 'express';
+import { UserService } from '../../application/services/UserService';
+
+const userService = new UserService();
+
+export const createUser = (req: Request, res: Response) => {
+    const { name, email } = req.body;
+    const user = userService.createUser(name, email);
+    res.status(201).json(user);
+};
+
+export const getUsers = (req: Request, res: Response) => {
+    const users = userService.getUsers();
+    res.status(200).json(users);
+};
+```
+
+### Running the Application
+
+To run the application, you would typically set up scripts in your `package.json` for starting the server and building the TypeScript code:
+
+```json
+"scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc"
+}
+```
+
+## Conclusion
+
+Onion Architecture promotes a clean separation of concerns, making applications easier to maintain and test. By using TypeScript with Node.js and Express, developers can effectively implement this architecture, leading to robust and scalable applications. For more detailed implementations and examples, you can refer to projects on GitHub that demonstrate this architecture in action, such as those by Jeff Mangan and others[1][2].
+
+Citations:
+[1] https://github.com/JeffMangan/typescript-onion
+[2] https://github.com/Melzar/onion-architecture-boilerplate
+[3] https://blog.allegro.tech/2023/02/onion-architecture.html
+[4] https://dev.to/remojansen/implementing-the-onion-architecture-in-nodejs-with-typescript-and-inversifyjs-10ad
+[5] https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/
+[6] https://bazaglia.com/clean-architecture-with-typescript-ddd-onion/
+[7] https://codesandbox.io/p/sandbox/onion-architecture-typescript-example-gdksu
+[8] https://www.reddit.com/r/typescript/comments/8b79sx/implementing_the_onion_architecture_in_nodejs/
