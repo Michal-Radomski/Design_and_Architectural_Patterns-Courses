@@ -12,3 +12,5 @@ Files created during design and architectural patterns and clean code courses:
 
 5. [Web Performance Bootcamp](https://www.udemy.com/course/mastering-web-performance-optimization) with a little help from
    [Perplexity](https://www.perplexity.ai)
+
+6. [Microfrontends with React](https://www.udemy.com/course/microfrontend-course)
