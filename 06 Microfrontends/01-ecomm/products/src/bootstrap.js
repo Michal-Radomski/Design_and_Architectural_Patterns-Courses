@@ -14,7 +14,7 @@ const mount = (el) => {
 // Context/Situation #1
 // We are running this file in development in isolation
 // We are using our local index.html file
-// Which DEFINITELY has an element with an id of 'dev-products
+// Which DEFINITELY has an element with an id of 'dev-products'
 // We want to immediately render our app into that element
 if (process.env.NODE_ENV === "development") {
   const el = document.querySelector("#dev-products");

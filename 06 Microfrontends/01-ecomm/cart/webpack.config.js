@@ -13,7 +13,10 @@ module.exports = {
       exposes: {
         "./CartShow": "./src/bootstrap",
       },
-      shared: ["faker"],
+      // shared: ["faker"],
+      shared: {
+        faker: { singleton: true },
+      },
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
