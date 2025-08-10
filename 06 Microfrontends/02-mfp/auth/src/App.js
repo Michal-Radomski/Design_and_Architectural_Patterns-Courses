@@ -9,7 +9,7 @@ const generateClassName = createGenerateClassName({
   productionPrefix: "au",
 });
 
-export default ({ history }) => {
+export default ({ history, onSignIn }) => {
   return (
     <React.Fragment>
       <StylesProvider generateClassName={generateClassName}>
