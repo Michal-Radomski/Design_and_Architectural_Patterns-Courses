@@ -14,3 +14,5 @@ Files created during design and architectural patterns and clean code courses:
    [Perplexity](https://www.perplexity.ai)
 
 6. [Microfrontends with React](https://www.udemy.com/course/microfrontend-course)
+
+7. [Microservices with Node JS and React](https://www.udemy.com/course/microservices-with-node-js-and-react)
