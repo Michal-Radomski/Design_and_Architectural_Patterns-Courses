@@ -1,5 +1,6 @@
 import path from "path";
 import http from "http";
+import { randomBytes } from "crypto";
 
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -9,6 +10,7 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
+import { Post } from "@common/CommonInterfaces";
 
 //* The server
 const app: Express = express();
@@ -46,6 +48,25 @@ app.get("/favicon.ico", (_req: Request, res: Response) => {
 app.get("/test", (req: Request, res: Response) => {
   console.log("req.ip:", req.ip);
   res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
+});
+
+//* Routes
+const posts = {} as { [id: string]: Post };
+
+app.get("/posts", (_req: Request, res: Response) => {
+  res.send(posts);
+});
+
+app.post("/posts", (req: Request, res: Response) => {
+  const id: string = randomBytes(4).toString("hex");
+  const { title } = req.body;
+
+  posts[id] = {
+    id,
+    title,
+  };
+
+  res.status(201).send(posts[id]);
 });
 
 //* Port

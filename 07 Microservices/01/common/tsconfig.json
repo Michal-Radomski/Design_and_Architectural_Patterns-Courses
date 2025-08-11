@@ -16,14 +16,9 @@
     "strictFunctionTypes": true,
     "skipLibCheck": true,
     "noImplicitThis": true,
-    "strictPropertyInitialization": true,
+    "strictPropertyInitialization": true
     // "sourceMap": true,
-    // "outDir": "dist",
-
-    // * Custom
-    "paths": {
-      "@common/*": ["../common/*"]
-    }
+    // "outDir": "dist"
   },
   "include": ["./**/*.ts"],
   "exclude": ["node_modules"]

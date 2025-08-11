@@ -5,7 +5,8 @@
   "workspaces": [
     "client",
     "comments",
-    "posts"
+    "posts",
+    "common"
   ],
   "private": true,
   "scripts": {
