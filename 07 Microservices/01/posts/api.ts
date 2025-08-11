@@ -10,6 +10,7 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
+
 import { Post } from "@common/CommonInterfaces";
 
 //* The server
@@ -50,7 +51,7 @@ app.get("/test", (req: Request, res: Response) => {
   res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
 });
 
-//* Routes
+//^ Routes
 const posts = {} as { [id: string]: Post };
 
 app.get("/posts", (_req: Request, res: Response) => {
