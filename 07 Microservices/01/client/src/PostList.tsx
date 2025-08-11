@@ -18,7 +18,7 @@ const PostList = (): JSX.Element => {
     fetchPosts();
   }, []);
 
-  const renderedPosts = Object.values(posts).map((post: Post) => {
+  const renderedPosts: JSX.Element[] = Object.values(posts).map((post: Post) => {
     return (
       <div className="card" style={{ width: "30%", marginBottom: "20px" }} key={post.id}>
         <div className="card-body">

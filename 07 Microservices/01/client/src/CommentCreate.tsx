@@ -4,7 +4,7 @@ import axios from "axios";
 const CommentCreate = ({ postId }: { postId: string }): JSX.Element => {
   const [content, setContent] = React.useState<string>("");
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
 
     await axios.post(`http://localhost:4001/posts/${postId}/comments`, {
