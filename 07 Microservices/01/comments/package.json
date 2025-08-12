@@ -2,9 +2,9 @@
   "name": "@01/comments",
   "version": "1.0.0",
   "description": "",
-  "main": "api.ts",
+  "main": "index.ts",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon api.ts"
+    "dev": "NODE_ENV=development nodemon index.ts"
   },
   "keywords": [],
   "author": "Michal Radomski <michalra@op.pl>",

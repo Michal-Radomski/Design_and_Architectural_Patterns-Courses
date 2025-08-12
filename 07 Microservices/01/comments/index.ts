@@ -11,7 +11,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
 
-import { CommentByPostId } from "./../common/CommonInterfaces.d";
+import { CommentByPostId } from "../common/CommonInterfaces";
 
 //* The server
 const app: Express = express();
