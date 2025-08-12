@@ -10,6 +10,7 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
+import axios from "axios";
 
 import { CommentByPostId } from "../common/CommonInterfaces";
 
@@ -58,17 +59,32 @@ app.get("/posts/:id/comments", (req: Request, res: Response) => {
   res.send(commentsByPostId[req.params.id] || []);
 });
 
-app.post("/posts/:id/comments", (req: Request, res: Response) => {
+app.post("/posts/:id/comments", async (req: Request, res: Response) => {
   const commentId: string = randomBytes(4).toString("hex");
   const { content } = req.body;
 
-  const comments = commentsByPostId[req.params.id] || [];
+  const comments: CommentByPostId[] = commentsByPostId[req.params.id] || [];
 
   comments.push({ id: commentId, content });
 
   commentsByPostId[req.params.id] = comments;
 
+  await axios.post("http://localhost:4005/events", {
+    type: "CommentCreated",
+    data: {
+      id: commentId,
+      content,
+      postId: req.params.id,
+    },
+  });
+
   res.status(201).send(comments);
+});
+
+app.post("/events", (req: Request, res: Response) => {
+  console.log("Event Received - comments:", req.body.type);
+
+  res.send({});
 });
 
 //* Port

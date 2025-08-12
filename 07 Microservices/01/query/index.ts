@@ -72,7 +72,7 @@ app.post("/events", (req: Request, res: Response) => {
     const post = posts[postId];
     post.comments!.push({ id, content });
   }
-  console.log("posts:", posts);
+  console.log("posts:", JSON.stringify(posts));
 
   res.send({});
 });

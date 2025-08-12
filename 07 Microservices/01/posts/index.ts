@@ -10,6 +10,7 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
+import axios from "axios";
 
 import { Post } from "@common/CommonInterfaces";
 
@@ -58,7 +59,7 @@ app.get("/posts", (_req: Request, res: Response) => {
   res.send(posts);
 });
 
-app.post("/posts", (req: Request, res: Response) => {
+app.post("/posts", async (req: Request, res: Response) => {
   const id: string = randomBytes(4).toString("hex");
   const { title } = req.body;
 
@@ -67,7 +68,21 @@ app.post("/posts", (req: Request, res: Response) => {
     title,
   };
 
+  await axios.post("http://localhost:4005/events", {
+    type: "PostCreated",
+    data: {
+      id,
+      title,
+    },
+  });
+
   res.status(201).send(posts[id]);
+});
+
+app.post("/events", (req: Request, res: Response) => {
+  console.log("Received Event - posts:", req.body.type);
+
+  res.send({});
 });
 
 //* Port
