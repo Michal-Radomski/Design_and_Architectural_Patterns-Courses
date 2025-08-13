@@ -9,5 +9,5 @@ export interface Post {
 export interface CommentByPostId {
   id: string;
   content: string;
-  status: string;
+  status?: string;
 }

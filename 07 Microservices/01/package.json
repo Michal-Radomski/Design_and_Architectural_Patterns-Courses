@@ -8,7 +8,8 @@
     "posts",
     "common",
     "event-bus",
-    "query"
+    "query",
+    "moderation"
   ],
   "private": true,
   "scripts": {
@@ -17,7 +18,8 @@
     "start:comments": "npm --workspace=comments run dev",
     "start:event-bus": "npm --workspace=event-bus run dev",
     "start:query": "npm --workspace=query run dev",
-    "start": "concurrently \"npm run start:client\" \"npm run start:posts\" \"npm run start:comments\" \"npm run start:event-bus\" \"npm run start:query\""
+    "start:moderation": "npm --workspace=moderation run dev",
+    "start": "concurrently \"npm run start:client\" \"npm run start:posts\" \"npm run start:comments\" \"npm run start:event-bus\" \"npm run start:query\" \"npm run start:moderation\""
   },
   "keywords": [],
   "author": "Michal Radomski <michalra@op.pl>",
