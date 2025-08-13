@@ -12,3 +12,7 @@ export interface CommentByPostId {
   status?: string;
   postId?: string;
 }
+
+export interface ObjectI {
+  [key: string]: any;
+}

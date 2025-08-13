@@ -9,6 +9,7 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
+import axios from "axios";
 
 import { CommentByPostId, Post } from "@common/CommonInterfaces";
 
@@ -98,8 +99,20 @@ const portHTTP = (process.env.HTTP_PORT || 4002) as number;
 //* HTTP Server
 const httpServer = http.createServer(app);
 //* IPv4
-httpServer.listen({ port: portHTTP, host: "127.0.0.1" }, () => {
+httpServer.listen({ port: portHTTP, host: "127.0.0.1" }, async () => {
   console.log(`🚀 Server is listening at http://localhost:${portHTTP}`);
   // For testing only
   console.log("Current Time:", new Date().toLocaleTimeString());
+
+  try {
+    const res = await axios.get("http://localhost:4005/events");
+
+    for (let event of res.data) {
+      console.log("Processing event:", event.type);
+
+      handleEvent(event.type, event.data);
+    }
+  } catch (error) {
+    console.log((error as Error).message);
+  }
 });

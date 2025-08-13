@@ -11,6 +11,8 @@ import helmet from "helmet";
 import compression from "compression";
 import axios from "axios";
 
+import { ObjectI } from "./../common/CommonInterfaces.d";
+
 //* The server
 const app: Express = express();
 
@@ -50,8 +52,12 @@ app.get("/test", (req: Request, res: Response) => {
 });
 
 //^ Routes
+const events = [] as ObjectI[];
+
 app.post("/events", (req: Request, res: Response) => {
   const event = req.body;
+
+  events.push(event);
 
   axios.post("http://localhost:4000/events", event).catch((err) => {
     console.log("err.message:", err.message);
@@ -66,6 +72,10 @@ app.post("/events", (req: Request, res: Response) => {
     console.log("err.message:", err.message);
   });
   res.send({ status: "OK" });
+});
+
+app.get("/events", (_req: Request, res: Response) => {
+  res.send(events);
 });
 
 //* Port
