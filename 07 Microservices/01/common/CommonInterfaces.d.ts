@@ -10,4 +10,5 @@ export interface CommentByPostId {
   id: string;
   content: string;
   status?: string;
+  postId?: string;
 }

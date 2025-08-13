@@ -10,7 +10,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
 
-import { Post } from "@common/CommonInterfaces";
+import { CommentByPostId, Post } from "@common/CommonInterfaces";
 
 //* The server
 const app: Express = express();
@@ -53,6 +53,33 @@ app.get("/test", (req: Request, res: Response) => {
 //^ Routes
 const posts = {} as { [id: string]: Post };
 
+const handleEvent = (type: string, data: Post | CommentByPostId): void => {
+  if (type === "PostCreated") {
+    const { id, title } = data as Post;
+
+    posts[id] = { id, title, comments: [] };
+  }
+
+  if (type === "CommentCreated") {
+    const { id, content, postId, status } = data as CommentByPostId;
+
+    const post = posts[postId!];
+    post.comments?.push({ id, content, status });
+  }
+
+  if (type === "CommentUpdated") {
+    const { id, content, postId, status } = data as CommentByPostId;
+
+    const post = posts[postId!];
+    const comment = post.comments?.find((comment: CommentByPostId) => {
+      return comment.id === id;
+    }) as CommentByPostId;
+
+    comment.status = status;
+    comment.content = content;
+  }
+};
+
 app.get("/posts", (_req: Request, res: Response) => {
   res.send(posts);
 });
@@ -60,19 +87,7 @@ app.get("/posts", (_req: Request, res: Response) => {
 app.post("/events", (req: Request, res: Response) => {
   const { type, data } = req.body;
 
-  if (type === "PostCreated") {
-    const { id, title } = data;
-
-    posts[id] = { id, title, comments: [] };
-  }
-
-  if (type === "CommentCreated") {
-    const { id, content, postId } = data;
-
-    const post = posts[postId];
-    post.comments!.push({ id, content });
-  }
-  console.log("posts:", JSON.stringify(posts));
+  handleEvent(type, data);
 
   res.send({});
 });
