@@ -11,7 +11,7 @@ import helmet from "helmet";
 import compression from "compression";
 import axios from "axios";
 
-import { ObjectI } from "./../common/CommonInterfaces.d";
+import { ObjectI } from "@common/CommonInterfaces";
 
 //* The server
 const app: Express = express();
