@@ -48,6 +48,12 @@ app.get("/test", (req: Request, res: Response) => {
   res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
 });
 
+//^ Routes
+app.get("/api/users/currentuser", (req: Request, res: Response) => {
+  console.log("req.ip:", req.ip);
+  res.send("Hi there!");
+});
+
 //* Port
 const portHTTP = (process.env.HTTP_PORT || 3000) as number;
 
