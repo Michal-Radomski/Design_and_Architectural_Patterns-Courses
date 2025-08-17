@@ -59,7 +59,7 @@ app.get("/posts", (_req: Request, res: Response) => {
   res.send(posts);
 });
 
-app.post("/posts", async (req: Request, res: Response) => {
+app.post("/posts/create", async (req: Request, res: Response) => {
   const id: string = randomBytes(4).toString("hex");
   const { title } = req.body;
 

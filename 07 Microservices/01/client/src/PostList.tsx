@@ -9,7 +9,8 @@ const PostList = (): JSX.Element => {
   const [posts, setPosts] = React.useState<{ [id: string]: Post }>({});
 
   const fetchPosts = async (): Promise<void> => {
-    const res = await axios.get("http://localhost:4002/posts");
+    // const res = await axios.get("http://localhost:4002/posts");
+    const res = await axios.get("http://post.com/posts");
 
     setPosts(res.data);
   };
