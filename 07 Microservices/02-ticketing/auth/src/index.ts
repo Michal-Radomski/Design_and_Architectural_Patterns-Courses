@@ -10,6 +10,11 @@ import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
 
+import { currentUserRouter } from "./routes/current-user";
+import { signinRouter } from "./routes/signin";
+import { signoutRouter } from "./routes/signout";
+import { signupRouter } from "./routes/signup";
+
 //* The server
 const app: Express = express();
 
@@ -49,10 +54,10 @@ app.get("/test", (req: Request, res: Response) => {
 });
 
 //^ Routes
-app.get("/api/users/currentuser", (req: Request, res: Response) => {
-  console.log("req.ip:", req.ip);
-  res.send("Hi there!");
-});
+app.use("", currentUserRouter);
+app.use("", signinRouter);
+app.use("", signoutRouter);
+app.use("", signupRouter);
 
 //* Port
 const portHTTP = (process.env.HTTP_PORT || 3000) as number;

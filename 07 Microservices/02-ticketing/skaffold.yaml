@@ -6,6 +6,8 @@ manifests:
 build:
   local:
     push: false
+  # googleCloudBuild:
+  #   projectId: ticketing-dev-451418
   artifacts:
     - image: rallycoding/auth
       context: auth
