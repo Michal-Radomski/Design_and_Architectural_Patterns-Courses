@@ -14,6 +14,7 @@ import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
+import { errorHandler } from "./middlewares/error-handler";
 
 //* The server
 const app: Express = express();
@@ -52,6 +53,8 @@ app.get("/test", (req: Request, res: Response) => {
   console.log("req.ip:", req.ip);
   res.send("<h1 style='color:blue;text-align:center'>API is running</h1>");
 });
+
+app.use(errorHandler);
 
 //^ Routes
 app.use("", currentUserRouter);
