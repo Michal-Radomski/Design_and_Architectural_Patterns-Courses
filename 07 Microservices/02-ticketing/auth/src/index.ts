@@ -9,6 +9,7 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
+import mongoose from "mongoose";
 
 import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
@@ -75,8 +76,20 @@ const portHTTP = (process.env.HTTP_PORT || 3000) as number;
 //* HTTP Server
 const httpServer = http.createServer(app);
 //* IPv4
-httpServer.listen({ port: portHTTP, host: "127.0.0.1" }, () => {
-  console.log(`🚀 Server is listening at http://localhost:${portHTTP}`);
-  // For testing only
-  console.log("Current Time:", new Date().toLocaleTimeString());
-});
+
+(async function start(): Promise<void> {
+  //* MongoDB
+  // await mongoose.connect('mongodb://auth-mongo-srv:27017/auth');
+  await mongoose
+    .connect(process.env.MONGO_URL as string)
+    .then((con: { connection: { host: string } }) => {
+      console.log(`MongoDB Database connected with HOST: ${con.connection.host}`);
+    })
+    .catch((error: string) => console.log("Mongo DB Error => ", error));
+
+  httpServer.listen({ port: portHTTP, host: "127.0.0.1" }, () => {
+    console.log(`🚀 Server is listening at http://localhost:${portHTTP}`);
+    // For testing only
+    console.log("Current Time:", new Date().toLocaleTimeString());
+  });
+})();
