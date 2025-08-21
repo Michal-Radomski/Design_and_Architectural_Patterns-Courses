@@ -10,6 +10,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import compression from "compression";
 import mongoose from "mongoose";
+import cookieSession from "cookie-session";
 
 import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
@@ -31,6 +32,7 @@ const corsOptions = {
 };
 
 //* Middlewares
+app.set("trust proxy", true);
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -45,6 +47,12 @@ app.use(
 );
 // Compress all responses
 app.use(compression({ level: 6 }));
+app.use(
+  cookieSession({
+    signed: false,
+    secure: true,
+  })
+);
 
 //* Favicon
 app.get("/favicon.ico", (_req: Request, res: Response) => {
