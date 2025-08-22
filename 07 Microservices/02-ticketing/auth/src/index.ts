@@ -50,7 +50,7 @@ app.use(compression({ level: 6 }));
 app.use(
   cookieSession({
     signed: false,
-    secure: true,
+    // secure: true,
   })
 );
 
@@ -86,6 +86,12 @@ const httpServer = http.createServer(app);
 //* IPv4
 
 (async function start(): Promise<void> {
+  const JWT_KEY = process.env.JWT_KEY as string;
+
+  if (!JWT_KEY) {
+    throw new Error("JWT_KEY must be defined");
+  }
+
   //* MongoDB
   // await mongoose.connect('mongodb://auth-mongo-srv:27017/auth');
   await mongoose
