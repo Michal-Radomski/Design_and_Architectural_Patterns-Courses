@@ -20,8 +20,9 @@ export const currentUser = (req: Request, _res: Response, next: NextFunction) =>
   }
 
   try {
-    const payload = jwt.verify(req.session.jwt, process.env.JWT_KEY!);
-    req.currentUser = payload as UserPayload;
+    const payload = jwt.verify(req.session.jwt, process.env.JWT_KEY!) as UserPayload;
+    // console.log("payload:", payload);
+    req.currentUser = payload;
   } catch (err) {
     console.log("err:", err);
   }
