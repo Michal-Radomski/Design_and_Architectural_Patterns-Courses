@@ -1,14 +1,15 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
+import { beforeAll, afterAll } from "@jest/globals";
 
 let mongo!: MongoMemoryServer;
 
 beforeAll(async (): Promise<void> => {
-  process.env.JWT_KEY = "asdfasdf";
   // console.log("process.env.JWT_KEY:", process.env.JWT_KEY);
+  process.env.JWT_KEY = "asdfasdf";
 
   const mongo = await MongoMemoryServer.create();
-  const mongoUri = mongo.getUri();
+  const mongoUri: string = mongo.getUri();
 
   await mongoose.connect(mongoUri, {});
 });

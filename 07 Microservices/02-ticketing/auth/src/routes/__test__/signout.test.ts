@@ -1,4 +1,5 @@
 import request from "supertest";
+import { it, expect } from "@jest/globals";
 
 import { httpServer as app } from "../../app";
 
@@ -13,7 +14,7 @@ it("clears the cookie after signing out", async (): Promise<void> => {
 
   const response = await request(app).post("/api/users/signout").send({}).expect(200);
 
-  const cookie = response.get("Set-Cookie");
+  const cookie = response.get("Set-Cookie") as string[];
   if (!cookie) {
     throw new Error("Expected cookie but got undefined.");
   }
