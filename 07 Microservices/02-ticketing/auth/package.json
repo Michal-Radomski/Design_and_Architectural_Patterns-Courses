@@ -4,7 +4,15 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "NODE_ENV=development nodemon src/index.ts"
+    "start": "NODE_ENV=development nodemon src/index.ts",
+    "test": "jest --watchAll --no-cache"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./src/test/setup.ts"
+    ]
   },
   "keywords": [],
   "author": "Michal Radomski <michalra@op.pl>",

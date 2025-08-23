@@ -17,7 +17,7 @@ import { httpServer } from "./app";
   //* MongoDB
   // await mongoose.connect('mongodb://auth-mongo-srv:27017/auth');
   await mongoose
-    .connect(process.env.MONGO_URL as string)
+    .connect(process.env.MONGO_URL as string, {})
     .then((con: { connection: { host: string } }) => {
       console.log(`MongoDB Database connected with HOST: ${con.connection.host}`);
     })
