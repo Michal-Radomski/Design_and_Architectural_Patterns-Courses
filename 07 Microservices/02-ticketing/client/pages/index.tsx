@@ -1,9 +1,13 @@
 import React from "react";
 
-export default function Home(): JSX.Element {
+export default function LandingPage({ color }: { color: string }): JSX.Element {
   return (
     <React.Fragment>
-      <h1>Landing Page</h1>
+      <h1 style={{ color: color }}>Landing Page</h1>
     </React.Fragment>
   );
 }
+
+LandingPage.getInitialProps = async () => {
+  return { color: "red" };
+};
