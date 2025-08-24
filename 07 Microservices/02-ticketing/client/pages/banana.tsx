@@ -1,9 +1,11 @@
 import React from "react";
 
-export default function Home(): JSX.Element {
+const Banana = (): JSX.Element => {
   return (
     <React.Fragment>
-      <h1>Landing Page</h1>
+      <h1>Banana</h1>
     </React.Fragment>
   );
-}
+};
+
+export default Banana;
