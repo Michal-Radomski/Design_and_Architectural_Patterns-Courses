@@ -8,7 +8,7 @@ const useRequest = ({ url, method, body }: { url: string; method: Method; body: 
   const doRequest = async (): Promise<any> => {
     try {
       setErrors(null);
-      const response = await axios[method as Method](url, body);
+      const response = await axios[method](url, body);
       return response.data;
     } catch (err) {
       setErrors(
