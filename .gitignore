@@ -16,4 +16,4 @@ dist/
 Temp/
 *.pdf
 notes.txt
-./next
+.next
