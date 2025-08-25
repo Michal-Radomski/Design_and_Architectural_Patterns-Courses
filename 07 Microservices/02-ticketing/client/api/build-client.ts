@@ -8,13 +8,13 @@ const buildClient = ({ req }: { req: NextRequest }): AxiosInstance => {
     // We are on the server
     return axios.create({
       // baseURL: "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
-      baseURL: "/",
+      baseURL: "http://localhost:3000",
       headers: req.headers as unknown as HeadersDefaults,
     });
   } else {
     // We must be on the browser
     return axios.create({
-      baseURL: "/",
+      baseURL: "http://localhost:3000",
     });
   }
 };
