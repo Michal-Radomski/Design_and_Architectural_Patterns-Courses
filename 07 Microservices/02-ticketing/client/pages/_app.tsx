@@ -5,6 +5,7 @@ import type { AppContext, AppProps } from "next/app";
 import "@/styles/globals.scss";
 import buildClient from "@/api/build-client";
 import { NextRequest } from "next/server";
+import Header from "@/components/header";
 
 interface CustomAppProps extends AppProps {
   currentUser: UserI;
@@ -14,7 +15,7 @@ const AppComponent = ({ Component, pageProps, currentUser }: CustomAppProps): JS
   return (
     <React.Fragment>
       <div>
-        <h1>Header! {currentUser?.email}</h1>
+        <Header currentUser={currentUser} />
         <Component {...pageProps} />
       </div>
     </React.Fragment>

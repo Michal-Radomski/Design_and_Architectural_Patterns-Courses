@@ -1,9 +1,12 @@
 import React from "react";
-import Router from "next/router";
+// import Router from "next/router";
+import { useRouter } from "next/router";
 
 import useRequest from "../../hooks/use-request";
 
 const SignIn = (): JSX.Element => {
+  const router = useRouter();
+
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
 
@@ -14,7 +17,7 @@ const SignIn = (): JSX.Element => {
       email,
       password,
     },
-    onSuccess: () => Router.push("/"),
+    onSuccess: () => router.push("/"),
   });
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
