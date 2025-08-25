@@ -18,7 +18,7 @@ const useRequest = ({
   const doRequest = async (): Promise<any> => {
     try {
       setErrors(null);
-      const response = await axios[method](url, body);
+      const response = await axios[method](url, body, { withCredentials: true });
       // console.log("response.data:", response.data);
 
       if (onSuccess) {
