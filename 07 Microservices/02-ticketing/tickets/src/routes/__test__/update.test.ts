@@ -71,7 +71,7 @@ it("returns a 400 if the user provides an invalid title or price", async (): Pro
 });
 
 it("updates the ticket provided valid inputs", async (): Promise<void> => {
-  const cookie = global.signin();
+  const cookie: string[] = global.signin();
 
   const response = await request(app).post("/api/tickets").set("Cookie", cookie).send({
     title: "asldkfj",

@@ -5,7 +5,8 @@ import { it, expect } from "@jest/globals";
 import { httpServer as app } from "../../app";
 
 it("returns a 404 if the ticket is not found", async (): Promise<void> => {
-  const id = new mongoose.Types.ObjectId().toHexString();
+  const id: string = new mongoose.Types.ObjectId().toHexString();
+  // console.log({ id });
 
   await request(app).get(`/api/tickets/${id}`).send().expect(404);
 });
