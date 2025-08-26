@@ -2,6 +2,7 @@ import request from "supertest";
 import { it, expect } from "@jest/globals";
 
 import { httpServer as app } from "../../app";
+import { Ticket } from "../../models/ticket";
 
 it("has a route handler listening to /api/tickets for post requests", async (): Promise<void> => {
   const response = await request(app).post("/api/tickets").send({});
@@ -57,4 +58,23 @@ it("returns an error if an invalid price is provided", async (): Promise<void> =
     .expect(400);
 });
 
-it("creates a ticket with valid inputs", async (): Promise<void> => {});
+it("creates a ticket with valid inputs", async (): Promise<void> => {
+  let tickets = await Ticket.find({});
+  expect(tickets.length).toEqual(0);
+
+  const title = "asldkfj";
+
+  await request(app)
+    .post("/api/tickets")
+    .set("Cookie", global.signin())
+    .send({
+      title,
+      price: 20,
+    })
+    .expect(201);
+
+  tickets = await Ticket.find({});
+  expect(tickets.length).toEqual(1);
+  expect(tickets[0].price).toEqual(20);
+  expect(tickets[0].title).toEqual(title);
+});
