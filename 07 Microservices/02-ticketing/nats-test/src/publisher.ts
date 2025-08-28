@@ -2,8 +2,8 @@ import nats from "node-nats-streaming";
 
 console.clear();
 
-const stan = nats.connect("test-cluster", "abc", {
-  url: "http://127.0.0.1:4222",
+const stan = nats.connect("ticketing", "abc", {
+  url: "http://localhost:4222",
   connectTimeout: 10000, // increase connection timeout in ms, if supported
 });
 
