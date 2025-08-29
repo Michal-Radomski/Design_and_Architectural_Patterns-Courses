@@ -1,9 +1,16 @@
-import { Message, Stan } from "node-nats-streaming";
+import { Message, Stan, SubscriptionOptions } from "node-nats-streaming";
 
-export abstract class Listener {
-  abstract subject: string;
+import { Subjects } from "./subjects";
+
+interface Event {
+  subject: Subjects;
+  data: any;
+}
+
+export abstract class Listener<T extends Event> {
+  abstract subject: T["subject"];
   abstract queueGroupName: string;
-  abstract onMessage(data: any, msg: Message): void;
+  abstract onMessage(data: T["data"], msg: Message): void;
   private client: Stan;
   protected ackWait = 5 * 1000;
 
@@ -11,7 +18,7 @@ export abstract class Listener {
     this.client = client;
   }
 
-  subscriptionOptions() {
+  subscriptionOptions(): SubscriptionOptions {
     return this.client
       .subscriptionOptions()
       .setDeliverAllAvailable()
@@ -20,7 +27,7 @@ export abstract class Listener {
       .setDurableName(this.queueGroupName);
   }
 
-  listen() {
+  listen(): void {
     const subscription = this.client.subscribe(this.subject, this.queueGroupName, this.subscriptionOptions());
 
     subscription.on("message", (msg: Message) => {
@@ -31,7 +38,7 @@ export abstract class Listener {
     });
   }
 
-  parseMessage(msg: Message) {
+  parseMessage(msg: Message): any {
     const data = msg.getData();
     return typeof data === "string" ? JSON.parse(data) : JSON.parse(data.toString("utf8"));
   }
