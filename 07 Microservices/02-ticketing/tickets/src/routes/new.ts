@@ -3,6 +3,7 @@ import { body } from "express-validator";
 
 import { requireAuth, validateRequest } from "@rallycoding/common";
 import { Ticket } from "../models/ticket";
+import { TicketCreatedPublisher } from "../events/publishers/ticket-created-publisher";
 
 const router: Router = express.Router();
 
@@ -23,6 +24,13 @@ router.post(
       userId: req.currentUser?.id as string,
     });
     await ticket.save();
+
+    await new TicketCreatedPublisher(client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+    });
 
     res.status(201).send(ticket);
   }

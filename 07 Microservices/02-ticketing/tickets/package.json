@@ -19,19 +19,20 @@
   "license": "ISC",
   "dependencies": {
     "@rallycoding/common": "^3.0.3",
-    "express-async-errors": "^3.1.1",
     "body-parser": "^2.2.0",
     "compression": "^1.8.1",
     "cookie-session": "^2.1.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^4.21.2",
+    "express-async-errors": "^3.1.1",
     "express-validator": "^7.2.1",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.18.0",
     "mongoose": "^8.17.2",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "node-nats-streaming": "^0.3.2"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.6",
