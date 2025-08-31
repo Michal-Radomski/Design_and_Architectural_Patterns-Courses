@@ -1,8 +1,8 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Router } from "express";
 
-const router = express.Router();
+const router: Router = express.Router();
 
-router.get('/api/orders', async (req: Request, res: Response) => {
+router.get("/api/orders", async (_req: Request, res: Response) => {
   res.send({});
 });
 

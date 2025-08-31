@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
-import { OrderStatus } from '@rallycoding/common';
-import { TicketDoc } from './ticket';
+import mongoose from "mongoose";
+
+import { OrderStatus } from "@rallycoding/common";
+import { TicketDoc } from "./ticket";
 
 interface OrderAttrs {
   userId: string;
@@ -37,14 +38,16 @@ const orderSchema = new mongoose.Schema(
     },
     ticket: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Ticket',
+      ref: "Ticket",
     },
   },
   {
     toJSON: {
-      transform(doc, ret) {
-        ret.id = ret._id;
-        delete ret._id;
+      transform(_doc, ret) {
+        // ret.id = ret._id;
+        // delete ret._id;
+        const { _id, userId, status, expiresAt, ticket } = ret;
+        return { id: _id, userId, status, expiresAt, ticket };
       },
     },
   }
@@ -54,6 +57,6 @@ orderSchema.statics.build = (attrs: OrderAttrs) => {
   return new Order(attrs);
 };
 
-const Order = mongoose.model<OrderDoc, OrderModel>('Order', orderSchema);
+const Order = mongoose.model<OrderDoc, OrderModel>("Order", orderSchema);
 
 export { Order };

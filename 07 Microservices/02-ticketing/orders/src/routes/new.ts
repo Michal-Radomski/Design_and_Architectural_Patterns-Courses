@@ -1,22 +1,23 @@
-import mongoose from 'mongoose';
-import express, { Request, Response } from 'express';
-import { requireAuth, validateRequest } from '@rallycoding/common';
-import { body } from 'express-validator';
+import mongoose from "mongoose";
+import express, { Request, RequestHandler, Response, Router } from "express";
+import { body } from "express-validator";
 
-const router = express.Router();
+import { requireAuth, validateRequest } from "@rallycoding/common";
+
+const router: Router = express.Router();
 
 router.post(
-  '/api/orders',
-  requireAuth,
+  "/api/orders",
+  requireAuth as unknown as RequestHandler,
   [
-    body('ticketId')
+    body("ticketId")
       .not()
       .isEmpty()
       .custom((input: string) => mongoose.Types.ObjectId.isValid(input))
-      .withMessage('TicketId must be provided'),
+      .withMessage("TicketId must be provided"),
   ],
-  validateRequest,
-  async (req: Request, res: Response) => {
+  validateRequest as unknown as RequestHandler,
+  async (_req: Request, res: Response) => {
     res.send({});
   }
 );
