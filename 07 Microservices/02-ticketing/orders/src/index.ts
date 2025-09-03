@@ -4,6 +4,8 @@ dotenv.config();
 
 import { httpServer } from "./app";
 import { natsWrapper } from "./nats-wrapper";
+import { TicketCreatedListener } from "./events/listeners/ticket-created-listener";
+import { TicketUpdatedListener } from "./events/listeners/ticket-updated-listener";
 
 (async function start(): Promise<void> {
   //* Port
@@ -36,6 +38,9 @@ import { natsWrapper } from "./nats-wrapper";
     });
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
+
+    new TicketCreatedListener(natsWrapper.client).listen();
+    new TicketUpdatedListener(natsWrapper.client).listen();
 
     //* MongoDB
     await mongoose
