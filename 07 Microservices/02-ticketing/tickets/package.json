@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@rallycoding/common": "^3.0.3",
+    "@rallycoding/common": "^3.0.7",
     "body-parser": "^2.2.0",
     "compression": "^1.8.1",
     "cookie-session": "^2.1.1",
@@ -31,6 +31,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.18.0",
     "mongoose": "^8.17.2",
+    "mongoose-update-if-current": "^1.4.0",
     "morgan": "^1.10.1",
     "node-nats-streaming": "^0.3.2"
   },
