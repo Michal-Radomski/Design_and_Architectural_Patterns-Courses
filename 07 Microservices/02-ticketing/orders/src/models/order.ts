@@ -17,6 +17,7 @@ interface OrderDoc extends mongoose.Document {
   status: OrderStatus;
   expiresAt: Date;
   ticket: TicketDoc;
+  version: number;
 }
 
 interface OrderModel extends mongoose.Model<OrderDoc> {
@@ -48,8 +49,8 @@ const orderSchema = new mongoose.Schema(
       transform(_doc, ret) {
         // ret.id = ret._id;
         // delete ret._id;
-        const { _id, userId, status, expiresAt, ticket } = ret;
-        return { id: _id, userId, status, expiresAt, ticket };
+        const { _id, userId, status, expiresAt, ticket, __v: version } = ret;
+        return { id: _id, userId, status, expiresAt, ticket, version };
       },
     },
   }
