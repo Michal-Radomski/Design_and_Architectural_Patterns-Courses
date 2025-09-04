@@ -1,5 +1,6 @@
 import request from "supertest";
 import { it, expect } from "@jest/globals";
+import mongoose from "mongoose";
 
 import { httpServer as app } from "../../app";
 import { Ticket } from "../../models/ticket";
@@ -7,6 +8,7 @@ import { Ticket } from "../../models/ticket";
 it("fetches the order", async (): Promise<void> => {
   // Create a ticket
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -29,6 +31,7 @@ it("fetches the order", async (): Promise<void> => {
 it("returns an error if one user tries to fetch another users order", async (): Promise<void> => {
   // Create a ticket
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });

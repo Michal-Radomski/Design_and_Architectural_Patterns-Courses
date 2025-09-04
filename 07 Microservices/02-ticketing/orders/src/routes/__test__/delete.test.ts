@@ -1,5 +1,6 @@
 import request from "supertest";
 import { it, expect } from "@jest/globals";
+import mongoose from "mongoose";
 
 import { httpServer as app } from "../../app";
 import { Ticket } from "../../models/ticket";
@@ -9,6 +10,7 @@ import { natsWrapper } from "../../nats-wrapper";
 it("marks an order as cancelled", async (): Promise<void> => {
   // create a ticket with Ticket Model
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -33,6 +35,7 @@ it("marks an order as cancelled", async (): Promise<void> => {
 
 it("emits a order cancelled event", async (): Promise<void> => {
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });

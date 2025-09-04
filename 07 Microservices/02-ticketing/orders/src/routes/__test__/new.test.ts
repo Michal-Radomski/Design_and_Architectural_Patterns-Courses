@@ -15,6 +15,7 @@ it("returns an error if the ticket does not exist", async (): Promise<void> => {
 
 it("returns an error if the ticket is already reserved", async (): Promise<void> => {
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -32,6 +33,7 @@ it("returns an error if the ticket is already reserved", async (): Promise<void>
 
 it("reserves a ticket", async (): Promise<void> => {
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
@@ -43,6 +45,7 @@ it("reserves a ticket", async (): Promise<void> => {
 // it.todo("emits an order created event");
 it("emits an order created event", async (): Promise<void> => {
   const ticket = Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });

@@ -1,5 +1,6 @@
 import request from "supertest";
 import { it, expect } from "@jest/globals";
+import mongoose from "mongoose";
 
 import { httpServer as app } from "../../app";
 import { Ticket, TicketDoc } from "../../models/ticket";
@@ -7,6 +8,7 @@ import { Ticket, TicketDoc } from "../../models/ticket";
 const buildTicket = async (): Promise<TicketDoc> => {
   const ticket = Ticket.build({
     title: "concert",
+    id: new mongoose.Types.ObjectId().toHexString(),
     price: 20,
   });
   await ticket.save();
