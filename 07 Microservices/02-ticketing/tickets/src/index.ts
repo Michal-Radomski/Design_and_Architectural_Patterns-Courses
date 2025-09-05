@@ -4,6 +4,8 @@ dotenv.config();
 
 import { httpServer } from "./app";
 import { natsWrapper } from "./nats-wrapper";
+import { OrderCreatedListener } from "./events/listeners/order-created-listener";
+import { OrderCancelledListener } from "./events/listeners/order-cancelled-listener";
 
 (async function start(): Promise<void> {
   //* Port
@@ -37,6 +39,9 @@ import { natsWrapper } from "./nats-wrapper";
     });
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
+
+    new OrderCreatedListener(natsWrapper.client).listen();
+    new OrderCancelledListener(natsWrapper.client).listen();
 
     //* MongoDB
     // await mongoose.connect('mongodb://auth-mongo-srv:27017/auth');

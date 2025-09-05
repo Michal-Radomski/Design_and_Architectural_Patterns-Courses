@@ -1,7 +1,7 @@
 import express, { Request, RequestHandler, Response, Router } from "express";
 import { body } from "express-validator";
 
-import { validateRequest, NotFoundError, requireAuth, NotAuthorizedError } from "@rallycoding/common";
+import { validateRequest, NotFoundError, requireAuth, NotAuthorizedError, BadRequestError } from "@rallycoding/common";
 import { Ticket } from "../models/ticket";
 import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
 import { natsWrapper } from "../nats-wrapper";
@@ -21,6 +21,10 @@ router.put(
 
     if (!ticket) {
       throw new NotFoundError();
+    }
+
+    if (ticket.orderId) {
+      throw new BadRequestError("Cannot edit a reserved ticket");
     }
 
     if (ticket.userId !== req.currentUser!.id) {
