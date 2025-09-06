@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "lib": ["Dom", "DOM.Iterable", "ESNext"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    // "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "skipLibCheck": true,
+    "noImplicitThis": true,
+    "strictPropertyInitialization": true
+    // "sourceMap": true,
+    // "outDir": "dist",
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules"]
+}

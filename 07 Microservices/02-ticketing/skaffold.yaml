@@ -1,4 +1,4 @@
-# Not Tested!
+#* Not Tested!
 apiVersion: skaffold/v4beta3
 kind: Config
 manifests:
@@ -36,6 +36,14 @@ build:
             dest: .
     - image: rallycoding/orders
       context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    - image: rallycoding/expiration
+      context: expiration
       docker:
         dockerfile: Dockerfile
       sync:
