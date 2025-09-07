@@ -16,7 +16,7 @@ spec:
         - name: auth
           image: rallycoding/auth
           env:
-            - name: MONGO_URI
+            - name: MONGO_URL
               value: "mongodb://auth-mongo-srv:27017/auth"
             - name: JWT_KEY
               valueFrom:
