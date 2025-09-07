@@ -8,7 +8,7 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
   subject: Subjects.OrderCreated = Subjects.OrderCreated;
   queueGroupName = queueGroupName;
 
-  async onMessage(data: OrderCreatedEvent["data"], msg: Message) {
+  async onMessage(data: OrderCreatedEvent["data"], msg: Message): Promise<void> {
     const order = Order.build({
       id: data.id,
       price: data.ticket.price,
