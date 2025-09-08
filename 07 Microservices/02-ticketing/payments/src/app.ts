@@ -13,6 +13,7 @@ import cookieSession from "cookie-session";
 import "express-async-errors";
 
 import { errorHandler, currentUser, NotFoundError } from "@rallycoding/common";
+import { createChargeRouter } from "./routes/new";
 
 //* The server
 const app: Express = express();
@@ -61,6 +62,7 @@ app.get("/test", (req: Request, res: Response) => {
 });
 
 app.use(currentUser as unknown as RequestHandler);
+app.use("", createChargeRouter);
 
 app.all("/*", async (_req, _res) => {
   throw new NotFoundError();
