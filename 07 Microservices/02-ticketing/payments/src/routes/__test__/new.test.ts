@@ -7,6 +7,8 @@ import { httpServer as app } from "../../app";
 import { Order } from "../../models/order";
 import { stripe } from "../../stripe";
 
+// jest.mock("../../stripe");
+
 it("returns a 404 when purchasing an order that does not exist", async (): Promise<void> => {
   await request(app)
     .post("/api/payments")
@@ -74,7 +76,7 @@ it("returns a 201 with valid inputs", async (): Promise<void> => {
     .post("/api/payments")
     .set("Cookie", global.signin(userId))
     .send({
-      token: "tok_visa",
+      token: "tok_visa", //* Test token
       orderId: order.id,
     })
     .expect(201);
