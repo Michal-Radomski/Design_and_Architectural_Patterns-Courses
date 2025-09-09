@@ -16,7 +16,7 @@ const AppComponent = ({ Component, pageProps, currentUser }: CustomAppProps): JS
     <React.Fragment>
       <div>
         <Header currentUser={currentUser} />
-        <Component {...pageProps} />
+        <Component currentUser={currentUser} {...pageProps} />
       </div>
     </React.Fragment>
   );
@@ -27,10 +27,10 @@ AppComponent.getInitialProps = async (appContext: AppContext) => {
   const { data } = await client.get("http://localhost:3000/api/users/currentuser");
 
   let pageProps = {};
+
   if (appContext.Component.getInitialProps) {
     pageProps = await appContext.Component.getInitialProps(appContext.ctx);
   }
-  // console.log("pageProps:", pageProps);
 
   return {
     pageProps,
