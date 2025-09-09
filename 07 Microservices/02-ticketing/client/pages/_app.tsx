@@ -16,7 +16,9 @@ const AppComponent = ({ Component, pageProps, currentUser }: CustomAppProps): JS
     <React.Fragment>
       <div>
         <Header currentUser={currentUser} />
-        <Component currentUser={currentUser} {...pageProps} />
+        <div className="container">
+          <Component currentUser={currentUser} {...pageProps} />
+        </div>
       </div>
     </React.Fragment>
   );

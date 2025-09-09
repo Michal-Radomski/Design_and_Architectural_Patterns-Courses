@@ -7,7 +7,7 @@ const NewTicket = (): JSX.Element => {
   const [price, setPrice] = React.useState<string>("");
 
   const { doRequest, errors } = useRequest({
-    url: "/api/tickets",
+    url: "/api/tickets", //* http://localhost:3002/api/tickets
     method: "post",
     body: {
       title,
