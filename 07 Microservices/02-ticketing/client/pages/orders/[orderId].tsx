@@ -1,9 +1,9 @@
 import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import Router from "next/router";
+import { AxiosInstance } from "axios";
 
 import useRequest from "../../hooks/use-request";
-import { AxiosInstance } from "axios";
 
 const OrderShow = ({ order, currentUser }: { order: OrderI; currentUser: UserI }): JSX.Element => {
   const [timeLeft, setTimeLeft] = React.useState<number>(0);
@@ -18,13 +18,13 @@ const OrderShow = ({ order, currentUser }: { order: OrderI; currentUser: UserI }
   });
 
   React.useEffect(() => {
-    const findTimeLeft = () => {
-      const msLeft = new Date(order.expiresAt).getTime() - new Date().getTime();
+    const findTimeLeft = (): void => {
+      const msLeft: number = new Date(order.expiresAt).getTime() - new Date().getTime();
       setTimeLeft(Math.round(msLeft / 1000));
     };
 
     findTimeLeft();
-    const timerId = setInterval(findTimeLeft, 1000);
+    const timerId: NodeJS.Timeout = setInterval(findTimeLeft, 1000);
 
     return () => {
       clearInterval(timerId);
@@ -41,7 +41,7 @@ const OrderShow = ({ order, currentUser }: { order: OrderI; currentUser: UserI }
         Time left to pay: {timeLeft} seconds
         <StripeCheckout
           token={({ id }) => doRequest({ token: id })}
-          stripeKey={process.env.NEXT_PUBLIC_STRIPE_API_KEY as string}
+          stripeKey={process.env.NEXT_PUBLIC_STRIPE_API_KEY as string} //* Public Key
           amount={order.ticket.price * 100}
           email={currentUser.email}
         />

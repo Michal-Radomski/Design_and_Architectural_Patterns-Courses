@@ -6,7 +6,7 @@ const OrderIndex = ({ orders }: { orders: OrderI[] }): JSX.Element => {
   return (
     <React.Fragment>
       <ul>
-        {orders.map((order: OrderI) => {
+        {orders?.map((order: OrderI) => {
           return (
             <li key={order.id}>
               {order.ticket.title} - {order.status}
