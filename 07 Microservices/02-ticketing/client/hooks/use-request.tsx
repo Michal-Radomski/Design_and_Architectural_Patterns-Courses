@@ -11,14 +11,14 @@ const useRequest = ({
   url: string;
   method: Method;
   body: { [key: string]: unknown };
-  onSuccess: (arg0: string) => void;
+  onSuccess: (arg0: any) => void;
 }) => {
   const [errors, setErrors] = React.useState<null | React.ReactNode>(null);
 
-  const doRequest = async (): Promise<any> => {
+  const doRequest = async (props = {}): Promise<any> => {
     try {
       setErrors(null);
-      const response = await axios[method](url, body, { withCredentials: true });
+      const response = await axios[method](url, { ...body, ...props });
       // console.log("response.data:", response.data);
 
       if (onSuccess) {

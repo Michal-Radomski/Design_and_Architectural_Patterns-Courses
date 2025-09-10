@@ -6,5 +6,12 @@ interface UserI {
 interface TicketI {
   id: string;
   title: string;
-  price: string;
+  price: number;
+}
+
+interface OrderI {
+  expiresAt: number;
+  id: string;
+  ticket: TicketI;
+  status: string;
 }
