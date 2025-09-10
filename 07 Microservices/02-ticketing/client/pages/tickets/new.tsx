@@ -1,4 +1,5 @@
 import React from "react";
+import Router from "next/router";
 
 import useRequest from "../../hooks/use-request";
 
@@ -13,7 +14,7 @@ const NewTicket = (): JSX.Element => {
       title,
       price,
     },
-    onSuccess: (ticket) => console.log(ticket),
+    onSuccess: () => Router.push("/"),
   });
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
