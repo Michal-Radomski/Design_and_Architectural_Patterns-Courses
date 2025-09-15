@@ -1,0 +1,18 @@
+{
+  "name": "exercise",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build"
+  },
+  "keywords": [],
+  "author": "Michal Radomski <michalra@op.pl>",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.15.4",
+    "parcel": "^2.15.4",
+    "sass": "^1.92.1"
+  }
+}
