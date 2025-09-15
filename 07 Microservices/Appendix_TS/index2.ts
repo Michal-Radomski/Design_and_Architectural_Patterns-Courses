@@ -10,7 +10,7 @@ class Vehicle {
 }
 
 {
-  //* The same as above
+  //* The same as above -> Parameter properties pattern!
   // class Vehicle {
   //   constructor(public color: string) {}
   //   protected honk(): void {
