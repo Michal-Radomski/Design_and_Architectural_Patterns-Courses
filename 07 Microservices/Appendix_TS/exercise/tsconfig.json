@@ -6,7 +6,7 @@
     "emitDecoratorMetadata": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "typeRoots": ["/usr/local/lib/node_modules/@types"], //* Globally installed types in Ubuntu
+    "typeRoots": ["/usr/local/lib/node_modules/@types", "node_modules/@types"], //* Globally installed types in Ubuntu
     "resolveJsonModule": true,
     // "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
